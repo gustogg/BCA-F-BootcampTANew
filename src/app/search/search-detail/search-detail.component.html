@@ -1,0 +1,75 @@
+
+<div class="tw-overflow-x-auto tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full">
+    <table class="tw-shadow-md tw-h-max tw-bg-gray-800 tw-text-white tw-border-collapse tw-rounded-md">
+      <thead class="tw-bg-blue-900 tw-text-gray-100">
+        <tr>
+          <th class="tw-py-3 tw-px-4 tw-text-left">NO</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">NO MAP</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">No Kontrak</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">NO PIN</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">CUSTOMER ID</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">NAMA KONSUMEN</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">TGL REALISASI</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">TGL JATUH TEMPO</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">TGL RETENSI DOKUMEN</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">FOTOCOPY KTP</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">PASANGAN</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">SELURUH PENGURUS</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">FC KARTU KELUARGA</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">Fc AKTA NIKAH/CERAI/KEMATIAN</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">KEPUTUSAN KOMITE KREDIT (K3)</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">REKOMENDASI BCA</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">FORM SURVEY</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">PETA LOKASI</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">FORMULIR APLIKASI PEMBIAYAAN (FAP)</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">RESUME</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">TANDA DAFTAR PERUSAHAAN (TDP)</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">SURAT IJIN USAHA (SIUP)</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">NO BOX</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customerDetails" class="tw-border-t tw-border-gray-700">
+          <td class="tw-py-2 tw-px-4">{{ customer.id }}</td>
+          <td class="tw-py-2 tw-px-4">{{ customer.noMap }}</td>
+          <td class="tw-py-2 tw-px-4">{{ customer.noKontrak }}</td>
+          <td class="tw-py-2 tw-px-4">{{ customer.noPin }}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.customerID}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.namaKonsumen}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.tglRealisasi}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.tglJatuhTempo}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.tglRetensi}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fcKTP}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fcPasangan}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fcPengurus}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fcKK}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fcAkta}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.k3}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.rekomendasi}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.formSurvey}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.petaLokasi}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.fap}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.resume}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.tandaDaftarPerusahaan}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.siup}}</td>
+          <td class="tw-py-2 tw-px-4">{{customer.noBox}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+
+
+<!-- <div *ngFor="let customer of customerDetails">
+    <p><strong>Name:</strong> {{ customer.namaKonsumen }}</p>
+    <p><strong>No Kontrak:</strong> {{ customer.noKontrak }}</p>
+    <p><strong>No Box:</strong> {{ customer.noBox }}</p>
+    <p><strong>FAP:</strong> {{ customer.fap }}</p>
+    <p><strong>FC Akta:</strong> {{ customer.fcAkta }}</p>
+    <p><strong>FC KK:</strong> {{ customer.fcKK }}</p> -->
+    <!-- Add more fields as needed -->
+  <!-- </div> -->
+  
+  <div *ngIf="!customerDetails">
+    <p>Loading customer details...</p>
+  </div>
+  

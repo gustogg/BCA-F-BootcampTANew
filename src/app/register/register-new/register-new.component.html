@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Add</title>
+</head>
+<body class="tw-bg-blue-900 tw-text-blue-900 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
+    <div class="tw-container tw-mx-auto tw-p-6 tw-bg-white tw-rounded-lg tw-shadow-xl tw-w-full tw-mt-10 tw-border-2 tw-border-finance tw-border-dashed">
+        <h1 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-2 tw-mt-5">New Register</h1>
+        <!-- nomor box -->
+        <form>
+            <div class="tw-flex tw-justify-center tw-mb-16">
+                <input required type="text" id="noBox" name="noBox" placeholder="Nomor Box" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
+            </div>
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-10">
+                <!-- Form Fields -->
+                <div class="tw-flex tw-flex-col">
+                    <label for="noKontrak" class="tw-mb-2 tw-font-bold">No. Kontrak</label>
+                    <input type="number" id="noKontrak" name="noKontrak" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="noPin" class="tw-mb-2 tw-font-bold">No. Pin</label>
+                    <input type="number" id="noPin" name="noPin" class="tw-p-3 tw-w-1/6 tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="customerId" class="tw-mb-2 tw-font-bold">Customer ID</label>
+                    <input type="number" id="customerId" name="customerId" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="namaKonsumen" class="tw-mb-2 tw-font-bold">Nama Konsumen</label>
+                    <input type="text" id="namaKonsumen" name="namaKonsumen" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="tanggalRealisasi" class="tw-mb-2 tw-font-bold">Tanggal Realisasi</label>
+                    <input type="date" id="tanggalRealisasi" name="tanggalRealisasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="tanggalJatuhTempo" class="tw-mb-2 tw-font-bold">Tanggal Jatuh Tempo</label>
+                    <input type="date" id="tanggalJatuhTempo" name="tanggalJatuhTempo" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="tanggalRetensi" class="tw-mb-2 tw-font-bold">Tanggal Retensi</label>
+                    <input type="date" id="tanggalRetensi" name="tanggalRetensi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="fotocopyKTP" class="tw-mb-2 tw-font-bold">Fotocopy KTP</label>
+                    <input type="number" id="fotocopyKTP" name="fotocopyKTP" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="fotocopyPasangan" class="tw-mb-2 tw-font-bold">Fotocopy Pasangan</label>
+                    <input type="number" id="fotocopyPasangan" name="fotocopyPasangan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="fotocopyPengurus" class="tw-mb-2 tw-font-bold">Fotocopy Seluruh Pengurus</label>
+                    <input type="number" id="fotocopyPengurus" name="fotocopyPengurus" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="fotocopyKK" class="tw-mb-2 tw-font-bold">Fotocopy Kartu Keluarga</label>
+                    <input type="number" id="fotocopyKK" name="fotocopyKK" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="fotocopyAkta" class="tw-mb-2 tw-font-bold">Fotocopy Akta Nikah/Cerai/Kematian</label>
+                    <input type="number" id="fotocopyAkta" name="fotocopyAkta" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="komiteKredit" class="tw-mb-2 tw-font-bold">Keputusan Komite Kredit</label>
+                    <input type="number" id="komiteKredit" name="komiteKredit" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="rekomendasiBCA" class="tw-mb-2 tw-font-bold">Rekomendasi BCA</label>
+                    <input type="number" id="rekomendasiBCA" name="rekomendasiBCA" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="formSurvey" class="tw-mb-2 tw-font-bold">Form Survey</label>
+                    <input type="number" id="formSurvey" name="formSurvey" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="petaLokasi" class="tw-mb-2 tw-font-bold">Peta Lokasi</label>
+                    <input type="text" id="petaLokasi" name="petaLokasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="formAplikasi" class="tw-mb-2 tw-font-bold">Formulir Aplikasi Pembiayaan</label>
+                    <input type="number" id="formAplikasi" name="formAplikasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="resume" class="tw-mb-2 tw-font-bold">Resume</label>
+                    <input type="number" id="resume" name="resume" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="tandaPerusahaan" class="tw-mb-2 tw-font-bold">Tanda Daftar Perusahaan</label>
+                    <input type="number" id="tandaPerusahaan" name="tandaPerusahaan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-flex tw-flex-col">
+                    <label for="suratIzin" class="tw-mb-2 tw-font-bold">Surat Izin Usaha (SIUP)</label>
+                    <input type="number" id="suratIzin" name="suratIzin" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+            </div>
+            <!-- Proceed Button -->
+            <div class="tw-flex tw-justify-center tw-mt-10 tw-mb-10">
+                <button type="submit" class="tw-bg-finance tw-text-lg tw-text-white tw-p-3 tw-rounded-lg tw-shadow hover:tw-bg-blue-700 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2">
+                    + Add Item
+                </button>
+            </div>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <!-- all recently added item with same noBox will shown here -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- <td>{{ customer.id }}</td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

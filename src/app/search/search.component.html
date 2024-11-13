@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body class="tw-bg-blue-900 tw-text-blue-900 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
+    <div class="tw-container tw-mx-auto tw-p-6 tw-bg-white tw-rounded-lg tw-shadow-xl tw-w-full tw-mt-10 tw-border-2 tw-border-finance tw-border-dashed">
+        <h2 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-16 tw-mt-5">Search</h2>
+        <div class="tw-flex tw-justify-end tw-space-x-2 tw-mb-5">
+            <!-- <button class="tw-bg-white tw-text-blue-500 tw-shadow-md tw-border-2 tw-border-blue-500 tw-p-2 tw-rounded tw-font-bold hover:tw-bg-blue-600 hover:tw-text-white hover:tw-shadow-md" [routerLink]="'/register-new'">
+              New Register +
+            </button> -->
+          </div>
+          
+        
+          <table class="tw-min-w-full tw-bg-white tw-rounded-lg tw-shadow-lg tw-overflow-hidden">
+            <thead class="tw-bg-blue-500 tw-text-white">
+                <tr>
+                    <th class="tw-p-2">Nomor Box</th>
+                    <th class="tw-p-2">Jumlah Customer</th>
+                    <th class="tw-p-2">Created Date</th>
+                    <th class="tw-p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of masterboxData" class="tw-border-b tw-text-center">
+                    <td class="tw-p-2">{{ item.no_box }}</td>
+                    <td class="tw-p-2 tw-text-blue-500">{{ item.jml }}</td>
+                    <td class="tw-p-2">{{ item.waktu | date:'short' }}</td>
+                    <td class="tw-p-2 tw-space-x-3">
+                        <button 
+                            class="tw-bg-white tw-text-blue-500 tw-shadow-md tw-border-2 tw-border-blue-500 tw-border-dashed tw-p-2 tw-rounded tw-font-bold"
+                            [routerLink]="['/search-detail', item.no_box]">
+                            Detail
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        
+        
+    </div>
+</body>
+</html>

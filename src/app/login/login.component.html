@@ -1,0 +1,38 @@
+<body class="tw-bg-blue-900 tw-text-blue-900 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
+<div class="tw-flex tw-items-center tw-justify-center tw-min-h-screen tw-bg-blue-900">
+    <div class="tw-bg-white tw-p-8 tw-rounded-lg tw-shadow-md tw-w-full tw-max-w-sm">
+      <img src="/assets/BCA_Finance.png" class="tw-w-1/2 tw-mx-auto tw-mb-14">
+      <form>
+        <div class="tw-mb-4">
+          <label for="email" class="tw-block tw-text-gray-700 tw-font-medium">Username</label>
+          <input
+            type="email"
+            id="email"
+            class="tw-w-full tw-mt-1 tw-px-3 tw-py-2 tw-border tw-rounded-lg tw-outline-none tw-focus:ring tw-focus:ring-blue-300"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="tw-mb-6">
+          <label for="password" class="tw-block tw-text-gray-700 tw-font-medium">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="tw-w-full tw-mt-1 tw-px-3 tw-py-2 tw-border tw-rounded-lg tw-outline-none tw-focus:ring tw-focus:ring-blue-300"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button [routerLink]="'/home'"
+          type="submit"
+          class="tw-w-full tw-bg-blue-600 tw-text-white tw-py-2 tw-rounded-lg tw-font-medium tw-transition tw-duration-300 hover:tw-bg-blue-900"
+        >
+          Login
+        </button>
+      </form>
+      <p class="tw-text-sm tw-text-center tw-text-gray-600 tw-mt-4">
+        E-Register Archive Management
+      </p>
+    </div>
+  </div>
+ </body> 

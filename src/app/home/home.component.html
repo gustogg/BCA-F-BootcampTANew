@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Register</title>
+</head>
+<body class="tw-bg-blue-900 tw-text-gray-100 tw-font-sans tw-h-max">
+
+  <!-- Main Container -->
+  <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+
+    <!-- Header -->
+    <header class="tw-w-full tw-py-6 tw-bg-white tw-shadow-lg tw-sticky tw-items-center tw-flex tw-justify-between">
+      <div class="tw-flex tw-items-center">
+        <h1 class="tw-text-blue-900 tw-font-bold tw-text-2xl tw-mx-5">E-Register</h1>
+        <h1 class="tw-text-blue-900 tw-font-bold tw-text-2xl">|</h1>
+        <img class="tw-w-44 tw-mx-5 " src="./assets/BCA_Finance.png" alt="BCA Finance Logo">
+      </div>
+      <div class="tw-items-center tw-flex">
+        <!-- <p class="tw-text-blue-900 tw-border-2 tw-border-blue-900 tw-px-4 tw-rounded-xl tw-py-1">LOGOUT</p> -->
+      <button [routerLink]="'/login'" class="tw-text-sm tw-w-max tw-px-3 tw-py-2 tw-border-blue-800 tw-border-2 hover:tw-bg-blue-900 tw-rounded-lg hover:tw-shadow-md tw-text-blue-900 tw-font-semibold hover:tw-text-white">LOG OUT</button>
+        <h1 class="tw-text-blue-900  tw-text-lg tw-mx-5 tw-mr-10">Hi, Gusto Ginting</h1>
+      </div>
+    </header>
+    
+
+    <!-- Hero Section -->
+    <section class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-text-center tw-px-4 tw-py-12 tw-mt-10">
+      <h2 class="tw-text-4xl tw-font-extrabold tw-text-blue-100 tw-mb-4">E-Register</h2>
+      <p class="tw-text-lg tw-text-blue-100">Archive Management Registration System</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="tw-w-full tw-max-w-4xl tw-grid md:tw-grid-cols-3 tw-gap-6 tw-py-12">
+      <button
+    class="tw-bg-white tw-rounded-lg tw-p-6 tw-text-center tw-py-32 hover:tw-bg-blue-200 hover:tw-text-blue-100 tw-w-full"
+    [routerLink]="'/register'">
+    <img class="tw-w-1/3 tw-mx-auto tw-mb-5" src="./assets/add-file-svgrepo-com.png" alt="add Logo">
+    <h3 class="tw-text-xl tw-font-semibold tw-text-blue-900 tw-mb-2">New Register</h3>
+    <p class="tw-text-blue-900">Input Registrasi Baru</p>
+  </button>
+      
+      <button class="tw-bg-white tw-rounded-lg tw-p-6 tw-text-center tw-py-32 hover:tw-bg-blue-200 tw-w-full"
+      [routerLink]="'/sampling'">
+        <img class="tw-w-1/3 tw-mx-auto tw-mb-5" src="./assets/check-file-svgrepo-com.png" alt="add Logo">
+        <h3 class="tw-text-xl tw-font-semibold tw-text-blue-900 tw-mb-2">Sampling</h3>
+        <p class="tw-text-blue-900">Sampling Dokumen</p>
+      </button>
+      
+      <button class="tw-bg-white tw-rounded-lg tw-p-6 tw-text-center tw-py-32 hover:tw-bg-blue-200 tw-w-full"
+      [routerLink]="'/search'">
+        <img class="tw-w-1/3 tw-mx-auto tw-mb-5" src="./assets/search-file-svgrepo-com.png" alt="add Logo">
+        <h3 class="tw-text-xl tw-font-semibold tw-text-blue-900 tw-mb-2">Search</h3>
+        <p class="tw-text-blue-900">Pencarian/Track Dokumen</p>
+      </button>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="tw-w-full tw-bg-blue-800 tw-py-4 tw-mt-12 tw-text-center">
+      <p class="tw-text-white">&copy; 2024 BCA Finance. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

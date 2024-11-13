@@ -1,0 +1,125 @@
+
+<div class="tw-bg-blue-900 tw-p-10 tw-text-blue-900 tw-w-screen tw-flex tw-items-center tw-justify-center tw-overflow-hidden">
+    <div class="tw-container tw-max-w-full md:tw-max-w-3xl tw-p-6 tw-bg-white tw-rounded-lg tw-shadow-xl tw-border-2 tw-border-finance tw-border-dashed tw-overflow-y-auto">
+            <h1 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-2 tw-mt-5">New Register</h1>
+            <!-- nomor box -->
+            <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)" class="tw-space-y-6 tw-overflow-auto">
+            <div class="tw-flex tw-justify-center tw-mb-10">
+                    <input required type="text" id="noBox" name="noBox" placeholder="Nomor Box"
+                 [(ngModel)]="customer.noBox" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-10">
+                    <!-- Form Fields -->
+                    <div class="tw-flex tw-flex-col">
+                        <label for="noKontrak" class="tw-mb-2 tw-font-bold">No. Kontrak</label>
+                        <input type="number" id="noKontrak" name="noKontrak"
+                 [(ngModel)]="customer.noKontrak" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="noPin" class="tw-mb-2 tw-font-bold">No. Pin</label>
+                        <input type="number" id="noPin" name="noPin"
+                 [(ngModel)]="customer.noPin" class="tw-p-3 tw-w-1/6 tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="customerId" class="tw-mb-2 tw-font-bold">Customer ID</label>
+                        <input type="text" id="customerId" name="customerId"
+                 [(ngModel)]="customer.customerID" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="namaKonsumen" class="tw-mb-2 tw-font-bold">Nama Konsumen</label>
+                        <input type="text" id="namaKonsumen" name="namaKonsumen"
+                 [(ngModel)]="customer.namaKonsumen" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="tanggalRealisasi" class="tw-mb-2 tw-font-bold">Tanggal Realisasi</label>
+                        <input type="date" id="tanggalRealisasi" name="tanggalRealisasi"
+                 [(ngModel)]="customer.tglRealisasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="tanggalJatuhTempo" class="tw-mb-2 tw-font-bold">Tanggal Jatuh Tempo</label>
+                        <input type="date" id="tanggalJatuhTempo" name="tanggalJatuhTempo"
+                 [(ngModel)]="customer.tglJatuhTempo" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="tanggalRetensi" class="tw-mb-2 tw-font-bold">Tanggal Retensi</label>
+                        <input type="date" id="tanggalRetensi" name="tanggalRetensi"
+                 [(ngModel)]="customer.tglRetensi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="fotocopyKTP" class="tw-mb-2 tw-font-bold">Fotocopy KTP</label>
+                        <input type="number" id="fotocopyKTP" name="fotocopyKTP"
+                 [(ngModel)]="customer.fcKTP" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="fotocopyPasangan" class="tw-mb-2 tw-font-bold">Fotocopy Pasangan</label>
+                        <input type="number" id="fotocopyPasangan"
+                 [(ngModel)]="customer.fcPasangan" name="fotocopyPasangan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="fotocopyPengurus" class="tw-mb-2 tw-font-bold">Fotocopy Seluruh Pengurus</label>
+                        <input type="number" id="fotocopyPengurus"
+                 [(ngModel)]="customer.fcPengurus" name="fotocopyPengurus" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="fotocopyKK" class="tw-mb-2 tw-font-bold">Fotocopy Kartu Keluarga</label>
+                        <input type="number" id="fotocopyKK"
+                 [(ngModel)]="customer.fcKK" name="fotocopyKK" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="fotocopyAkta" class="tw-mb-2 tw-font-bold">Fotocopy Akta Nikah/Cerai/Kematian</label>
+                        <input type="number" id="fotocopyAkta" name="fotocopyAkta"
+                 [(ngModel)]="customer.fcAkta" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="komiteKredit" class="tw-mb-2 tw-font-bold">Keputusan Komite Kredit</label>
+                        <input type="number" id="komiteKredit" name="komiteKredit"
+                 [(ngModel)]="customer.k3" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="rekomendasiBCA" class="tw-mb-2 tw-font-bold">Rekomendasi BCA</label>
+                        <input type="number" id="rekomendasiBCA" name="rekomendasiBCA"
+                 [(ngModel)]="customer.rekomendasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="formSurvey" class="tw-mb-2 tw-font-bold">Form Survey</label>
+                        <input type="number" id="formSurvey" name="formSurvey"
+                 [(ngModel)]="customer.formSurvey" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="petaLokasi" class="tw-mb-2 tw-font-bold">Peta Lokasi</label>
+                        <input type="text" id="petaLokasi" name="petaLokasi"
+                 [(ngModel)]="customer.petaLokasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="formAplikasi" class="tw-mb-2 tw-font-bold">Formulir Aplikasi Pembiayaan</label>
+                        <input type="number" id="formAplikasi" name="formAplikasi"
+                 [(ngModel)]="customer.fap" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="resume" class="tw-mb-2 tw-font-bold">Resume</label>
+                        <input type="number" id="resume" name="resume"
+                        [(ngModel)]="customer.resume" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="tandaPerusahaan" class="tw-mb-2 tw-font-bold">Tanda Daftar Perusahaan</label>
+                        <input type="number" id="tandaPerusahaan" name="tandaPerusahaan"
+                        [(ngModel)]="customer.tandaDaftarPerusahaan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                    <div class="tw-flex tw-flex-col">
+                        <label for="suratIzin" class="tw-mb-2 tw-font-bold">Surat Izin Usaha (SIUP)</label>
+                        <input type="number" id="suratIzin" name="suratIzin"
+                        [(ngModel)]="customer.siup" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
+                    </div>
+                </div>
+                <!-- Proceed Button -->
+                <div class="tw-flex tw-justify-center tw-mt-10 tw-mb-10">
+                    <button type="submit" class="tw-bg-finance tw-text-lg tw-text-white tw-p-3 tw-rounded-lg tw-shadow hover:tw-bg-blue-700 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2">
+                        + Add Item
+                    </button>
+                </div>
+            </form>
+            <table>
+                <tr>
+            </table>
+        </div>
+    </div>

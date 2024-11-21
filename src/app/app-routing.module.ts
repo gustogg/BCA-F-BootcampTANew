@@ -5,6 +5,8 @@ import { SearchComponent } from './search/search.component';
 import { SearchDetailComponent } from './search/search-detail/search-detail.component';
 import { HomeComponent } from './home/home.component';
 import { SamplingComponent } from './sampling/sampling.component';
+import { SamplingDoComponent } from './sampling/sampling-do/sampling-do.component';
+import { SamplingViewComponent } from './sampling/sampling-view/sampling-view.component';
 import { RegisterComponent } from './register/register.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 
@@ -15,6 +17,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'sampling', component: SamplingComponent },
+  { path: 'sampling-do', component: SamplingDoComponent },
+  { path: 'sampling-do/:noBox', component: SamplingDoComponent },
+  { path: 'sampling-view', component: SamplingViewComponent },
+  { path: 'sampling-view/:noBox', component: SearchDetailComponent },
   { path: 'search', component: SearchComponent },
   { path: 'search-detail/:noBox', component: SearchDetailComponent },
   { path: 'customer-list', component: CustomerListComponent },

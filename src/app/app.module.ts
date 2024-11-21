@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SearchDetailComponent } from './search/search-detail/search-detail.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -51,7 +52,8 @@ import { SearchDetailComponent } from './search/search-detail/search-detail.comp
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule
   ],
   providers: [
     provideAnimationsAsync()

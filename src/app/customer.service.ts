@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ListBox } from './listbox.model';
 
 export interface Customer {
   id: number;
@@ -31,12 +32,17 @@ export interface Customer {
   createdDate: Date;
 }
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
   private apiUrl = 'http://localhost:8080/api/customers';
+
+  private listBoxApiUrl = 'http://localhost:8080/api/listbox';
+
 
   constructor(private http: HttpClient) {}
 
@@ -61,6 +67,8 @@ export class CustomerService {
   getMasterboxData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/masterbox`);
   }
+
+  
 
   deleteCustomer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
@@ -89,5 +97,20 @@ export class CustomerService {
 
   getCustomerDetails(noBox: string) {
     return this.http.get<any>(`${this.apiUrl}/details/${noBox}`);
-  }  
+  }
+  
+  
+  //List Box is down here
+
+  getAllListBoxes(): Observable<ListBox[]> {
+    return this.http.get<ListBox[]>(this.listBoxApiUrl);
+  }
+
+  getListBoxById(id: number): Observable<ListBox> {
+    return this.http.get<ListBox>(`${this.listBoxApiUrl}/${id}`);
+  }
+
+  deleteListBox(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.listBoxApiUrl}/${id}`);
+  }
 }

@@ -1,60 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Add</title>
-</head>
-<body class="tw-bg-blue-900 tw-text-blue-900 tw-min-h-screen tw-flex tw-items-center tw-justify-center">
-    <div class="tw-container tw-mx-auto tw-p-6 tw-bg-white tw-rounded-lg tw-shadow-xl tw-w-full tw-mt-10 tw-border-2 tw-border-finance tw-border-dashed">
-        <h2 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-16 tw-mt-5">List of Sample</h2>
-        <div class="tw-flex tw-space-x-2 tw-mb-5">
-            <p>Total Queue :</p>
-            <p class="tw-font-bold">2</p>
+<body class="tw-bg-blue-800">
+    <div class="tw-container tw-mx-auto tw-p-4 tw-w-full">
+        <h2 class="tw-text-3xl tw-text-center tw-p-6 tw-font-bold tw-text-white tw-mb-4">List of Sample</h2>
+      
+      
+        <div class="tw-flex tw-items-center tw-space-x-2 tw-mb-3 tw-mt-5">
+          <label for="sort" class="tw-font-medium tw-text-white">Queue to Sample: {{ countSampledZero }}</label>
+          
         </div>
-        
-            <table class="tw-min-w-full tw-bg-white tw-rounded-lg tw-shadow-lg tw-overflow-hidden">
-                <thead class="tw-bg-blue-500 tw-text-white">
-                    <tr>
-                        <th class="tw-p-2"></th>
-                        <th class="tw-p-2">Nomor Box</th>
-                        <th class="tw-p-2">Created Date</th>
-                        <th class="tw-p-2">Status</th>
-                        <th class="tw-p-2">Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="tw-border-b tw-text-center">
-                        <td class="tw-p-2">1.</td>
-                        <td class="tw-p-2">XX-AM01-XXXXX</td>
-                        <td class="tw-p-2">21-11-2024</td>
-                        <td class="tw-p-2 tw-text-red-500">Belum di Sampling</td>
-                        <td class="tw-p-2 tw-space-x-3">
-                            <!-- Add your action buttons here, e.g., Edit/Delete -->
-                            <button class="tw-bg-yellow-500 tw-text-white tw-p-2 tw-rounded tw-font-bold"[routerLink]="'/sampling-do'">Sample</button>
-                            <button class="tw-bg-blue-500 tw-text-white tw-p-2 tw-rounded tw-font-bold" [routerLink]="'/sampling-view'">View</button>
-                            <button class="tw-bg-red-500 tw-text-white tw-p-2 tw-rounded tw-font-bold" (click)="showDeleteConfirmation()">Delete</button>
-                        </td>
-                    </tr>
-
-                    <tr class="tw-border-b tw-text-center">
-                        <td class="tw-p-2">2.</td>
-                        <td class="tw-p-2">XX-AM02-XXXXX</td>
-                        <td class="tw-p-2">24-11-2024</td>
-                        <td class="tw-p-2 tw-text-green-500">Done Sampling</td>
-                        <td class="tw-p-2 tw-space-x-3">
-                            <!-- Add your action buttons here, e.g., Edit/Delete -->
-                            <!-- <button class="tw-bg-yellow-500 tw-text-white tw-p-2 tw-rounded tw-font-bold">Sample</button> -->
-                            <button class="tw-bg-blue-500 tw-text-white tw-p-2 tw-rounded tw-font-bold"[routerLink]="'/sampling-view'">View</button>
-                            <button class="tw-bg-red-500 tw-text-white tw-p-2 tw-rounded tw-font-bold" (click)="showDeleteConfirmation()">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        
-        
-    </div>
-</body>
-</html>
+    
+        <!-- ListBox Table -->
+        <table class="tw-min-w-full tw-bg-white tw-rounded-lg tw-shadow-md tw-overflow-hidden">
+          <thead class="tw-bg-blue-900 tw-text-white">
+            <tr>
+              <th (click)="sortData('id')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
+                ID
+                <fa-icon *ngIf="sortColumn === 'id'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
+              </th>
+              <th (click)="sortData('no_box')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
+                No Box
+                <fa-icon *ngIf="sortColumn === 'no_box'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
+              </th>
+              <th (click)="sortData('created_date')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
+                Created Date
+                <fa-icon *ngIf="sortColumn === 'created_date'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
+              </th>
+              <th (click)="sortData('approved')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
+                Approved
+                <fa-icon *ngIf="sortColumn === 'approved'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
+              </th>
+              <!-- <th class="tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">Sampled</th> -->
+              <th class="tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">Actions</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            <tr *ngFor="let listBox of filteredListBoxes" class="hover:bg-blue-50 tw-transition-all">
+              <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.id }}</td>
+              <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.no_box }}</td>
+              <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.created_date | date: 'shortDate' }}</td>
+              
+              <!-- Progression Bar for Approved -->
+              <td class="tw-py-2 tw-px-4 tw-border-b tw-text-center">
+                <div class="tw-relative">
+                  <div class="tw-h-6 tw-text-xs tw-w-full tw-bg-gray-200 tw-rounded-full">
+                    <div 
+                      class="tw-h-full tw-rounded-full"
+                      [ngClass]="{
+                        'tw-bg-red-500': listBox.approved === 'No' && listBox.sampled === 'No',
+                        'tw-bg-yellow-500': listBox.approved === 'No' && listBox.sampled === 'Yes',
+                        'tw-bg-green-500 ': listBox.approved === 'Yes' && listBox.sampled === 'Yes'
+                      }"
+                      [style.width]="getProgressWidth(listBox) + '%'">
+                    </div>
+                  </div>
+                  <div style="font-size: 15px; margin-top: 2px;" class="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-text-center tw-font-xs">
+                    {{ getProgressLabel(listBox) }}
+                  </div>
+                </div>
+              </td>
+          
+              <td class="tw-py-2 tw-px-4 tw-border-b tw-text-center">
+                <button [routerLink]="['/sampling-do', listBox.no_box]"
+                  class="tw-bg-green-600 tw-text-white tw-px-3 tw-py-1 tw-rounded-md tw-hover:bg-blue-800 tw-transition-all tw-mr-2">
+                  Sampling
+                </button>
+                <button [routerLink]="['/sampling-view', listBox.no_box]"
+                  class="tw-bg-blue-900 tw-text-white tw-px-3 tw-py-1 tw-rounded-md tw-hover:bg-blue-800 tw-transition-all tw-mr-2">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </body>

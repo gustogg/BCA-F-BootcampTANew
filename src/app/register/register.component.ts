@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { CustomerService, Customer } from '../customer.service';
 import { NgForm } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-register',
@@ -13,8 +11,10 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   faPen = faPen;
+
+  // Define a single customer object
   customer: Customer = {
-    id: 0,
+    id: 0, // Set to 0 but will not be sent to the backend
     customerID: '',
     fap: '',
     fcAkta: '',
@@ -37,35 +37,50 @@ export class RegisterComponent {
     tglRetensi: new Date(),
     noBox: '',
     fcPengurus: '',
-    createdDate: new Date()
-
+    createdDate: new Date(),
+    sampled: ''
   };
 
   constructor(private customerService: CustomerService) {}
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.customerService.createCustomer(this.customer).subscribe(
+      // Remove the `id` field from the payload
+      const { id, ...customerToSend } = this.customer;
+
+      console.log('Customer data to send:', customerToSend); // Log data to verify
+
+      this.customerService.createCustomer(customerToSend as Omit<Customer, 'id'>).subscribe(
         response => {
           console.log('Customer created successfully', response);
-          // Clear form or reset it if needed
+
+          // Reset the form after successful submission
           form.resetForm();
+
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your data has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          });
         },
         error => {
           console.error('Error creating customer', error);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! Please try again.',
+          });
         }
       );
+    } else {
       Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your data has been saved",
-        showConfirmButton: false,
-        timer: 1500
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in all required fields!',
       });
     }
   }
-
-  // showDeleteConfirmation() {
-    
-  // }
 }

@@ -4,10 +4,16 @@
             <h1 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-2 tw-mt-5">New Register</h1>
             <!-- nomor box -->
             <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)" class="tw-space-y-6 tw-overflow-auto">
-            <div class="tw-flex tw-justify-center tw-mb-10">
+                <div class="tw-flex tw-justify-center tw-mb-10">
                     <input required type="text" id="noBox" name="noBox" placeholder="Nomor Box"
                  [(ngModel)]="customer.noBox" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
                 </div>
+
+                <div class="tw-flex tw-justify-center tw-mb-10">
+                    <input required type="text" id="noMap" name="noMap" placeholder="Nomor MAP"
+                 [(ngModel)]="customer.noMap" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
+                </div>
+
                 <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-10">
                     <!-- Form Fields -->
                     <div class="tw-flex tw-flex-col">

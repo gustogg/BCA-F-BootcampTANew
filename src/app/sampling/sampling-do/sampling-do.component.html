@@ -1,5 +1,5 @@
 
-<div class="tw-overflow-x-auto tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full">
+<div  class="tw-overflow-x-auto tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full">
     <table class="tw-shadow-md tw-h-max tw-bg-gray-800 tw-text-white tw-border-collapse tw-rounded-md">
       <thead class="tw-bg-blue-900 tw-text-gray-100">
         <tr>
@@ -26,7 +26,8 @@
           <th class="tw-py-3 tw-px-4 tw-text-left">TANDA DAFTAR PERUSAHAAN (TDP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">SURAT IJIN USAHA (SIUP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">NO BOX</th>
-          <th class="tw-py-3 tw-px-4 tw-text-left">Action</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">SAMPLED</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">ACTION</th>
         </tr>
       </thead>
       <tbody>
@@ -54,8 +55,11 @@
           <td class="tw-py-2 tw-px-4">{{customer.tandaDaftarPerusahaan}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.siup}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.noBox}}</td>
+          <td class="tw-py-2 tw-px-4 tw-text-center">{{customer.sampled}}</td>
           <td class="tw-py-2 tw-px-4">
-            <button class="tw-bg-blue-900 tw-p-2 tw-rounded-md tw-text-sm tw-shadow-md">Sample</button>
+            <button (click)="startSampling(customer.id)" class="tw-bg-blue-900 tw-p-2 tw-rounded-md tw-text-sm tw-shadow-md">
+              Sample
+            </button>            
           </td>
         </tr>
       </tbody>

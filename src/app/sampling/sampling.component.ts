@@ -186,13 +186,39 @@ export class SamplingComponent implements OnInit {
 
   getProgressLabel(listBox: ListBox): string {
     if (listBox.sampled === 'Yes' && listBox.approved === 'Yes') {
-      return '3/3 Complete';
+      return 'COMPLETE';
     } else if (listBox.sampled === 'Yes' && listBox.approved === 'No') {
-      return '2/3';
+      return 'APPROVAL';
     } else if (listBox.sampled === 'No' && listBox.approved === 'No') {
-      return '1/3';
+      return 'SAMPLING';
     }
     return '0/3';
   }
+
+  approveListBox(listBox: ListBox): void {
+    Swal.fire({
+      title: 'Approve this item?',
+      text: `Are you sure you want to approve No Box: ${listBox.no_box}?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, approve it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.customerService.updateListBoxApproved(listBox.id, '1').subscribe({
+          next: () => {
+            Swal.fire('Approved!', `No Box: ${listBox.no_box} has been approved.`, 'success');
+            this.getListBoxes(); // Refresh the list to update UI
+          },
+          error: (error) => {
+            console.error('Error approving ListBox:', error);
+            Swal.fire('Error!', 'Could not approve this item.', 'error');
+          },
+        });
+      }
+    });
+  }
+  
 
 }

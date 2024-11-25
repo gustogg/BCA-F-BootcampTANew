@@ -26,6 +26,7 @@
           <th class="tw-py-3 tw-px-4 tw-text-left">TANDA DAFTAR PERUSAHAAN (TDP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">SURAT IJIN USAHA (SIUP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">NO BOX</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">ACTION</th>
         </tr>
       </thead>
       <tbody>
@@ -53,10 +54,22 @@
           <td class="tw-py-2 tw-px-4">{{customer.tandaDaftarPerusahaan}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.siup}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.noBox}}</td>
+          <td class="tw-flex tw-justify-center tw-my-auto tw-items-center tw-mx-auto tw-mt-5 tw-space-x-2 tw-p-3 tw-font-bold">
+            <button mat-raised-button (click)="openEditModal(customer)" class="tw-bg-blue-800 tw-rounded-md tw-p-2 tw-shadow-md">
+              <i class="fa fa-pen"></i> <!-- Solid Font Awesome Pen Icon -->
+            </button>
+            <!-- <button (click)="deleteCustomer(customer.id)" class="tw-bg-red-500 tw-rounded-md tw-p-1 tw-shadow-md">DELETE</button> -->
+          </td>
         </tr>
       </tbody>
     </table>
 
+
+
+
+
+
+    
   <div *ngIf="!customerDetails">
     <p>Loading customer details...</p>
   </div>

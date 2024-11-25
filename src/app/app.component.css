@@ -1,0 +1,6 @@
+/* Add this to your global CSS if needed */
+
+/* Transition for the mobile menu */
+.tw-transition-all {
+  transition: all 0.3s ease-in-out;
+}

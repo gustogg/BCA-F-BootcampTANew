@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ListBox } from './listbox.model';
+import { tap } from 'rxjs/operators';
+import { environment } from './environments/environment';
+
 
 export interface Customer {
   id: number;
@@ -30,6 +33,7 @@ export interface Customer {
   noBox: string;
   fcPengurus: string;
   createdDate: Date;
+  sampled: string; 
 }
 
 
@@ -39,21 +43,30 @@ export interface Customer {
 })
 export class CustomerService {
 
-  private apiUrl = 'http://localhost:8080/api/customers';
+  // private apiUrl = 'http://localhost:8080/api/customers';
 
-  private listBoxApiUrl = 'http://localhost:8080/api/listbox';
+  // private listBoxApiUrl = 'http://localhost:8080/api/listbox';
 
+  // private apiLogin = 'http://localhost:8080/api/auth/login'
 
+  // private apiRegister = 'http://localhost:8080/api/auth/register'
+
+  private apiUrl = environment.apiUrl;  
+  private listBoxApiUrl = environment.listBoxApiUrl;
+  private apiLogin = environment.apiLogin;
+  private apiRegister = environment.apiRegister;
+  
   constructor(private http: HttpClient) {}
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.apiUrl, customer).pipe(
+  createCustomer(customer: Omit<Customer, 'id'>): Observable<Customer> {
+    return this.http.post<Customer>(`${this.apiUrl}`, customer).pipe(
       catchError(error => {
         console.error('Error creating customer', error);
         return throwError(error);
       })
     );
   }
+  
 
   getAllCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.apiUrl).pipe(
@@ -113,4 +126,57 @@ export class CustomerService {
   deleteListBox(id: number): Observable<void> {
     return this.http.delete<void>(`${this.listBoxApiUrl}/${id}`);
   }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.apiLogin, { username, password }).pipe(
+      catchError(error => {
+        console.error('Error logging in', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  register(username: string, password: string): Observable<any> {
+    return this.http.post(this.apiRegister, { username, password }).pipe(
+      catchError(error => {
+        console.error('Error registering user', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateListBoxSampled(noBox: string, sampled: string): Observable<any> {
+    return this.http.put(`${this.listBoxApiUrl}/update-sampled?noBox=${noBox}&sampled=${sampled}`, null, { observe: 'response' }).pipe(
+      tap(response => console.log('ListBox update response:', response)),
+      catchError((error) => {
+        console.error('Error updating ListBox sampled', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+  updateListBoxApproved(id: number, approved: string): Observable<any> {
+    const url = `${this.listBoxApiUrl}/${id}`;
+    return this.http.put(url, { approved }, { responseType: 'text' }).pipe(
+      catchError((error) => {
+        console.error('Error updating ListBox approved status:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+  
+  
+  // updateCustomer(id: number, customerData: Customer): Observable<Customer> {
+  //   return this.http.put<Customer>(`${this.apiUrl}/${id}`, customerData).pipe(
+  //     catchError(error => {
+  //       console.error('Error updating customer', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+  
+  
+
+  
 }

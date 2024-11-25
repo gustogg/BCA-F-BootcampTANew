@@ -26,6 +26,8 @@
           <th class="tw-py-3 tw-px-4 tw-text-left">TANDA DAFTAR PERUSAHAAN (TDP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">SURAT IJIN USAHA (SIUP)</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">NO BOX</th>
+          <th class="tw-py-3 tw-px-4 tw-text-left">ACTION</th>
+
         </tr>
       </thead>
       <tbody>
@@ -53,10 +55,144 @@
           <td class="tw-py-2 tw-px-4">{{customer.tandaDaftarPerusahaan}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.siup}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.noBox}}</td>
+          <td class="tw-flex tw-justify-center tw-my-auto tw-items-center tw-mx-auto tw-mt-5 tw-space-x-2 tw-p-3 tw-font-bold">
+            <button mat-raised-button (click)="openEditModal(customer)" class="tw-bg-blue-800 tw-rounded-md tw-p-2 tw-shadow-md">
+              <i class="fa fa-pen"></i> <!-- Solid Font Awesome Pen Icon -->
+            </button>
+            <!-- <button (click)="deleteCustomer(customer.id)" class="tw-bg-red-500 tw-rounded-md tw-p-1 tw-shadow-md">DELETE</button> -->
+          </td>
         </tr>
       </tbody>
     </table>
     
+    <div *ngIf="isEditModalOpen" @fadeIn class=" tw-overflow-y-auto tw-p-5 tw-fixed tw-h-auto tw-inset-0 tw-bg-black tw-bg-opacity-50 tw-flex tw-items-center tw-justify-center">
+      <div class="tw-bg-blue-800 tw-rounded-lg tw-shadow-lg tw-p-6 tw-w-1/2 tw-relative tw-h-auto tw-text-white" style="top:650px;">
+        <h2 class="tw-text-xl tw-font-bold tw-mb-10 tw-mt-3">UPDATE ITEM</h2>
+        <!-- <form (ngSubmit)="saveCustomer()"> -->
+          <form>
+          <!-- Form fields for customer attributes -->
+          <div class="tw-mb-4">
+            <div class="tw-mb-4">
+              <label for="noKontrak">NO KONTRAK</label>
+              <input disabled id="noKontrak" type="text" [(ngModel)]="editableCustomer.noKontrak" name="noKontrak" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+            </div>
+            <div class="tw-mb-4">
+              <label for="noPin">NO PIN</label>
+              <input disabled id="noPin" type="text" [(ngModel)]="editableCustomer.noPin" name="noPin" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+            </div>
+            <div class="tw-mb-4">
+              <label for="namaKonsumen">NAMA KONSUMEN</label>
+              <input disabled id="namaKonsumen" type="text" [(ngModel)]="editableCustomer.namaKonsumen" name="namaKonsumen" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+            </div>
+            <label for="customerID">CUSTOMER ID</label>
+            <input disabled id="customerID" type="text" [(ngModel)]="editableCustomer.customerID" name="customerID" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+          <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+            <label for="tglRealisasi">TGL REALISASI</label>
+            <mat-form-field class="tw-flex-0">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRealisasi" name="tglRealisasi" />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+            <label for="tglJatuhTempo">TGL JATUH TEMPO</label>
+            <mat-form-field class="tw-flex-0">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglJatuhTempo" name="tglJatuhTempo" />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+            <label for="tglRetensi">TGL RETENSI</label>
+            <mat-form-field class="tw-flex-0">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRetensi" name="tglRetensi" />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="tw-mb-4">
+            <label for="fcKTP">FC KTP</label>
+            <input id="fcKTP" type="text" [(ngModel)]="editableCustomer.fcKTP" name="fcKTP" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="fcPasangan">FC PASANGAN</label>
+            <input id="fcPasangan" type="text" [(ngModel)]="editableCustomer.fcPasangan" name="fcPasangan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="fcPengurus">FC Seluruh Pengurus</label>
+            <input id="fcPengurus" type="text" [(ngModel)]="editableCustomer.fcPengurus" name="fcPengurus" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="fcKK">FC Kartu Keluarga</label>
+            <input id="fcKK" type="text" [(ngModel)]="editableCustomer.fcKK" name="fcKK" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="fcAkta">FC Akta/Nikah/Cerai/Kematian</label>
+            <input id="fcAkta" type="text" [(ngModel)]="editableCustomer.fcAkta" name="fcAkta" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="k3">Keputusan Komite Kredit (K3)</label>
+            <input id="k3" type="text" [(ngModel)]="editableCustomer.k3" name="k3" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="rekomendasi">Rekomendasi BCA</label>
+            <input id="rekomendasi" type="text" [(ngModel)]="editableCustomer.rekomendasi" name="rekomendasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="formSurvey">Form Survey</label>
+            <input id="formSurvey" type="text" [(ngModel)]="editableCustomer.formSurvey" name="formSurvey" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="petaLokasi">Peta Lokasi</label>
+            <input id="petaLokasi" type="text" [(ngModel)]="editableCustomer.petaLokasi" name="petaLokasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="fap">Formulir Aplikasi Pembiayaan (FAP)</label>
+            <input id="fap" type="text" [(ngModel)]="editableCustomer.fap" name="fap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="resume">Resume</label>
+            <input id="resume" type="text" [(ngModel)]="editableCustomer.resume" name="resume" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="tandaDaftarPerusahaan">Tanda Daftar Perusahaan (TDP)</label>
+            <input id="tandaDaftarPerusahaan" type="text" [(ngModel)]="editableCustomer.tandaDaftarPerusahaan" name="tandaDaftarPerusahaan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="siup">Surat Ijin Usaha (SIUP)</label>
+            <input id="siup" type="text" [(ngModel)]="editableCustomer.siup" name="siup" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="noBox">Nomor BOX</label>
+            <input id="noBox" type="text" [(ngModel)]="editableCustomer.noBox" name="noBox" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-mb-4">
+            <label for="noMap">Nomor MAP</label>
+            <input id="noMap" type="text" [(ngModel)]="editableCustomer.noMap" name="noMap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+    
+          <div class="tw-flex tw-justify-end tw-space-x-2">
+            <button type="button" (click)="closeEditModal()" class="tw-bg-gray-500 tw-text-white tw-rounded-md tw-px-4 tw-py-2">Cancel</button>
+            <button type="submit" (click)="saveCustomer()" class="tw-bg-green-500 tw-text-white tw-rounded-md tw-px-4 tw-py-2">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
 
 <!-- <div *ngFor="let customer of customerDetails">

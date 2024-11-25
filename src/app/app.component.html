@@ -1,47 +1,53 @@
-<!-- Only show the nav if showNav is true -->
-<nav *ngIf="showNav" class="tw-bg-white tw-shadow-xl tw-border-b tw-border-gray-200 tw-flex tw-p-7">
-  <a class="tw-font-bold tw-text-2xl tw-text-blue-900">E-Register</a>
-  <div class="tw-flex tw-justify-center tw-text-center tw-items-center tw-mx-auto tw-space-x-8">
-    <a
-      routerLink="/home"
-      href="/home"
-      routerLinkActive="active"
-      class="tw-text-gray-800 tw-font-medium tw-text-lg tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-      Home
-    </a>
-    <a
-      routerLink="/register"
-      href="/register"
-      routerLinkActive="active"
-      class="tw-text-gray-800 tw-font-medium tw-text-lg tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-      Register
-    </a>
-    <a
-      routerLink="/sampling"
-      href="/sampling"
-      routerLinkActive="active"
-      class="tw-text-gray-800 tw-font-medium tw-text-lg tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-      Sampling
-    </a>
-    <a
-      routerLink="/search"
-      href="/search"
-      routerLinkActive="active"
-      class="tw-text-gray-800 tw-font-medium tw-text-lg tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-      Search
-    </a>
-    <a
-      routerLink="/customer-list"
-      href="/customer-list"
-      routerLinkActive="active"
-      class="tw-text-gray-800 tw-font-medium tw-text-lg tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-      Customer List
-    </a>
+<nav *ngIf="showNav" class="tw-bg-white tw-shadow-xl tw-border-b tw-border-gray-200 tw-p-7 tw-items-center">
+  <!-- Logo -->
+  <div class="tw-flex tw-items-center tw-w-full tw-justify-between">
+    <!-- Logo (Left-aligned) -->
+    <a class="tw-font-bold md:tw-text-2xl tw-text-xl tw-text-blue-900">E-Register</a>
+  
+    <!-- Greeting (Right-aligned, along with the button) -->
+    <div class="tw-flex tw-items-center tw-space-x-2">
+      <h1 class="tw-text-blue-900 tw-text-md md:tw-text-lg">Hi, Gusto Ginting</h1>
+      <button [routerLink]="'/login'" class="md:tw-text-xs tw-text-xs tw-w-max md:tw-px-3 tw-px-2 md:tw-py-2 tw-py-1 tw-bg-red-500 tw-border-2 hover:tw-bg-red-900 tw-rounded-lg hover:tw-shadow-md tw-text-white hover:tw-text-white">
+        LOG OUT
+      </button>
+    </div>
   </div>
-  <div class="tw-items-center tw-flex">
-    <button [routerLink]="'/login'" class="tw-text-sm tw-w-max tw-px-3 tw-py-2 tw-border-blue-800 tw-border-2 hover:tw-bg-blue-900 tw-rounded-lg hover:tw-shadow-md tw-text-blue-900 tw-font-semibold hover:tw-text-white">LOG OUT</button>
-    <h1 class="tw-text-blue-900 tw-text-lg tw-mx-5 tw-mr-10">Hi, Gusto Ginting</h1>
-  </div>
+  
+  <!-- Hamburger Menu Button (only visible on mobile) -->
+  <button class="md:tw-hidden tw-block tw-pt-2 tw-pb-2 tw-text-blue-900" (click)="toggleMobileMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+  <!-- Navigation Links (always visible on desktop, hidden on mobile by default) -->
+  <div class="md:tw-flex tw-flex-col md:tw-space-x-4 md:tw--mt-7 md:tw-flex-row md:tw-items-center md:tw-justify-center tw-w-full md:tw-text-center"
+     [ngClass]="{ 'tw-hidden': !showMobileNav, 'tw-flex': showMobileNav }">
+  <a routerLink="/home" href="/home" routerLinkActive="active"
+     class="tw-text-gray-800 md:tw-text-xl tw-text-md tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
+     Home
+  </a>
+  <a routerLink="/register" href="/register" routerLinkActive="active"
+     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
+     Register
+  </a>
+  <a routerLink="/sampling" href="/sampling" routerLinkActive="active"
+     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
+     Sampling
+  </a>
+  <a routerLink="/search" href="/search" routerLinkActive="active"
+     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
+     Search
+  </a>
+  <a routerLink="/customer-list" href="/customer-list" routerLinkActive="active"
+     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
+     Customer List
+  </a>
+</div>
+
+
+  <!-- User info and Logout button -->
+  
 </nav>
 
 <!-- The content of the current route will be displayed here -->

@@ -3,7 +3,6 @@
     max-height: 750px; /* Adjust height as needed */
     overflow-y: auto;
     overflow-x: auto;
-    border: 1px solid #ccc; /* Optional for border */
   }
   
   /* Table styling */
@@ -18,17 +17,19 @@
     position: sticky;
     top: 0px;
     z-index: 15;
-    background-color: #1e3a8a; /* Adjust for sticky header background */
-    color: white;
+    background-color: white; /* Adjust for sticky header background */
+    color: black;
     text-align: left;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    border: 0.5px solid black; /* Optional for border */
+
   }
   
   /* Table body styling */
   .sticky-table tbody td {
     padding: 10px;
     border-top: 1px solid #ddd;
+    border: 0.5px solid black; /* Optional for border */
   }
   
   /* Optional row hover effect */

@@ -1,0 +1,8 @@
+.tw-appearance-none {
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none; /* Modern browsers */
+    background: transparent; /* Ensures no extra background styling */
+    color: white;
+  }
+  

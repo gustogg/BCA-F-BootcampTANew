@@ -1,7 +1,7 @@
-
-<div class="tw-overflow-x-auto tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full">
-    <table class="tw-shadow-md tw-h-max tw-bg-gray-800 tw-text-white tw-border-collapse tw-rounded-md">
-      <thead class="tw-bg-blue-900 tw-text-gray-100">
+<!-- <body class="tw-w-full tw-bg-blue-900"> -->
+<div class="tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full table-container">
+    <table class="tw-overflow-auto tw-shadow-md tw-h-max tw-bg-gray-200 tw-border-collapse tw-rounded-md sticky-table">
+      <thead class="tw-bg-blue-900 tw-text-white" style="top: -15px">
         <tr>
           <th class="tw-py-3 tw-px-4 tw-text-left">NO</th>
           <th class="tw-py-3 tw-px-4 tw-text-left">NO MAP</th>
@@ -30,7 +30,7 @@
 
         </tr>
       </thead>
-      <tbody>
+      <tbody class="tw-font-medium">
         <tr *ngFor="let customer of customerDetails" class="tw-border-t tw-border-gray-700">
           <td class="tw-py-2 tw-px-4">{{ customer.id }}</td>
           <td class="tw-py-2 tw-px-4">{{ customer.noMap }}</td>
@@ -55,7 +55,7 @@
           <td class="tw-py-2 tw-px-4">{{customer.tandaDaftarPerusahaan}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.siup}}</td>
           <td class="tw-py-2 tw-px-4">{{customer.noBox}}</td>
-          <td class="tw-flex tw-justify-center tw-my-auto tw-items-center tw-mx-auto tw-mt-5 tw-space-x-2 tw-p-3 tw-font-bold">
+          <td class="tw-flex tw-justify-center tw-my-auto tw-items-center tw-mx-auto tw-mt-5 tw-space-x-2 tw-p-3 tw-font-bold tw-text-white">
             <button mat-raised-button (click)="openEditModal(customer)" class="tw-bg-blue-800 tw-rounded-md tw-p-2 tw-shadow-md">
               <i class="fa fa-pen"></i> <!-- Solid Font Awesome Pen Icon -->
             </button>
@@ -193,7 +193,8 @@
         </form>
       </div>
     </div>
-
+  </div>
+<!-- </body> -->
 
 <!-- <div *ngFor="let customer of customerDetails">
     <p><strong>Name:</strong> {{ customer.namaKonsumen }}</p>

@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { SamplingComponent } from './sampling/sampling.component';
 import { SamplingDoComponent } from './sampling/sampling-do/sampling-do.component';
 import { SamplingViewComponent } from './sampling/sampling-view/sampling-view.component';
+import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print.component';
 import { RegisterComponent } from './register/register.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { AuthGuard } from './auth.guard';
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'sampling-do/:noBox', component: SamplingDoComponent },
   { path: 'sampling-view', component: SamplingViewComponent },
   { path: 'sampling-view/:noBox', component: SearchDetailComponent },
+  { path: 'sampling-print', component: SamplingPrintComponent },
+  { path: 'sampling-print/:noBox', component: SamplingPrintComponent },
   { path: 'search', component: SearchComponent },
   { path: 'search-detail/:noBox', component: SearchDetailComponent },
   { path: 'customer-list', component: CustomerListComponent },

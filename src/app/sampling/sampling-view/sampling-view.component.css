@@ -1,0 +1,38 @@
+/* Scrollable container */
+.table-container {
+    max-height: 750px; /* Adjust height as needed */
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ccc; /* Optional for border */
+  }
+  
+  /* Table styling */
+  .sticky-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f8f9fa; /* Optional background */
+  }
+  
+  /* Header styling for sticky behavior */
+  .sticky-table thead th {
+    position: sticky;
+    top: 0px;
+    z-index: 15;
+    background-color: #1e3a8a; /* Adjust for sticky header background */
+    color: white;
+    text-align: left;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  }
+  
+  /* Table body styling */
+  .sticky-table tbody td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Optional row hover effect */
+  .sticky-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  

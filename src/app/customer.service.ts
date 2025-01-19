@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { ListBox } from './listbox.model';
+// import { ListBox } from './listbox.model';
 import { tap } from 'rxjs/operators';
 import { environment } from './environments/environment';
 
@@ -36,7 +36,14 @@ export interface Customer {
   sampled: string; 
 }
 
+export interface ListBox {
+  id: number;
+  no_box: string;
+  created_date: Date;
+  approved: string;
+  sampled: string;
 
+}
 
 @Injectable({
   providedIn: 'root'
@@ -155,15 +162,16 @@ export class CustomerService {
     );
   }
   
-  updateListBoxApproved(id: number, approved: string): Observable<any> {
-    const url = `${this.listBoxApiUrl}/${id}`;
-    return this.http.put(url, { approved }, { responseType: 'text' }).pipe(
+  updateListBoxApproved(listBox: ListBox): Observable<any> {
+    const url = `${this.listBoxApiUrl}/${listBox.id}`;
+    return this.http.put(url, listBox, { responseType: 'text' }).pipe(
       catchError((error) => {
         console.error('Error updating ListBox approved status:', error);
         return throwError(error);
       })
     );
   }
+  
   
   
   

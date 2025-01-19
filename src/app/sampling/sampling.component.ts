@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { ListBox } from '../listbox.model';
+import { ListBoxSampled } from '../listboxsampled.model';
+import { jsPDF } from 'jspdf';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +17,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class SamplingComponent implements OnInit {
   listBoxes: ListBox[] = [];
+  listSampledBoxes: ListBoxSampled[] = [];
   filteredListBoxes: ListBox[] = [];
   searchTerm: string = '';
   filterByNoBox: boolean = true; // Default to filter by no_box
@@ -28,20 +32,25 @@ export class SamplingComponent implements OnInit {
   countApprovedZero: number = 0;
 
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {
-    this.getListBoxes();
+
+  ngOnInit() {
+    this.loadListBoxes();
   }
 
   // Fetch all ListBox items
+  
   getListBoxes(): void {
     this.customerService.getAllListBoxes().subscribe(
       (data: ListBox[]) => {
         this.listBoxes = data.map((item) => ({
           ...item,
-          sampled: item.sampled === '0' ? 'No' : 'Yes',
-          approved: item.approved === '0' ? 'No' : 'Yes',
+          sampled: item.sampled === '1' ? 'Yes' : 'No',
+          approved: item.approved === '1' ? 'Yes' : 'No',
         }));
         this.filteredListBoxes = this.listBoxes;
         this.updateSampledZeroCount();
@@ -51,7 +60,7 @@ export class SamplingComponent implements OnInit {
       }
     );
   }
-
+  
   sortData(column: keyof ListBox): void {
     // Toggle sort direction if the same column is clicked again
     if (this.sortColumn === column) {
@@ -173,28 +182,32 @@ export class SamplingComponent implements OnInit {
     ).length;
   }
 
-  getProgressWidth(listBox: ListBox): number {
-    if (listBox.sampled === 'Yes' && listBox.approved === 'Yes') {
-      return 100; // 3/3 completed
-    } else if (listBox.sampled === 'Yes' && listBox.approved === 'No') {
-      return 66; // 2/3 completed
-    } else if (listBox.sampled === 'No' && listBox.approved === 'No') {
-      return 33; // 1/3 completed
+  
+
+  getProgressBox(listBox: ListBox): string {
+    if (listBox.sampled === '1' && listBox.approved === '1') {
+      return 'Complete'; // Progress complete
+    } else if (listBox.sampled === '1' && listBox.approved === '0') {
+      return 'Approval'; // Sampling is done, waiting for approval
+    } else if (listBox.sampled === '0' && listBox.approved === '0') {
+      return 'Sampling'; // Only started, needs sampling
     }
-    return 0; // No progress
+    return 'Registered'; // Default case if none match
   }
+  
+  
 
   getProgressLabel(listBox: ListBox): string {
     if (listBox.sampled === 'Yes' && listBox.approved === 'Yes') {
       return 'COMPLETE';
     } else if (listBox.sampled === 'Yes' && listBox.approved === 'No') {
-      return 'APPROVAL';
+      return 'PENDING APPROVAL';
     } else if (listBox.sampled === 'No' && listBox.approved === 'No') {
-      return 'SAMPLING';
+      return 'PENDING SAMPLING';
     }
-    return '0/3';
+    return 'NO PROGRESS';
   }
-
+  
   approveListBox(listBox: ListBox): void {
     Swal.fire({
       title: 'Approve this item?',
@@ -206,7 +219,8 @@ export class SamplingComponent implements OnInit {
       confirmButtonText: 'Yes, approve it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.customerService.updateListBoxApproved(listBox.id, '1').subscribe({
+        const updatedListBox = { ...listBox, approved: '1' }; // Create a copy of the listBox object with updated approved value
+        this.customerService.updateListBoxApproved(updatedListBox).subscribe({
           next: () => {
             Swal.fire('Approved!', `No Box: ${listBox.no_box} has been approved.`, 'success');
             this.getListBoxes(); // Refresh the list to update UI
@@ -219,6 +233,95 @@ export class SamplingComponent implements OnInit {
       }
     });
   }
+  
+
+  handleAction(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement; // Typecasting the target
+    const action = selectElement.value; // Now you can safely access 'value'
+  
+    switch (action) {
+      case 'sampling':
+        console.log('Sampling action selected');
+        // Implement sampling logic here
+        break;
+      case 'approve':
+        console.log('Approve action selected');
+        // Implement approve logic here
+        break;
+      case 'complete':
+        console.log('Complete action selected');
+        // Implement complete logic here
+        break;
+      default:
+        console.log('No action selected');
+        break;
+    }
+  }
+
+  
+  loadListBoxes() {
+    this.customerService.getAllListBoxes().subscribe((data) => {
+      this.listBoxes = data;
+      this.filteredListBoxes = data;  // Initially show all
+    });
+  }
+
+  displayedDataCount: number = 0;
+
+  updateDisplayedDataCount(): void {
+    this.displayedDataCount = this.filteredListBoxes.length;
+  }
+
+  currentFilter: string = 'ALL';
+  filterList(status: string) {
+  this.currentFilter = status; 
+    switch (status) {
+      case 'ALL':
+        this.filteredListBoxes = [...this.listBoxes];
+        break;
+      case 'SAMPLING':
+        this.filteredListBoxes = this.listBoxes.filter(
+          (item) => (item.sampled === '0' || item.sampled === null) && (item.approved === '0' || item.approved === null)
+        );
+        break;
+      case 'APPROVE':
+        this.filteredListBoxes = this.listBoxes.filter(
+          (item) => item.sampled === '1' && (item.approved === '0' || item.approved === null)
+        );
+        break;
+      case 'COMPLETE':
+        this.filteredListBoxes = this.listBoxes.filter(
+          (item) => item.sampled === '1' && item.approved === '1'
+        );
+        break;
+      default:
+        this.filteredListBoxes = [...this.listBoxes];
+    }
+  
+    this.updateDisplayedDataCount();
+  }
+
+  getHeadingText(filter: string): string {
+    switch (filter) {
+      case 'ALL':
+        return 'All Progress';
+      case 'SAMPLING':
+        return 'List to Sampling';
+      case 'APPROVE':
+        return 'List to Approve';
+      case 'COMPLETE':
+        return 'Complete List';
+      default:
+        return 'All Progress'; // Fallback for unexpected filter values
+    }
+  }
+  
+  saveAsPDF(noBox: string): void {
+    // Optional: Perform any actions before routing
+    console.log(`Navigating to sampling-print with noBox: ${noBox}`);
+    // Router navigation already handled by [routerLink]
+  }
+  
   
 
 }

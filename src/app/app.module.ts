@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SearchDetailComponent } from './search/search-detail/search-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print.component';
 
 
 
@@ -40,7 +41,8 @@ import { MatRadioModule } from '@angular/material/radio';
     SamplingViewComponent,
     SearchComponent,
     CustomerListComponent,
-    SearchDetailComponent
+    SearchDetailComponent,
+    SamplingPrintComponent
   ],
   imports: [
     BrowserModule,

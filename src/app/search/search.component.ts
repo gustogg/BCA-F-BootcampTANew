@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
+import { Customer, CustomerService } from '../customer.service';
 import { ListBox } from '../listbox.model';
 import Swal from 'sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,15 +15,28 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class SearchComponent implements OnInit {
   listBoxes: ListBox[] = [];
   filteredListBoxes: ListBox[] = [];
+  boxData: ListBox[] = [];
+  customerData: Customer[] = [];
   searchTerm: string = '';
   filterByNoBox: boolean = true; // Default to filter by no_box
   filterByCreatedDate: boolean = false;
+  filterByCustName: boolean = true; // Default to filter by no_box
+  filterByCustID: boolean = false; // Default to filter by no_box
   selectedDate: string | null = null;
   sortDirection: boolean = true; // true = ascending, false = descending
   sortColumn: keyof ListBox | '' = ''; // Track the currently sorted column
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   isDateFocused: boolean = false;  // State to manage the input type
+  isCustIDFocused: boolean = false;
+  customerSearchTerm: string = '';
+  searchMode: 'box' | 'customer' = 'box';
+  searchQuery: string = '';
+  isEditModalOpen = false;
+  editableCustomer: Partial<Customer> = {}; // Data for editing
+  // currentFilter: string = 'box';
+
+  
 
   constructor(private customerService: CustomerService) {}
 
@@ -73,6 +86,7 @@ export class SearchComponent implements OnInit {
 
   // Filter list boxes based on search term
   search(): void {
+    if (this.searchMode === 'box') {
     this.filteredListBoxes = this.listBoxes.filter((listBox) => {
       let matchesNoBox = true;
       let matchesCreatedDate = true;
@@ -92,6 +106,22 @@ export class SearchComponent implements OnInit {
       return matchesNoBox && matchesCreatedDate;
     });
   }
+  else if (this.searchMode === 'customer'){
+    this.customerData = this.customerData.filter((customerData) => {
+      let matchesCustomer = true;
+      let matchesCustID = true;
+      if (this.filterByCustName && this.searchTerm) {
+        matchesCustomer = customerData.namaKonsumen.toLowerCase().includes(this.searchTerm.toLowerCase());
+      }
+      if (this.filterByCustID && this.searchTerm) {
+        // Format the created_date from the database to YYYY-MM-DD for comparison
+        matchesCustID = customerData.noKontrak.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+      }
+        return matchesCustomer && matchesCustID;
+    });
+  }
+}
 
   onCreatedDateFilterChange(): void {
     // Reset search term and selected date when toggling created date filter
@@ -109,6 +139,19 @@ export class SearchComponent implements OnInit {
       this.filterByNoBox = false;
       this.filterByCreatedDate = true;
       this.selectedDate = null; // Reset text input if switching to Created Date filter
+    }
+    this.search(); // Trigger the search to update results
+  }
+
+  toggleFilterx(filter: 'custName' | 'custID'): void {
+    if (filter === 'custName') {
+      this.filterByCustName = true;
+      this.filterByCustID = false;
+      this.searchTerm = ''; // Reset date input if switching to No Box filter
+    } else if (filter === 'custID') {
+      this.filterByCustName = false;
+      this.filterByCustID = true;
+      // this.selectedDate = null; // Reset text input if switching to Created Date filter
     }
     this.search(); // Trigger the search to update results
   }
@@ -153,9 +196,67 @@ export class SearchComponent implements OnInit {
 
   onFocus() {
     this.isDateFocused = true;  // Switch type to 'date' on focus
+    this.isCustIDFocused = true;
   }
 
   onBlur() {
     this.isDateFocused = false;  // Switch type back to 'text' on blur
+    this.isCustIDFocused = false;
   }
+  fetchCustomerData(): void {
+    this.customerService.getAllCustomers().subscribe(
+      (data) => {
+        this.customerData = data;
+      },
+      (error) => {
+        console.error('Error fetching customer data', error);
+      }
+    );
+  }
+  fetchBoxData(): void {
+    this.customerService.getAllListBoxes().subscribe(
+      (data) => {
+        this.boxData = data;
+      },
+      (error) => {
+        console.error('Error fetching box data', error);
+      }
+    );
+  }
+  toggleSearchMode(mode: 'box' | 'customer'): void {
+    this.searchMode = mode;
+    if (mode === 'box') {
+      this.fetchBoxData();
+    } else {
+      this.fetchCustomerData();
+    }
+  }
+
+  openEditModal(customer: Customer): void {
+    this.isEditModalOpen = true;
+    this.editableCustomer = { ...customer };  // Clone customer data to avoid direct binding
+  }
+
+  closeEditModal(): void {
+    this.isEditModalOpen = false;
+    this.editableCustomer = {};
+  }
+
+  getOption(filter: string): string {
+    switch (filter) {
+      case 'box':
+        return 'Search - Box';
+      case 'customer':
+        return 'Search - Customer';
+      default:
+        return 'Search - All'; // Fallback for unexpected filter values
+    }
+  }
+
+  // searchCustomers(): void {
+  //   this.filteredCustomers = this.customers.filter((customer) =>
+  //     customer.name.toLowerCase().includes(this.customerSearchTerm.toLowerCase())
+  //   );
+  // }
+
 }

@@ -30,6 +30,8 @@ export class SamplingComponent implements OnInit {
   isDateFocused: boolean = false;  // State to manage the input type
   countSampledZero: number = 0;
   countApprovedZero: number = 0;
+  displayedDataCount: number = 0;
+
 
 
   constructor(
@@ -37,9 +39,13 @@ export class SamplingComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  updateDisplayedDataCount(): void {
+    this.displayedDataCount = this.filteredListBoxes.length;
+  }
 
   ngOnInit() {
     this.loadListBoxes();
+    this.updateDisplayedDataCount();
   }
 
   // Fetch all ListBox items
@@ -257,21 +263,7 @@ export class SamplingComponent implements OnInit {
         break;
     }
   }
-
-  
-  loadListBoxes() {
-    this.customerService.getAllListBoxes().subscribe((data) => {
-      this.listBoxes = data;
-      this.filteredListBoxes = data;  // Initially show all
-    });
-  }
-
-  displayedDataCount: number = 0;
-
-  updateDisplayedDataCount(): void {
-    this.displayedDataCount = this.filteredListBoxes.length;
-  }
-
+ 
   currentFilter: string = 'ALL';
   filterList(status: string) {
   this.currentFilter = status; 
@@ -322,6 +314,11 @@ export class SamplingComponent implements OnInit {
     // Router navigation already handled by [routerLink]
   }
   
-  
+  loadListBoxes() {
+    this.customerService.getAllListBoxes().subscribe((data) => {
+      this.listBoxes = data;
+      this.filteredListBoxes = data;  // Initially show all
+    });
+  }
 
 }

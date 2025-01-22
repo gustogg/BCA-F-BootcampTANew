@@ -10,6 +10,7 @@ import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
 import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 
 
 
@@ -67,20 +68,24 @@ customerDetails: any = {}; // Initialize as an object since it will be a single 
       customer.resume, customer.tandaDaftarPerusahaan, customer.siup, customer.noBox
     ]);
 
+    //Title
     doc.setFontSize(16); // Set font size for the title
-    const title = `SAMPLING LIST - ${noBox}`; // Your title string
+    const title = `SAMPLING LIST`; // Your title string
     const pageWidth = doc.internal.pageSize.width; // Get the page width in landscape
     const titleWidth = doc.getStringUnitWidth(title) * doc.internal.scaleFactor; // Calculate the width of the text
     const titleX = (pageWidth) / 2; // Calculate X position for centering
 
     // Add the title "Sampling List" at the top, centered
-    doc.text(title, titleX, 15, { align: 'center' }); // Position the title at (titleX, 10) // Position the title at (10) on the page
+    doc.text(title, titleX, 15, { align: 'center' },{fontWeight: 'bold'}); // Position the title at (titleX, 10) // Position the title at (10) on the page
 
+    //Keterangan
+    doc.setFontSize(12); // Set smaller font size for keterangan
+    const keterangan = `Nomor Box : ${noBox}`; // Keterangan string
+    doc.text(keterangan, 10, 25       , { align: 'left' }); // X = 10 for left alignment, Y = 20
 
-    
     // Generate the table in the PDF
     doc.autoTable(columns, rows, {
-      startY: 25,  // Position from the top
+      startY: 30,  // Position from the top
       margin: { horizontal: 10 },
       styles: { fontSize: 8, cellPadding: 3, overflow: 'linebreak' },  // Table style
       headStyles: {

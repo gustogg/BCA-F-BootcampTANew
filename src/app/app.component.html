@@ -1,54 +1,93 @@
-<nav *ngIf="showNav" class="tw-bg-gray-200 tw-shadow-xl tw-border-b tw-border-gray-200 tw-p-7 tw-items-center">
-  <!-- Logo -->
-  <div class="tw-flex tw-items-center tw-w-full tw-justify-between">
-    <!-- Logo (Left-aligned) -->
-    <a class="tw-font-bold md:tw-text-2xl tw-text-xl tw-text-blue-900">E-Register</a>
-  
-    <!-- Greeting (Right-aligned, along with the button) -->
-    <div class="tw-flex tw-items-center tw-space-x-2">
-      <h1 class="tw-text-blue-900 tw-text-md md:tw-text-lg">Hi, Gusto Ginting</h1>
-      <button [routerLink]="'/login'" class="md:tw-text-xs tw-text-xs tw-w-max md:tw-px-3 tw-px-2 md:tw-py-2 tw-py-1 tw-bg-red-500 tw-border-2 hover:tw-bg-red-900 tw-rounded-lg hover:tw-shadow-md tw-text-white hover:tw-text-white">
-        LOG OUT
-      </button>
+<nav *ngIf="showNav" class="tw-fixed tw-top-0 tw-left-0 tw-right-0 tw-z-50 tw-bg-white tw-shadow-lg">
+  <!-- Main Nav Container -->
+  <div class="tw-container tw-mx-auto tw-px-4">
+    <!-- Top Section with Logo and User Info -->
+    <div class="tw-flex tw-items-center tw-justify-between tw-py-4 tw-border-b tw-border-blue-100">
+      <!-- Logo Section -->
+      <div class="tw-flex tw-items-center tw-space-x-4">
+        <img src="../assets/ARSA-LOGO.png" class="tw-w-28 tw-object-contain" alt="ARSA Logo">
+        <span class="tw-text-blue-900 tw-font-bold tw-text-2xl tw-hidden md:tw-block">|</span>
+        <img class="tw-w-44 tw-object-contain tw-hidden sm:tw-block" src="./assets/BCA_Finance.png" alt="BCA Finance Logo">
+      </div>
+
+      <!-- User Info & Logout -->
+      <div class="tw-flex tw-items-center tw-space-x-4">
+        <div class="tw-flex tw-items-center tw-space-x-3">
+          <!-- User Avatar -->
+          <div class="tw-w-8 tw-h-8 tw-rounded-full tw-bg-blue-100 tw-flex tw-items-center tw-justify-center">
+            <!-- <span class="tw-text-blue-600 tw-font-semibold">
+              Gusto Ginting
+            </span> -->
+          </div>
+          <!-- User Name -->
+          <h1 class="tw-text-blue-900 tw-font-medium tw-hidden sm:tw-block">Hi, Gusto Ginting</h1>
+        </div>
+        
+        <!-- Logout Button -->
+        <button [routerLink]="'/login'" 
+                class="tw-px-4 tw-py-2 tw-bg-red-500 tw-rounded-lg tw-text-white 
+                       tw-text-sm tw-font-medium tw-transition-all tw-duration-300
+                       hover:tw-bg-red-600 hover:tw-shadow-lg active:tw-transform 
+                       active:tw-scale-95 focus:tw-outline-none focus:tw-ring-2 
+                       focus:tw-ring-red-500 focus:tw-ring-offset-2">
+          LOG OUT
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button class="tw-p-2 tw-rounded-lg tw-text-blue-900 hover:tw-bg-blue-50 md:tw-hidden"
+                (click)="toggleMobileMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               [class.tw-hidden]="showMobileNav" 
+               class="tw-h-6 tw-w-6" 
+               fill="none" 
+               viewBox="0 0 24 24" 
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               [class.tw-hidden]="!showMobileNav" 
+               class="tw-h-6 tw-w-6" 
+               fill="none" 
+               viewBox="0 0 24 24" 
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="tw-relative">
+      <!-- Desktop Navigation -->
+      <div class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-py-4 tw-space-x-8">
+        <a *ngFor="let item of navItems" 
+           [routerLink]="item.path" 
+           routerLinkActive="tw-text-blue-600" 
+           class="tw-group tw-relative tw-px-3 tw-py-2 tw-text-gray-700 tw-font-medium tw-transition-colors tw-duration-200 hover:tw-text-blue-600">
+          {{item.label}}
+          <span class="tw-absolute tw-bottom-0 tw-left-0 tw-w-full tw-h-0.5 tw-bg-blue-600 tw-transform tw-scale-x-0 tw-transition-transform tw-duration-200 group-hover:tw-scale-x-100"></span>
+        </a>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="md:tw-hidden" 
+           [ngClass]="{ 'tw-hidden': !showMobileNav }"
+           @slideDown>
+        <div class="tw-py-2 tw-space-y-1 tw-bg-white tw-rounded-b-lg tw-shadow-lg">
+          <a *ngFor="let item of navItems" 
+             [routerLink]="item.path" 
+             routerLinkActive="tw-bg-blue-50 tw-text-blue-600" 
+             class="tw-block tw-px-4 tw-py-3 tw-text-gray-700 tw-font-medium tw-transition-colors tw-duration-200 hover:tw-bg-blue-50 hover:tw-text-blue-600">
+            {{item.label}}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <!-- Hamburger Menu Button (only visible on mobile) -->
-  <button class="md:tw-hidden tw-block tw-pt-2 tw-pb-2 tw-text-blue-900" (click)="toggleMobileMenu()">
-    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  </button>
-
-  <!-- Navigation Links (always visible on desktop, hidden on mobile by default) -->
-  <div class="md:tw-flex tw-flex-col md:tw-space-x-4 md:tw--mt-7 md:tw-flex-row md:tw-items-center md:tw-justify-center tw-w-full md:tw-text-center"
-     [ngClass]="{ 'tw-hidden': !showMobileNav, 'tw-flex': showMobileNav }">
-  <a routerLink="/home" href="/home" routerLinkActive="active"
-     class="tw-text-gray-800 md:tw-text-xl tw-text-md tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-     Home
-  </a>
-  <a routerLink="/register" href="/register" routerLinkActive="active"
-     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-     Register
-  </a>
-  <a routerLink="/sampling" href="/sampling" routerLinkActive="active"
-     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-     Sampling
-  </a>
-  <a routerLink="/search" href="/search" routerLinkActive="active"
-     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-     Search
-  </a>
-  <a routerLink="/customer-list" href="/customer-list" routerLinkActive="active"
-     class="tw-text-gray-800 md:tw-text-xl tw-text-md  tw-transition tw-duration-300 tw-transform hover:tw-text-blue-900 hover:tw-scale-105">
-     Customer List
-  </a>
-</div>
-
-
-  <!-- User info and Logout button -->
-  
 </nav>
 
-<!-- The content of the current route will be displayed here -->
+<!-- Spacer for fixed navbar -->
+<div *ngIf="showNav" class="tw-h-32"></div>
+
+<!-- Content -->
 <router-outlet></router-outlet>

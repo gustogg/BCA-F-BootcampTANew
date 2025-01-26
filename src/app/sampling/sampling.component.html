@@ -57,9 +57,9 @@
               NOMOR BOX
               <fa-icon *ngIf="sortColumn === 'no_box'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
             </th>
-            <th (click)="sortData('created_date')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
+            <th (click)="sortData('createdDate')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
               CREATED DATE
-              <fa-icon *ngIf="sortColumn === 'created_date'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
+              <fa-icon *ngIf="sortColumn === 'createdDate'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
             </th>
             <th (click)="sortData('approved')" class="tw-cursor-pointer tw-border-b tw-border-blue-900 tw-w-max tw-w-auto">
               PROGRESS
@@ -72,7 +72,7 @@
           <tr *ngFor="let listBox of filteredListBoxes" class="hover:bg-blue-50 tw-transition-all">
             <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.id }}</td>
             <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.no_box }}</td>
-            <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.created_date | date: 'shortDate' }}</td>
+            <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.createdDate | date: 'shortDate' }}</td>
 
             <!-- Progression Bar for Approved -->
             <td class="tw-py-2 tw-px-4 tw-border-b tw-text-center ">

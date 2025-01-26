@@ -24,7 +24,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SearchDetailComponent } from './search/search-detail/search-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print.component';
+import { RegisterBoxComponent } from './register/register-box/register-box.component';
+import { RegisterCustomerComponent } from './register/register-customer/register-customer.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 
@@ -42,7 +50,10 @@ import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print
     SearchComponent,
     CustomerListComponent,
     SearchDetailComponent,
-    SamplingPrintComponent
+    SamplingPrintComponent,
+    RegisterBoxComponent,
+    RegisterCustomerComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +66,10 @@ import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule,
+    MatTabsModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()

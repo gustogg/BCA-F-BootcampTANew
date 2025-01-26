@@ -1,0 +1,137 @@
+<div class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-50 tw-to-blue-100 tw-p-4 md:tw-p-8">
+  <div class="tw-max-w-4xl tw-mx-auto tw-bg-white tw-rounded-xl tw-shadow-xl tw-overflow-hidden">
+    <mat-tab-group 
+      [(selectedIndex)]="selectedTabIndex"
+      class="box-tabs"
+      animationDuration="300ms"
+      backgroundColor="primary">
+      
+      <!-- Input Box Tab -->
+      <mat-tab label="Input Box">
+        <div class="tw-p-6 md:tw-p-8">
+          <div class="tw-bg-white tw-rounded-lg tw-border tw-border-blue-100 tw-shadow-lg">
+            <div class="tw-p-6">
+              <h2 class="tw-text-2xl tw-font-bold tw-text-blue-800 tw-mb-2">Register Nomor Box</h2>
+              <p class="tw-text-blue-600/70 tw-text-sm tw-mb-6">Please enter your box number below</p>
+              
+              <form #boxForm="ngForm" class="tw-space-y-6" (ngSubmit)="onSubmit(boxForm)">
+                <mat-form-field [floatLabel]="floatLabelValue()" class="tw-w-96">
+                  <mat-label class="tw-border-2">Input Nomor Box</mat-label>
+                  <input 
+                    matInput 
+                    name="boxNumber"
+                    [(ngModel)]="boxNumber" 
+                    required
+                    class="tw-bg-blue-100 tw-text-lg tw-py-6 "
+                    placeholder="Enter box number here...">
+                  <mat-icon matSuffix class="tw-text-blue-400 tw-border-l-0">inventory_2</mat-icon>
+                </mat-form-field>
+              
+                <button 
+                  mat-raised-button 
+                  color="primary" 
+                  class="submit-button tw-w-full tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-font-bold 
+                         tw-py-3 tw-px-4 tw-rounded-lg tw-shadow-lg hover:tw-shadow-xl
+                         tw-transition-all tw-duration-200"
+                  [disabled]="!boxForm.form.valid">
+                  Proceed
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+  
+      <!-- Lock Box Tab -->
+      <mat-tab label="Lock Box">
+        <div class="tw-p-6 md:tw-p-8">
+          <div class="tw-bg-white tw-rounded-lg tw-border tw-border-blue-100 tw-shadow-lg">
+            <div class="tw-p-6">
+              <h2 class="tw-text-2xl tw-font-bold tw-text-blue-800 tw-mb-2">Lock Box Management</h2>
+              <p class="tw-text-blue-600/70 tw-text-sm tw-mb-6">Select a box to lock or unlock</p>
+  
+              <mat-selection-list #boxList [multiple]="false" class="tw-mb-6">
+                <mat-list-option *ngFor="let box of listboxes" 
+                                [value]="box"
+                                [selected]="box.sampled"
+                                class="tw-mb-2 tw-rounded-lg tw-border tw-border-blue-100 hover:tw-bg-blue-50/50">
+                  <div class="tw-flex tw-items-center tw-gap-2">
+                    <span class="tw-text-blue-900">Box #{{box.no_box}}</span>
+                    <mat-icon class="tw-text-blue-400">
+                      {{box.sampled ? 'lock' : 'lock_open'}}
+                    </mat-icon>
+                  </div>
+                </mat-list-option>
+              </mat-selection-list>
+  
+              <button 
+                mat-raised-button 
+                color="primary"
+                class="tw-w-full tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-font-bold 
+                       tw-py-3 tw-px-4 tw-rounded-lg tw-shadow-lg hover:tw-shadow-xl
+                       tw-transition-all tw-duration-200">
+                Toggle Lock Status
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+  
+      <!-- Box List Tab -->
+      <mat-tab label="Box List">
+        <div class="tw-p-6 md:tw-p-8">
+          <div class="tw-bg-white tw-rounded-lg tw-border tw-border-blue-100 tw-shadow-lg">
+            <div class="tw-p-6">
+              <h2 class="tw-text-2xl tw-font-bold tw-text-blue-800 tw-mb-2">Box Database</h2>
+              <p class="tw-text-blue-600/70 tw-text-sm tw-mb-6">List of all registered boxes</p>
+  
+              <table mat-table class="tw-w-full tw-border-collapse">
+                <!-- Box Number Column -->
+                <ng-container matColumnDef="boxNumber">
+                  <th mat-header-cell *matHeaderCellDef class="tw-bg-blue-50 tw-text-blue-800 tw-font-semibold tw-p-4"> 
+                    Box Number 
+                  </th>
+                  <td mat-cell *matCellDef="let box" class="tw-p-4 tw-border-t tw-border-blue-100"> 
+                    {{box.boxNumber}} 
+                  </td>
+                </ng-container>
+  
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef class="tw-bg-blue-50 tw-text-blue-800 tw-font-semibold tw-p-4"> 
+                    Status 
+                  </th>
+                  <td mat-cell *matCellDef="let box" class="tw-p-4 tw-border-t tw-border-blue-100">
+                    <div class="tw-flex tw-items-center tw-gap-2">
+                      <mat-icon [class.tw-text-blue-600]="box.sampled" class="tw-text-blue-400">
+                        {{box.sampled ? 'lock' : 'lock_open'}}
+                      </mat-icon>
+                      <span [class.tw-text-blue-600]="box.sampled">
+                        {{box.sampled ? 'Locked' : 'Unlocked'}}
+                      </span>
+                    </div>
+                  </td>
+                </ng-container>
+  
+                <!-- Created Date Column -->
+                <ng-container matColumnDef="createdAt">
+                  <th mat-header-cell *matHeaderCellDef class="tw-bg-blue-50 tw-text-blue-800 tw-font-semibold tw-p-4"> 
+                    Created Date 
+                  </th>
+                  <td mat-cell *matCellDef="let box" class="tw-p-4 tw-border-t tw-border-blue-100"> 
+                    {{box.createdAt | date}} 
+                  </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="['boxNumber', 'status', 'createdAt']" 
+                    class="tw-bg-blue-50"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['boxNumber', 'status', 'createdAt'];"
+                    class="hover:tw-bg-blue-50/50 tw-transition-colors tw-duration-150"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

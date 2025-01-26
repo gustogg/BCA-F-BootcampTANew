@@ -1,0 +1,18 @@
+/* Custom scrollbar for webkit browsers */
+.tw-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tw-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.tw-container::-webkit-scrollbar-thumb {
+    background: #93c5fd;
+    border-radius: 4px;
+}
+
+.tw-container::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;
+}

@@ -9,8 +9,11 @@ import { SamplingDoComponent } from './sampling/sampling-do/sampling-do.componen
 import { SamplingViewComponent } from './sampling/sampling-view/sampling-view.component';
 import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisterBoxComponent } from './register/register-box/register-box.component';
+import { RegisterCustomerComponent } from './register/register-customer/register-customer.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { AuthGuard } from './auth.guard';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },  // Redirect root path to login
@@ -21,6 +24,8 @@ const routes: Routes = [
 
   // Other routes
   { path: 'register', component: RegisterComponent },
+  { path: 'register-box', component: RegisterBoxComponent },
+  { path: 'register-customer', component: RegisterCustomerComponent },
   { path: 'sampling', component: SamplingComponent },
   { path: 'sampling-do', component: SamplingDoComponent },
   { path: 'sampling-do/:noBox', component: SamplingDoComponent },
@@ -31,6 +36,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search-detail/:noBox', component: SearchDetailComponent },
   { path: 'customer-list', component: CustomerListComponent },
+  { path: 'maintenance', component: MaintenanceComponent },
 ];
 
 @NgModule({

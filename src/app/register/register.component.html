@@ -1,131 +1,104 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Register</title>
+</head>
+<body class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-text-gray-100 tw-font-sans">
 
-<div class="tw-bg-blue-900 tw-p-10 tw-text-blue-900 tw-w-screen tw-flex tw-items-center tw-justify-center tw-overflow-hidden">
-    <div class="tw-container tw-max-w-full md:tw-max-w-3xl tw-p-6 tw-bg-white tw-rounded-lg tw-shadow-xl tw-border-2 tw-border-finance tw-border-dashed tw-overflow-y-auto">
-            <h1 class="tw-text-3xl tw-font-bold tw-text-center tw-mb-2 tw-mt-5">New Register</h1>
-            <!-- nomor box -->
-            <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)" class="tw-space-y-6 tw-overflow-auto">
-                <div class="tw-flex tw-justify-center tw-mb-10">
-                    <input required type="text" id="noBox" name="noBox" placeholder="Nomor Box"
-                 [(ngModel)]="customer.noBox" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
-                </div>
-
-                <div class="tw-flex tw-justify-center tw-mb-10">
-                    <input required type="text" id="noMap" name="noMap" placeholder="Nomor MAP"
-                 [(ngModel)]="customer.noMap" class="tw-p-2 tw-text-center tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
-                </div>
-
-                <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-10">
-                    <!-- Form Fields -->
-                    <div class="tw-flex tw-flex-col">
-                        <label for="noKontrak" class="tw-mb-2 tw-font-bold">No. Kontrak</label>
-                        <input type="number" id="noKontrak" name="noKontrak"
-                 [(ngModel)]="customer.noKontrak" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="noPin" class="tw-mb-2 tw-font-bold">No. Pin</label>
-                        <input type="number" id="noPin" name="noPin"
-                 [(ngModel)]="customer.noPin" class="tw-p-3 tw-w-1/6 tw-border-finance tw-border-b-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="customerId" class="tw-mb-2 tw-font-bold">Customer ID</label>
-                        <input type="text" id="customerId" name="customerId"
-                 [(ngModel)]="customer.customerID" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="namaKonsumen" class="tw-mb-2 tw-font-bold">Nama Konsumen</label>
-                        <input type="text" id="namaKonsumen" name="namaKonsumen"
-                 [(ngModel)]="customer.namaKonsumen" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="tanggalRealisasi" class="tw-mb-2 tw-font-bold">Tanggal Realisasi</label>
-                        <input type="date" id="tanggalRealisasi" name="tanggalRealisasi"
-                 [(ngModel)]="customer.tglRealisasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="tanggalJatuhTempo" class="tw-mb-2 tw-font-bold">Tanggal Jatuh Tempo</label>
-                        <input type="date" id="tanggalJatuhTempo" name="tanggalJatuhTempo"
-                 [(ngModel)]="customer.tglJatuhTempo" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="tanggalRetensi" class="tw-mb-2 tw-font-bold">Tanggal Retensi</label>
-                        <input type="date" id="tanggalRetensi" name="tanggalRetensi"
-                 [(ngModel)]="customer.tglRetensi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="fotocopyKTP" class="tw-mb-2 tw-font-bold">Fotocopy KTP</label>
-                        <input type="number" id="fotocopyKTP" name="fotocopyKTP"
-                 [(ngModel)]="customer.fcKTP" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="fotocopyPasangan" class="tw-mb-2 tw-font-bold">Fotocopy Pasangan</label>
-                        <input type="number" id="fotocopyPasangan"
-                 [(ngModel)]="customer.fcPasangan" name="fotocopyPasangan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="fotocopyPengurus" class="tw-mb-2 tw-font-bold">Fotocopy Seluruh Pengurus</label>
-                        <input type="number" id="fotocopyPengurus"
-                 [(ngModel)]="customer.fcPengurus" name="fotocopyPengurus" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="fotocopyKK" class="tw-mb-2 tw-font-bold">Fotocopy Kartu Keluarga</label>
-                        <input type="number" id="fotocopyKK"
-                 [(ngModel)]="customer.fcKK" name="fotocopyKK" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="fotocopyAkta" class="tw-mb-2 tw-font-bold">Fotocopy Akta Nikah/Cerai/Kematian</label>
-                        <input type="number" id="fotocopyAkta" name="fotocopyAkta"
-                 [(ngModel)]="customer.fcAkta" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="komiteKredit" class="tw-mb-2 tw-font-bold">Keputusan Komite Kredit</label>
-                        <input type="number" id="komiteKredit" name="komiteKredit"
-                 [(ngModel)]="customer.k3" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="rekomendasiBCA" class="tw-mb-2 tw-font-bold">Rekomendasi BCA</label>
-                        <input type="number" id="rekomendasiBCA" name="rekomendasiBCA"
-                 [(ngModel)]="customer.rekomendasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="formSurvey" class="tw-mb-2 tw-font-bold">Form Survey</label>
-                        <input type="number" id="formSurvey" name="formSurvey"
-                 [(ngModel)]="customer.formSurvey" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="petaLokasi" class="tw-mb-2 tw-font-bold">Peta Lokasi</label>
-                        <input type="text" id="petaLokasi" name="petaLokasi"
-                 [(ngModel)]="customer.petaLokasi" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="formAplikasi" class="tw-mb-2 tw-font-bold">Formulir Aplikasi Pembiayaan</label>
-                        <input type="number" id="formAplikasi" name="formAplikasi"
-                 [(ngModel)]="customer.fap" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="resume" class="tw-mb-2 tw-font-bold">Resume</label>
-                        <input type="number" id="resume" name="resume"
-                        [(ngModel)]="customer.resume" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="tandaPerusahaan" class="tw-mb-2 tw-font-bold">Tanda Daftar Perusahaan</label>
-                        <input type="number" id="tandaPerusahaan" name="tandaPerusahaan"
-                        [(ngModel)]="customer.tandaDaftarPerusahaan" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                    <div class="tw-flex tw-flex-col">
-                        <label for="suratIzin" class="tw-mb-2 tw-font-bold">Surat Izin Usaha (SIUP)</label>
-                        <input type="number" id="suratIzin" name="suratIzin"
-                        [(ngModel)]="customer.siup" class="tw-p-3 tw-border-finance tw-border-2 tw-rounded tw-outline-none tw-text-blue-900">
-                    </div>
-                </div>
-                <!-- Proceed Button -->
-                <div class="tw-flex tw-justify-center tw-mt-10 tw-mb-10">
-                    <button type="submit" class="tw-bg-finance tw-text-lg tw-text-white tw-p-3 tw-rounded-lg tw-shadow hover:tw-bg-blue-700 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2">
-                        + Add Item
-                    </button>
-                </div>
-            </form>
-            <table>
-                <tr>
-            </table>
-        </div>
+  <!-- Main Container -->
+  <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-min-h-max tw-px-4 tw-py-20">
+    
+    <!-- Welcome Section -->
+    <div class="tw-text-center tw-mb-12 tw-space-y-4">
+      <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-white tw-tracking-tight">
+        Register Menu
+      </h1>
+      <p class="tw-text-blue-200 tw-text-lg">Choose an option to get started</p>
     </div>
+
+    <!-- Features Section -->
+    <section class="tw-w-full tw-max-w-6xl tw-grid md:tw-grid-cols-3 tw-gap-8 tw-px-4">
+      
+      <!-- Register Box Card -->
+      <button 
+        [routerLink]="'/register-box'"
+        class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
+               tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
+                    tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <!-- Content -->
+        <div class="tw-relative tw-z-10">
+          <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
+                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
+            <img class="tw-w-full tw-h-full" src="./assets/box-open-svgrepo-com.png" alt="Register Box">
+          </div>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Register Box</h3>
+          <p class="tw-text-blue-600">Pendaftaran/Registrasi Box Dokumen</p>
+        </div>
+      </button>
+      
+      <!-- Register Customer Card -->
+      <button 
+        [routerLink]="'/register-customer'"
+        class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
+               tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
+                    tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <!-- Content -->
+        <div class="tw-relative tw-z-10">
+          <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
+                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
+            <img class="tw-w-full tw-h-full" src="./assets/customer-list-line-svgrepo-com.png" alt="Register Customer">
+          </div>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Register Customer</h3>
+          <p class="tw-text-blue-600">Pendaftaran/Registrasi Customer</p>
+        </div>
+      </button>
+
+      <!-- File Import Card (Coming Soon) -->
+      <button 
+        [routerLink]="'/maintenance'"
+        class="tw-group tw-relative tw-bg-white/80 tw-rounded-2xl tw-p-8 tw-text-center 
+               tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
+        <!-- Coming Soon Badge -->
+        <div class="tw-absolute tw-top-4 tw-right-4 tw-bg-blue-600 tw-text-white tw-text-xs 
+                    tw-px-3 tw-py-1 tw-rounded-full tw-font-medium">
+          Coming Soon
+        </div>
+        <!-- Background Pattern -->
+        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
+                    tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <!-- Content -->
+        <div class="tw-relative tw-z-10 tw-opacity-50">
+          <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
+                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
+            <img class="tw-w-full tw-h-full" src="./assets/import-content-svgrepo-com.png" alt="File Import">
+          </div>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">File Import</h3>
+          <p class="tw-text-blue-600">Import Data Customer *CSV/XLSX</p>
+        </div>
+      </button>
+
+    </section>
+
+    <!-- Decorative Elements -->
+    <div class="tw-fixed tw-top-0 tw-left-0 tw-w-96 tw-h-96 tw-bg-blue-400/10 tw-rounded-full 
+                tw--translate-x-1/2 tw--translate-y-1/2 tw-blur-3xl"></div>
+    <div class="tw-fixed tw-bottom-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-blue-400/10 tw-rounded-full 
+                tw-translate-x-1/2 tw-translate-y-1/2 tw-blur-3xl"></div>
+
+    <!-- Footer -->
+    <footer class="tw-w-full tw-fixed tw-bottom-0 tw-left-0 tw-bg-blue-900/90 tw-backdrop-blur-sm 
+                   tw-border-t tw-border-blue-700/50 tw-py-4 tw-px-4 tw-text-center">
+      <p class="tw-text-blue-200">&copy; 2024 BCA Finance. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+</body>

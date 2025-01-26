@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CustomerService, Customer } from '../customer.service';
 import { NgForm } from '@angular/forms';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import {FloatLabelType, MatFormFieldModule} from '@angular/material/form-field';
 import Swal from 'sweetalert2';
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   faPen = faPen;
-
+  
   // Define a single customer object
   customer: Customer = {
     id: 0, // Set to 0 but will not be sent to the backend

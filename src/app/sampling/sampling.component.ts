@@ -108,7 +108,7 @@ export class SamplingComponent implements OnInit {
       // Filter by Created Date if checked and date is selected
       if (this.filterByCreatedDate && this.selectedDate) {
         // Format the created_date from the database to YYYY-MM-DD for comparison
-        const formattedCreatedDate = new Date(listBox.created_date).toISOString().split('T')[0];
+        const formattedCreatedDate = new Date(listBox.createdDate).toISOString().split('T')[0];
         matchesCreatedDate = formattedCreatedDate === this.selectedDate;
       }
   
@@ -142,7 +142,7 @@ export class SamplingComponent implements OnInit {
       title: 'ListBox Details',
       html: `<p><strong>ID:</strong> ${listBox.id}</p>
              <p><strong>No Box:</strong> ${listBox.no_box}</p>
-             <p><strong>Created Date:</strong> ${new Date(listBox.created_date).toLocaleDateString()}</p>
+             <p><strong>Created Date:</strong> ${new Date(listBox.createdDate).toLocaleDateString()}</p>
              <p><strong>Approved:</strong> ${listBox.approved}</p>`,
       icon: 'info',
     });

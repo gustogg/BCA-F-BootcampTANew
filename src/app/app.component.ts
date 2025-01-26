@@ -22,7 +22,12 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
+navItems = [
+    { path: '/home', label: 'Home' },
+    { path: '/register', label: 'Register' },
+    { path: '/sampling', label: 'Sampling' },
+    { path: '/search', label: 'Search' }
+  ];
   toggleMobileMenu(): void {
     // Toggle the visibility of the mobile menu
     this.showMobileNav = !this.showMobileNav;

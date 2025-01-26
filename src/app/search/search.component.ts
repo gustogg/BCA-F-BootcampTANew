@@ -29,10 +29,10 @@ export class SearchComponent implements OnInit {
   faArrowDown = faArrowDown;
   isDateFocused: boolean = false;  // State to manage the input type
   isCustIDFocused: boolean = false;
-  customerSearchTerm: string = '';
   searchMode: 'box' | 'customer' = 'box';
   searchQuery: string = '';
   isEditModalOpen = false;
+
   editableCustomer: Partial<Customer> = {}; // Data for editing
   // currentFilter: string = 'box';
 
@@ -98,8 +98,8 @@ export class SearchComponent implements OnInit {
   
       // Filter by Created Date if checked and date is selected
       if (this.filterByCreatedDate && this.selectedDate) {
-        // Format the created_date from the database to YYYY-MM-DD for comparison
-        const formattedCreatedDate = new Date(listBox.created_date).toISOString().split('T')[0];
+        // Format the createdDate from the database to YYYY-MM-DD for comparison
+        const formattedCreatedDate = new Date(listBox.createdDate).toISOString().split('T')[0];
         matchesCreatedDate = formattedCreatedDate === this.selectedDate;
       }
   
@@ -114,11 +114,11 @@ export class SearchComponent implements OnInit {
         matchesCustomer = customerData.namaKonsumen.toLowerCase().includes(this.searchTerm.toLowerCase());
       }
       if (this.filterByCustID && this.searchTerm) {
-        // Format the created_date from the database to YYYY-MM-DD for comparison
+        // Format the createdDate from the database to YYYY-MM-DD for comparison
         matchesCustID = customerData.noKontrak.toLowerCase().includes(this.searchTerm.toLowerCase());
 
       }
-        return matchesCustomer && matchesCustID;
+        return matchesCustomer && matchesCustID ;
     });
   }
 }
@@ -130,12 +130,12 @@ export class SearchComponent implements OnInit {
     this.search();
   }
 
-  toggleFilter(filter: 'no_box' | 'created_date'): void {
+  toggleFilter(filter: 'no_box' | 'createdDate'): void {
     if (filter === 'no_box') {
       this.filterByNoBox = true;
       this.filterByCreatedDate = false;
       this.searchTerm = ''; // Reset date input if switching to No Box filter
-    } else if (filter === 'created_date') {
+    } else if (filter === 'createdDate') {
       this.filterByNoBox = false;
       this.filterByCreatedDate = true;
       this.selectedDate = null; // Reset text input if switching to Created Date filter
@@ -162,7 +162,7 @@ export class SearchComponent implements OnInit {
       title: 'ListBox Details',
       html: `<p><strong>ID:</strong> ${listBox.id}</p>
              <p><strong>No Box:</strong> ${listBox.no_box}</p>
-             <p><strong>Created Date:</strong> ${new Date(listBox.created_date).toLocaleDateString()}</p>
+             <p><strong>Created Date:</strong> ${new Date(listBox.createdDate).toLocaleDateString()}</p>
              <p><strong>Approved:</strong> ${listBox.approved}</p>`,
       icon: 'info',
     });
@@ -231,6 +231,7 @@ export class SearchComponent implements OnInit {
       this.fetchCustomerData();
     }
   }
+
 
   openEditModal(customer: Customer): void {
     this.isEditModalOpen = true;

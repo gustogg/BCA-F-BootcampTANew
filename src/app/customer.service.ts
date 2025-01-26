@@ -39,10 +39,9 @@ export interface Customer {
 export interface ListBox {
   id: number;
   no_box: string;
-  created_date: Date;
   approved: string;
   sampled: string;
-
+  createdDate: Date;
 }
 
 @Injectable({
@@ -153,7 +152,7 @@ export class CustomerService {
   }
 
   updateListBoxSampled(noBox: string, sampled: string): Observable<any> {
-    return this.http.put(`${this.listBoxApiUrl}/update-sampled?noBox=${noBox}&sampled=${sampled}`, null, { observe: 'response' }).pipe(
+    return this.http.put(`${this.listBoxApiUrl}/update-sampled?noBox=${noBox}&sampled=${sampled}&approved=0`, null, { observe: 'response' }).pipe(
       tap(response => console.log('ListBox update response:', response)),
       catchError((error) => {
         console.error('Error updating ListBox sampled', error);
@@ -172,7 +171,16 @@ export class CustomerService {
     );
   }
   
-  
+  createListBox(listBox: Omit<ListBox, 'id' | 'createdDate'>): Observable<ListBox> {
+    console.log('Creating a new ListBox with no_box:', listBox.no_box); // Log the data being sent
+    return this.http.post<ListBox>(this.listBoxApiUrl, listBox).pipe(
+      catchError(error => {
+        console.error('Error creating ListBox', error);
+        return throwError(error);
+      })
+    );
+  }
+
   
   
   // updateCustomer(id: number, customerData: Customer): Observable<Customer> {

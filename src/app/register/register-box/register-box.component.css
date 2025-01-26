@@ -1,0 +1,14 @@
+
+  /* Remove the separator between input and icon */
+  ::ng-deep .mat-form-field-suffix {
+    border-left: none !important;
+  }
+
+  /* Make the input field bigger */
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  ::ng-deep .mat-form-field-outline {
+    background-color: rgba(239, 246, 255, 0.5); /* matches tw-bg-blue-50/50 */
+  }

@@ -1,340 +1,339 @@
-<body class="tw-bg-blue-800 tw-h-max">
-<div class="tw-container tw-mx-auto tw-p-4 tw-w-full">
-  <div class="tw-mb-4 tw-flex tw-justify-start">
-    <div class="search-controls tw-content-between tw-space-x-2">
-      <button 
-        class="tw-text-blue-800 tw-font-medium tw-bg-white tw-py-2 tw-px-4 tw-rounded-lg tw-border-blue-500 hover:tw-bg-gray-300 focus:tw-ring-2 focus:tw-ring-blue-500"
-        [class.active]="searchMode === 'box'"
-        (click)="toggleSearchMode('box')">
-        BOX
-      </button>
-      <button
-        class="tw-text-blue-800 tw-font-medium tw-bg-white tw-border-2 tw-border-blue-500 tw-py-2 tw-px-4 tw-rounded-lg hover:tw-bg-gray-300 focus:tw-ring-2 focus:tw-ring-blue-500"
-        [class.active]="searchMode === 'customer'"
-        (click)="toggleSearchMode('customer')">
-        CUSTOMER
-      </button>
+<body class="tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-900 tw-min-h-max tw-transition-all tw-duration-300">
+  <div class="tw-container tw-mx-auto tw-p-6 tw-w-full tw-max-w-7xl">
+    <!-- Mode Selection Buttons -->
+    <div class="tw-mb-8">
+      <h1 class="tw-text-white tw-w-max tw-px-3 tw-rounded-sm tw-font-medium tw-mb-2">SEARCH OPTIONS</h1>
+      <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-p-2 tw-rounded-xl tw-inline-flex tw-shadow-lg">
+        <div class="tw-relative tw-flex tw-space-x-1">
+          <!-- Background Slider -->
+          <div 
+            class="tw-absolute tw-transition-all tw-duration-300 tw-ease-in-out tw-bg-white tw-rounded-lg tw-shadow-lg" 
+            [ngStyle]="{
+              'left': searchMode === 'box' ? '0' : '50%',
+              'width': '50%',
+              'height': '100%'
+            }">
+          </div>
+          
+          <!-- Box Button -->
+          <button 
+            (click)="toggleSearchMode('box')"
+            class="tw-relative tw-px-8 tw-py-3 tw-rounded-lg tw-transition-colors tw-duration-300 tw-z-10"
+            [ngClass]="searchMode === 'box' ? 'tw-text-blue-800' : 'tw-text-white hover:tw-text-blue-200'">
+            <div class="tw-flex tw-items-center tw-space-x-2">
+              <i class="fas fa-box tw-text-lg"></i>
+              <span class="tw-font-medium">Box</span>
+            </div>
+          </button>
+    
+          <!-- Customer Button -->
+          <button 
+            (click)="toggleSearchMode('customer')"
+            class="tw-relative tw-px-8 tw-py-3 tw-rounded-lg tw-transition-colors tw-duration-300 tw-z-10"
+            [ngClass]="searchMode === 'customer' ? 'tw-text-blue-800' : 'tw-text-white hover:tw-text-blue-200'">
+            <div class="tw-flex tw-items-center tw-space-x-2">
+              <i class="fas fa-user tw-text-lg"></i>
+              <span class="tw-font-medium">Customer</span>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
-    
-  </div>
-    <h2 class="tw-text-3xl tw-text-center tw-p-6 tw-font-bold tw-text-white tw-mb-4">{{ getOption(searchMode) }}</h2>
-    <div class="tw-items-center tw-space-x-2 tw-mx-auto tw-text-center tw-font-sans tw-font-medium tw-mb-28">
-
-    <!-- Search Bar Box -->
-  <div *ngIf="searchMode === 'box'">
-      <input
-        type="text"
-        placeholder="Search by No. Box ..."
-        *ngIf="filterByNoBox"
-        [(ngModel)]="searchTerm"
-        (input)="search()"
-        class="tw-placeholder-blue-900 tw-placeholder-opacity-70 tw-bg-white tw-text-center tw-p-2 tw-border tw-border-blue-500 tw-text-blue-900 tw-rounded-3xl tw-w-full tw-mb-4 tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-blue-900"
-      />
-    
-      <input
-      *ngIf="filterByCreatedDate"
-      [type]="isDateFocused ? 'date' : 'text'"
-      placeholder="Search by Date ..."
-      [(ngModel)]="selectedDate"
-      (change)="search()"
-      (focus)="onFocus()"
-      (blur)="onBlur()"
-      class="tw-placeholder-blue-900 tw-placeholder-opacity-70 tw-bg-white tw-text-center tw-p-2 tw-border tw-border-blue-500 tw-text-blue-900 tw-rounded-3xl tw-w-full tw-mb-4 tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-blue-900"
-    />
-  </div>
-    <!-- End of Search Bar Box -->
-
-
-    <!-- Search Bar Customer -->
-  <div *ngIf="searchMode === 'customer'">
-      <input
-        type="text"
-        placeholder="Search by No. Customer Name ..."
-        *ngIf="filterByCustName"
-        [(ngModel)]="searchTerm"
-        (input)="search()"
-        class="tw-placeholder-blue-900 tw-placeholder-opacity-70 tw-bg-white tw-text-center tw-p-2 tw-border tw-border-blue-500 tw-text-blue-900 tw-rounded-3xl tw-w-full tw-mb-4 tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-blue-900"
-      />
-    
-      <input
-      *ngIf="filterByCustID"
-      [type]="isCustIDFocused ? 'text' : 'text'"
-      type="text"
-      placeholder="Search by Customer Contract ..."
-      [(ngModel)]="searchTerm"
-      (input)="search()"
-      (focus)="onFocus()"
-      (blur)="onBlur()"
-      class="tw-placeholder-blue-900 tw-placeholder-opacity-70 tw-bg-white tw-text-center tw-p-2 tw-border tw-border-blue-500 tw-text-blue-900 tw-rounded-3xl tw-w-full tw-mb-4 tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-blue-900"
-    />
-  </div>
-    <!-- End of Search Bar Customer -->
-
-
-    <!-- Radio untuk box search -->
-  <div *ngIf="searchMode === 'box'">
-      <mat-radio-button
-      value="no_box"
-      class="tw-text-white"
-      [checked]="filterByNoBox"
-      (change)="toggleFilter('no_box')">
-    <label class="tw-text-white">No. Box</label>
-    </mat-radio-button>
       
-    
-    <mat-radio-button
-    value="createdDate"
-    class="tw-text-white"
-    [checked]="filterByCreatedDate"
-    (change)="toggleFilter('createdDate')">
-    <label class="tw-text-white">Date</label>
-    </mat-radio-button>
-  </div>
-    <!-- End of Radio untuk box search -->
-
-
-  <!-- Radio untuk customer search -->
-  <div *ngIf="searchMode === 'customer'">
-    <mat-radio-button
-    value="custName"
-    class="tw-text-white"
-    [checked]="filterByCustName"
-    (change)="toggleFilterx('custName')">
-  <label class="tw-text-white">Customer Name</label>
-  </mat-radio-button>
-    
-
-  <mat-radio-button
-  value="custID"
-  class="tw-text-white"
-  [checked]="filterByCustID"
-  (change)="toggleFilterx('custID')">
-  <label class="tw-text-white">Customer Contract</label>
-  </mat-radio-button>
-  </div>
-  <!-- End of radio untuk customer search -->
-
-
+    <!-- Title -->
+    <h2 class="tw-text-4xl tw-text-center tw-font-bold tw-text-white tw-mb-8 tw-opacity-0 tw-animate-fade-in">
+      {{ getOption(searchMode) }}
+    </h2>
+  
+    <!-- Search Controls -->
+    <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-rounded-xl tw-p-6 tw-mb-8 tw-shadow-xl tw-animate-slide-up">
+      <div class="tw-space-y-4">
+        <!-- Search Input Box Mode -->
+        <div *ngIf="searchMode === 'box'" class="tw-space-y-4">
+          <input
+            *ngIf="filterByNoBox"
+            type="text"
+            placeholder="Search by No. Box ..."
+            [(ngModel)]="searchTerm"
+            (input)="search()"
+            class="tw-w-full tw-bg-white/90 tw-backdrop-blur tw-text-center tw-p-3 tw-border-2 tw-border-blue-400 tw-text-blue-900 tw-rounded-full tw-shadow-inner focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-transition-all tw-duration-300"
+          />
+          
+          <input
+            *ngIf="filterByCreatedDate"
+            [type]="isDateFocused ? 'date' : 'text'"
+            placeholder="Search by Date ..."
+            [(ngModel)]="selectedDate"
+            (change)="search()"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            class="tw-w-full tw-bg-white/90 tw-backdrop-blur tw-text-center tw-p-3 tw-border-2 tw-border-blue-400 tw-text-blue-900 tw-rounded-full tw-shadow-inner focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-transition-all tw-duration-300"
+          />
+        </div>
+  
+        <!-- Search Input Customer Mode -->
+        <div *ngIf="searchMode === 'customer'" class="tw-space-y-4">
+          <input
+            *ngIf="filterByCustName"
+            type="text"
+            placeholder="Search by Customer Name ..."
+            [(ngModel)]="searchTerm"
+            (input)="search()"
+            class="tw-w-full tw-bg-white/90 tw-backdrop-blur tw-text-center tw-p-3 tw-border-2 tw-border-blue-400 tw-text-blue-900 tw-rounded-full tw-shadow-inner focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-transition-all tw-duration-300"
+          />
+          
+          <input
+            *ngIf="filterByCustID"
+            type="text"
+            placeholder="Search by Customer Contract ..."
+            [(ngModel)]="searchTerm"
+            (input)="search()"
+            class="tw-w-full tw-bg-white/90 tw-backdrop-blur tw-text-center tw-p-3 tw-border-2 tw-border-blue-400 tw-text-blue-900 tw-rounded-full tw-shadow-inner focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-transition-all tw-duration-300"
+          />
+        </div>
+  
+        <!-- Radio Buttons -->
+        <div class="tw-flex tw-justify-center tw-gap-6">
+          <div *ngIf="searchMode === 'box'" class="tw-space-x-6">
+            <mat-radio-button
+              value="no_box"
+              [checked]="filterByNoBox"
+              (change)="toggleFilter('no_box')"
+              class="tw-text-white hover:tw-opacity-80 tw-transition-opacity">
+              <label class="tw-text-white">No. Box</label>
+            </mat-radio-button>
+            
+            <mat-radio-button
+              value="createdDate"
+              [checked]="filterByCreatedDate"
+              (change)="toggleFilter('createdDate')"
+              class="tw-text-white hover:tw-opacity-80 tw-transition-opacity">
+              <label class="tw-text-white">Date</label>
+            </mat-radio-button>
+          </div>
+  
+          <div *ngIf="searchMode === 'customer'" class="tw-space-x-6">
+            <mat-radio-button
+              value="custName"
+              [checked]="filterByCustName"
+              (change)="toggleFilterx('custName')"
+              class="tw-text-white hover:tw-opacity-80 tw-transition-opacity">
+              <label class="tw-text-white">Customer Name</label>
+            </mat-radio-button>
+            
+            <mat-radio-button
+              value="custID"
+              [checked]="filterByCustID"
+              (change)="toggleFilterx('custID')"
+              class="tw-text-white hover:tw-opacity-80 tw-transition-opacity">
+              <label class="tw-text-white">Customer Contract</label>
+            </mat-radio-button>
+          </div>
+        </div>
+      </div>
     </div>
   
-    <div *ngIf="searchMode === 'box'" class="tw-flex tw-items-center tw-space-x-2 tw-mb-3 tw-mt-5">
-      <label for="sort" class="tw-font-medium tw-text-white">SORT BY:</label>
-      <select id="sort" (change)="onSortColumnChange($event)" class="tw-rounded-md">
+    <!-- Sort Controls (Box Mode) -->
+    <div *ngIf="searchMode === 'box'" class="tw-flex tw-items-center tw-space-x-4 tw-mb-6">
+      <label for="sort" class="tw-font-medium tw-text-white tw-text-lg">Sort by:</label>
+      <select 
+        id="sort" 
+        (change)="onSortColumnChange($event)" 
+        class="tw-bg-white/90 tw-backdrop-blur tw-rounded-lg tw-px-4 tw-py-2 tw-border-2 tw-border-blue-400 focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-transition-all tw-duration-300">
         <option value="id">ID</option>
         <option value="no_box">No Box</option>
         <option value="createdDate">Created Date</option>
         <option value="approved">Approved</option>
       </select>
     </div>
-
-    <!-- ListBox Table -->
-    <table *ngIf="searchMode === 'box'" class="tw-min-w-full tw-bg-white tw-rounded-lg tw-shadow-md tw-overflow-hidden">
-      <thead class="tw-bg-blue-900 tw-text-white">
-        <tr>
-          <th (click)="sortData('id')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
-            ID
-            <fa-icon *ngIf="sortColumn === 'id'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
-          </th>
-          <th (click)="sortData('no_box')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
-            No Box
-            <fa-icon *ngIf="sortColumn === 'no_box'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
-          </th>
-          <th (click)="sortData('createdDate')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
-            Created Date
-            <fa-icon *ngIf="sortColumn === 'createdDate'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
-          </th>
-          <th (click)="sortData('approved')" class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">
-            Approved
-            <fa-icon *ngIf="sortColumn === 'approved'" [icon]="sortDirection ? faArrowUp : faArrowDown" class="tw-ml-2"></fa-icon>
-          </th>
-          <th class="tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">Sampled</th>
-          <th class="tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">Action</th>
-        </tr>
-        
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let listBox of filteredListBoxes"
-          class="tw-hover:bg-blue-50 tw-transition-all"
-        >
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.id }}</td>
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.no_box }}</td>
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.createdDate | date: 'shortDate' }}</td>
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">
-            {{ listBox.approved == '1' ? 'Yes' : 'No' }}
-          </td>
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">{{ listBox.sampled == '1' ? 'Yes' : 'No' }}</td>
-          <td class="tw-py-2 tw-text-center tw-px-4 tw-border-b">
-            <button
-            [routerLink]="['/search-detail', listBox.no_box]"
-              class="tw-bg-blue-900 tw-text-white tw-px-3 tw-py-1 tw-rounded-md tw-hover:bg-blue-800 tw-transition-all tw-mr-2"
-            >
-              View
-            </button>
-            <!-- <button
-              (click)="deleteListBox(listBox.id)"
-              class="tw-bg-red-600 tw-text-white tw-px-3 tw-py-1 tw-rounded-md tw-hover:bg-red-500 tw-transition-all"
-            >
-              Delete
-            </button> -->
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div *ngIf="searchMode === 'customer'" class="tw-w-full tw-bg-blue-800">
-      <table class="tw-min-w-full tw-bg-blue-800 tw-rounded-lg tw-shadow-md tw-overflow-hidden">
-        <thead class="tw-bg-blue-900 tw-text-white tw-p-5">
-          <tr class="tw-cursor-pointer  tw-px-4 tw-border-b tw-border-blue-900">
-            <th class="tw-cursor-pointer tw-py-2 tw-px-4 tw-border-b tw-border-blue-900">Customer Name</th>
-            <th>Contract Number</th>
-            <th>Box Number</th>
-            <th>Action</th>
+  
+    <!-- Tables -->
+    <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-rounded-xl tw-p-6 tw-shadow-xl tw-animate-slide-up tw-overflow-x-auto">
+      <!-- Box Table -->
+      <table *ngIf="searchMode === 'box'" class="tw-min-w-full tw-divide-y tw-divide-blue-200">
+        <thead>
+          <tr class="tw-bg-blue-900/50">
+            <th *ngFor="let header of ['ID', 'No Box', 'Created Date', 'Approved', 'Sampled', 'Action']"
+                class="tw-px-6 tw-py-4 tw-text-left tw-text-xs tw-font-medium tw-text-white tw-uppercase tw-tracking-wider">
+              {{header}}
+            </th>
           </tr>
         </thead>
-        <tbody class="tw-hover:bg-blue-50 tw-bg-white">
-          <tr *ngFor="let customer of customerData" class="tw-py-2 tw-text-center tw-px-4 tw-border-b">
-            <td>{{ customer.namaKonsumen }}</td>
-            <td>{{ customer.noKontrak }}</td>
-            <td>{{ customer.noBox }}</td>
-            <td class="tw-p-2">
-              <button mat-raised-button (click)="openEditModal(customer)" class="tw-bg-blue-800 tw-text-white tw-rounded-md tw-p-2 tw-shadow-md">
-                <i class="fa fa-circle-info"></i> <!-- Solid Font Awesome Pen Icon -->
+        <tbody class="tw-divide-y tw-divide-blue-200">
+          <tr *ngFor="let listBox of filteredListBoxes"
+              class="tw-bg-white/5 hover:tw-bg-white/10 tw-transition-colors tw-duration-200">
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{listBox.id}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{listBox.no_box}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{listBox.createdDate | date:'shortDate'}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{listBox.approved == '1' ? 'Yes' : 'No'}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{listBox.sampled == '1' ? 'Yes' : 'No'}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">
+              <button [routerLink]="['/search-detail', listBox.no_box]"
+                      class="tw-bg-blue-500 hover:tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-lg tw-transition-colors tw-duration-200">
+                View
               </button>
             </td>
           </tr>
-        </tbody> 
+        </tbody>
+      </table>
+  
+      <!-- Customer Table -->
+      <table *ngIf="searchMode === 'customer'" class="tw-min-w-full tw-divide-y tw-divide-blue-200">
+        <thead>
+          <tr class="tw-bg-blue-900/50">
+            <th *ngFor="let header of ['Customer Name', 'Contract Number', 'Box Number', 'Action']"
+                class="tw-px-6 tw-py-4 tw-text-left tw-text-xs tw-font-medium tw-text-white tw-uppercase tw-tracking-wider">
+              {{header}}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="tw-divide-y tw-divide-blue-200">
+          <tr *ngFor="let customer of customerData"
+              class="tw-bg-white/5 hover:tw-bg-white/10 tw-transition-colors tw-duration-200">
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{customer.namaKonsumen}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{customer.noKontrak}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">{{customer.noBox}}</td>
+            <td class="tw-px-6 tw-py-4 tw-text-sm tw-text-white">
+              <button (click)="openEditModal(customer)"
+                      class="tw-bg-blue-500 hover:tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-lg tw-transition-colors tw-duration-200">
+                <i class="fa fa-circle-info"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-
-     <!-- Modal for Editing Customer -->
-<!-- Modal for Editing Customer -->
-<div *ngIf="isEditModalOpen" @fadeIn class=" tw-overflow-y-auto tw-p-5 tw-fixed tw-h-auto tw-inset-0 tw-bg-black tw-bg-opacity-50 tw-flex tw-items-center tw-justify-center">
-  <div class="tw-bg-blue-800 tw-rounded-lg tw-shadow-lg tw-p-6 tw-w-1/2 tw-relative tw-h-auto tw-text-white" style="top:650px;">
-    <h2 class="tw-text-xl tw-font-bold tw-mb-10 tw-mt-3">UPDATE ITEM</h2>
-    <!-- <form (ngSubmit)="saveCustomer()"> -->
+  </div>
+  
+  <!-- Modal -->
+  <div *ngIf="isEditModalOpen" 
+       class="tw-fixed tw-inset-0 tw-bg-black/50 tw-backdrop-blur-sm tw-flex tw-items-center tw-justify-center tw-z-50 tw-animate-fade-in">
+    <div class="tw-bg-gradient-to-br tw-text-white tw-from-blue-800 tw-to-blue-900 tw-rounded-xl tw-shadow-2xl tw-p-8 tw-w-full tw-max-w-2xl tw-max-h-[90vh] tw-overflow-y-auto tw-animate-slide-up">
+      <!-- Modal content remains the same but with enhanced styling -->
       <form>
-      <!-- Form fields for customer attributes -->
-      <div class="tw-mb-4">
+        <!-- Form fields for customer attributes -->
         <div class="tw-mb-4">
-          <label for="noKontrak">NO KONTRAK</label>
-          <input disabled id="noKontrak" type="text" [(ngModel)]="editableCustomer.noKontrak" name="noKontrak" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          <div class="tw-mb-4">
+            <label for="noKontrak">NO KONTRAK</label>
+            <input disabled id="noKontrak" type="text" [(ngModel)]="editableCustomer.noKontrak" name="noKontrak" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+          <div class="tw-mb-4">
+            <label for="noPin">NO PIN</label>
+            <input disabled id="noPin" type="text" [(ngModel)]="editableCustomer.noPin" name="noPin" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+          <div class="tw-mb-4">
+            <label for="namaKonsumen">NAMA KONSUMEN</label>
+            <input disabled id="namaKonsumen" type="text" [(ngModel)]="editableCustomer.namaKonsumen" name="namaKonsumen" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          </div>
+          <label for="customerID">CUSTOMER ID</label>
+          <input disabled id="customerID" type="text" [(ngModel)]="editableCustomer.customerID" name="customerID" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+        <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+          <label for="tglRealisasi">TGL REALISASI</label>
+          <mat-form-field class="tw-flex-0">
+            <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRealisasi" name="tglRealisasi" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+          <label for="tglJatuhTempo">TGL JATUH TEMPO</label>
+          <mat-form-field class="tw-flex-0">
+            <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglJatuhTempo" name="tglJatuhTempo" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
+          <label for="tglRetensi">TGL RETENSI</label>
+          <mat-form-field class="tw-flex-0">
+            <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRetensi" name="tglRetensi" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
         <div class="tw-mb-4">
-          <label for="noPin">NO PIN</label>
-          <input disabled id="noPin" type="text" [(ngModel)]="editableCustomer.noPin" name="noPin" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          <label for="fcKTP">FC KTP</label>
+          <input disabled id="fcKTP" type="text" [(ngModel)]="editableCustomer.fcKTP" name="fcKTP" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
         </div>
+  
         <div class="tw-mb-4">
-          <label for="namaKonsumen">NAMA KONSUMEN</label>
-          <input disabled id="namaKonsumen" type="text" [(ngModel)]="editableCustomer.namaKonsumen" name="namaKonsumen" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
+          <label for="fcPasangan">FC PASANGAN</label>
+          <input disabled id="fcPasangan" type="text" [(ngModel)]="editableCustomer.fcPasangan" name="fcPasangan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
         </div>
-        <label for="customerID">CUSTOMER ID</label>
-        <input disabled id="customerID" type="text" [(ngModel)]="editableCustomer.customerID" name="customerID" class="tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-      <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
-        <label for="tglRealisasi">TGL REALISASI</label>
-        <mat-form-field class="tw-flex-0">
-          <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRealisasi" name="tglRealisasi" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
-        <label for="tglJatuhTempo">TGL JATUH TEMPO</label>
-        <mat-form-field class="tw-flex-0">
-          <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglJatuhTempo" name="tglJatuhTempo" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="tw-mb-4 tw-flex tw-justify-between tw-items-center">
-        <label for="tglRetensi">TGL RETENSI</label>
-        <mat-form-field class="tw-flex-0">
-          <input disabled matInput [matDatepicker]="picker" [(ngModel)]="editableCustomer.tglRetensi" name="tglRetensi" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div class="tw-mb-4">
-        <label for="fcKTP">FC KTP</label>
-        <input disabled id="fcKTP" type="text" [(ngModel)]="editableCustomer.fcKTP" name="fcKTP" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="fcPasangan">FC PASANGAN</label>
-        <input disabled id="fcPasangan" type="text" [(ngModel)]="editableCustomer.fcPasangan" name="fcPasangan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="fcPengurus">FC Seluruh Pengurus</label>
-        <input disabled id="fcPengurus" type="text" [(ngModel)]="editableCustomer.fcPengurus" name="fcPengurus" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="fcKK">FC Kartu Keluarga</label>
-        <input disabled id="fcKK" type="text" [(ngModel)]="editableCustomer.fcKK" name="fcKK" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="fcAkta">FC Akta/Nikah/Cerai/Kematian</label>
-        <input disabled id="fcAkta" type="text" [(ngModel)]="editableCustomer.fcAkta" name="fcAkta" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="k3">Keputusan Komite Kredit (K3)</label>
-        <input disabled id="k3" type="text" [(ngModel)]="editableCustomer.k3" name="k3" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="rekomendasi">Rekomendasi BCA</label>
-        <input disabled id="rekomendasi" type="text" [(ngModel)]="editableCustomer.rekomendasi" name="rekomendasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="formSurvey">Form Survey</label>
-        <input disabled id="formSurvey" type="text" [(ngModel)]="editableCustomer.formSurvey" name="formSurvey" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="petaLokasi">Peta Lokasi</label>
-        <input disabled id="petaLokasi" type="text" [(ngModel)]="editableCustomer.petaLokasi" name="petaLokasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="fap">Formulir Aplikasi Pembiayaan (FAP)</label>
-        <input disabled id="fap" type="text" [(ngModel)]="editableCustomer.fap" name="fap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="resume">Resume</label>
-        <input disabled id="resume" type="text" [(ngModel)]="editableCustomer.resume" name="resume" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="tandaDaftarPerusahaan">Tanda Daftar Perusahaan (TDP)</label>
-        <input disabled id="tandaDaftarPerusahaan" type="text" [(ngModel)]="editableCustomer.tandaDaftarPerusahaan" name="tandaDaftarPerusahaan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="siup">Surat Ijin Usaha (SIUP)</label>
-        <input disabled id="siup" type="text" [(ngModel)]="editableCustomer.siup" name="siup" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="noBox">Nomor BOX</label>
-        <input disabled id="noBox" type="text" [(ngModel)]="editableCustomer.noBox" name="noBox" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-mb-4">
-        <label for="noMap">Nomor MAP</label>
-        <input disabled id="noMap" type="text" [(ngModel)]="editableCustomer.noMap" name="noMap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
-      </div>
-
-      <div class="tw-flex tw-justify-end tw-space-x-2">
-        <button type="button" (click)="closeEditModal()" class="tw-bg-green-500 tw-text-white tw-rounded-md tw-px-4 tw-py-2">DONE</button>
-      </div>
-    </form>
+  
+        <div class="tw-mb-4">
+          <label for="fcPengurus">FC Seluruh Pengurus</label>
+          <input disabled id="fcPengurus" type="text" [(ngModel)]="editableCustomer.fcPengurus" name="fcPengurus" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="fcKK">FC Kartu Keluarga</label>
+          <input disabled id="fcKK" type="text" [(ngModel)]="editableCustomer.fcKK" name="fcKK" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="fcAkta">FC Akta/Nikah/Cerai/Kematian</label>
+          <input disabled id="fcAkta" type="text" [(ngModel)]="editableCustomer.fcAkta" name="fcAkta" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="k3">Keputusan Komite Kredit (K3)</label>
+          <input disabled id="k3" type="text" [(ngModel)]="editableCustomer.k3" name="k3" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="rekomendasi">Rekomendasi BCA</label>
+          <input disabled id="rekomendasi" type="text" [(ngModel)]="editableCustomer.rekomendasi" name="rekomendasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="formSurvey">Form Survey</label>
+          <input disabled id="formSurvey" type="text" [(ngModel)]="editableCustomer.formSurvey" name="formSurvey" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="petaLokasi">Peta Lokasi</label>
+          <input disabled id="petaLokasi" type="text" [(ngModel)]="editableCustomer.petaLokasi" name="petaLokasi" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="fap">Formulir Aplikasi Pembiayaan (FAP)</label>
+          <input disabled id="fap" type="text" [(ngModel)]="editableCustomer.fap" name="fap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="resume">Resume</label>
+          <input disabled id="resume" type="text" [(ngModel)]="editableCustomer.resume" name="resume" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="tandaDaftarPerusahaan">Tanda Daftar Perusahaan (TDP)</label>
+          <input disabled id="tandaDaftarPerusahaan" type="text" [(ngModel)]="editableCustomer.tandaDaftarPerusahaan" name="tandaDaftarPerusahaan" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="siup">Surat Ijin Usaha (SIUP)</label>
+          <input disabled id="siup" type="text" [(ngModel)]="editableCustomer.siup" name="siup" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="noBox">Nomor BOX</label>
+          <input disabled id="noBox" type="text" [(ngModel)]="editableCustomer.noBox" name="noBox" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-mb-4">
+          <label for="noMap">Nomor MAP</label>
+          <input disabled id="noMap" type="text" [(ngModel)]="editableCustomer.noMap" name="noMap" class="tw-bg-blue-900 tw-w-full tw-border tw-rounded-md tw-p-2"/>
+        </div>
+  
+        <div class="tw-flex tw-justify-end tw-space-x-2">
+          <button type="button" (click)="closeEditModal()" class="tw-bg-green-500 tw-text-white tw-rounded-md tw-px-4 tw-py-2">DONE</button>
+        </div>
+      </form>
+  
+    </div>
   </div>
-</div>
-  </div>
-</body>
+  </body>
+  
+  

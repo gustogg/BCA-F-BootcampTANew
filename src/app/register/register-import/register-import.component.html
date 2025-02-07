@@ -1,0 +1,266 @@
+<body class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-h-max tw-to-blue-950 tw-text-gray-100 tw-font-sans">
+    <div class="tw-container tw-mx-auto tw-px-4 tw-py-12 tw-max-w-6xl tw-animate-fade-in">
+
+      <button [routerLink]="'/register-import-customize'" 
+              class="tw-border-2 tw-border-white tw-px-2 tw-py-2 tw-font-medium hover:tw-bg-white hover:tw-text-blue-900 hover:tw-shadow-xl tw-rounded-sm">
+                    Customize Imported Data
+      </button>
+
+      <!-- Header Section -->
+      <div class="tw-text-center tw-mb-12 tw-space-y-4 tw-animate-slide-down">
+        <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-white tw-tracking-tight">
+          Import Customer Data
+        </h1>
+        <p class="tw-text-blue-200 tw-text-lg">Upload your Excel or CSV file to import customer data</p>
+      </div>
+  
+      <!-- Stepper -->
+      <div class="tw-mb-12 tw-flex tw-justify-center">
+        <div class="tw-flex tw-items-center tw-space-x-4">
+          <div class="tw-flex tw-items-center">
+            <div [ngClass]="{'tw-bg-blue-500': currentStep >= 1, 'tw-bg-blue-900': currentStep < 1}"
+                 class="tw-w-10 tw-h-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-transition-colors">
+              1
+            </div>
+            <span class="tw-ml-2">Upload</span>
+          </div>
+          <div class="tw-w-16 tw-h-1" [ngClass]="{'tw-bg-blue-500': currentStep >= 2, 'tw-bg-blue-900': currentStep < 2}"></div>
+          <div class="tw-flex tw-items-center">
+            <div [ngClass]="{'tw-bg-blue-500': currentStep >= 2, 'tw-bg-blue-900': currentStep < 2}"
+                 class="tw-w-10 tw-h-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-transition-colors">
+              2
+            </div>
+            <span class="tw-ml-2">Verify</span>
+          </div>
+          <div class="tw-w-16 tw-h-1" [ngClass]="{'tw-bg-blue-500': currentStep >= 3, 'tw-bg-blue-900': currentStep < 3}"></div>
+          <div class="tw-flex tw-items-center">
+            <div [ngClass]="{'tw-bg-blue-500': currentStep >= 3, 'tw-bg-blue-900': currentStep < 3}"
+                 class="tw-w-10 tw-h-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-transition-colors">
+              3
+            </div>
+            <span class="tw-ml-2">Import</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Main Content Area -->
+      <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-rounded-2xl tw-p-8 tw-shadow-xl tw-mb-8">
+        
+        <!-- Step 1: File Upload -->
+        <div *ngIf="currentStep === 1" class="tw-animate-fade-in">
+          <div class="tw-border-2 tw-border-dashed tw-border-blue-400/50 tw-rounded-xl 
+                      tw-transition-all tw-duration-300 hover:tw-border-blue-400
+                      [&.dragover]:tw-border-blue-500 [&.dragover]:tw-bg-blue-500/10"
+               (dragover)="onDragOver($event)"
+               (dragleave)="onDragLeave($event)"
+               (drop)="onDrop($event)">
+            
+            <div class="tw-py-12 tw-px-4 tw-text-center">
+              <div class="tw-mx-auto tw-w-24 tw-h-24 tw-mb-6 tw-rounded-full tw-bg-blue-500/10 
+                          tw-flex tw-items-center tw-justify-center tw-group">
+                <i class="fas fa-file-excel tw-text-4xl tw-text-blue-400 
+                          group-hover:tw-scale-110 tw-transition-transform"></i>
+              </div>
+  
+              <h3 class="tw-text-xl tw-font-semibold tw-mb-2">
+                Drag and drop your file here
+              </h3>
+              <p class="tw-text-blue-200 tw-mb-6">
+                Supported formats: .xlsx, .xls, .csv
+              </p>
+  
+              <button class="tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-font-medium 
+                            tw-py-3 tw-rounded-lg tw-transition-colors tw-cursor-pointer">
+                            <p class=" md:tw-left-[0px] md:tw-absolute tw-inset-[300px] md:tw-inset-[290px] md:tw-w-full">Choose File</p>
+              <input type="file" 
+                     accept=".xlsx,.xls,.csv" 
+                     class="tw-w-max tw-opacity-0 tw-cursor-pointer"
+                     (change)="onFileSelected($event)">
+            </button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Step 2: Header Mapping & Data Preview -->
+        <!-- <div *ngIf="currentStep === 2" class="tw-animate-fade-in">
+          <div class="tw-mb-8">
+            <h3 class="tw-text-xl tw-font-semibold tw-mb-4">Preview Data</h3>
+            <div class="tw-overflow-x-auto">
+              <table class="tw-w-full tw-min-w-[800px]">
+                <thead>
+                  <tr class="tw-bg-blue-900/50">
+                    <th *ngFor="let mapping of excelMapping" 
+                        class="tw-px-4 tw-py-2 tw-text-left tw-text-sm tw-font-medium">
+                      {{mapping.excelHeader}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tw-divide-y tw-bg-white tw-text-blue-900 tw-font-medium">
+                  <tr *ngFor="let row of previewData" class="hover:tw-bg-blue-500/10">
+                    <td *ngFor="let mapping of excelMapping" 
+                        class="tw-px-4 tw-py-2 tw-text-sm">
+                      {{row[mapping.excelHeader]}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> -->
+
+        <div *ngIf="currentStep === 2" class="tw-animate-fade-in">
+          <div class="tw-mb-8">
+            <h3 class="tw-text-xl tw-font-semibold tw-mb-4">Preview and Edit Data</h3>
+            <p class="tw-text-blue-200 tw-mb-4">Click on any cell to edit the data before importing.</p>
+            
+            <div class="tw-overflow-x-auto">
+              <table class="tw-w-full tw-min-w-[800px]">
+                <thead>
+                  <tr class="tw-bg-blue-900/50">
+                    <th *ngFor="let mapping of excelMapping" 
+                        class="tw-px-4 tw-py-2 tw-text-left tw-text-sm tw-font-medium">
+                      {{mapping.excelHeader}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="tw-bg-white tw-text-blue-900 tw-font-medium">
+                  <tr *ngFor="let row of previewData; let rowIndex = index" 
+                      class="hover:tw-bg-blue-500/10">
+                    <td *ngFor="let mapping of excelMapping" 
+                        class="tw-px-4 tw-py-2 tw-text-sm">
+                      <!-- Date input for date fields -->
+                      <ng-container *ngIf="isDateField(mapping.excelHeader); else regularInput">
+                        <input 
+                          type="date"
+                          [value]="formatDateForInput(row[mapping.excelHeader])"
+                          (change)="onCellEdit(rowIndex, mapping.excelHeader, $event)"
+                          class="tw-bg-transparent tw-border-b tw-border-blue-400/30 tw-w-full 
+                                 focus:tw-outline-none focus:tw-border-blue-500 tw-px-1 tw-py-0.5"
+                        />
+                      </ng-container>
+                      
+                      <!-- Regular input for non-date fields -->
+                      <ng-template #regularInput>
+                        <input 
+                          type="text"
+                          [value]="row[mapping.excelHeader]"
+                          (change)="onCellEdit(rowIndex, mapping.excelHeader, $event)"
+                          class="tw-bg-transparent tw-border-b tw-border-blue-400/30 tw-w-full 
+                                 focus:tw-outline-none focus:tw-border-blue-500 tw-px-1 tw-py-0.5"
+                        />
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        
+            <!-- Pagination controls -->
+            <div class="tw-mt-4 tw-flex tw-justify-between tw-items-center">
+              <div class="tw-text-sm tw-text-blue-200">
+                Showing {{previewData.length}} of {{excelData.length}} rows
+              </div>
+              
+              <button *ngIf="previewData.length < excelData.length"
+                      (click)="loadMoreRows()"
+                      class="tw-px-4 tw-py-2 tw-text-sm tw-bg-blue-600 tw-rounded-lg 
+                             hover:tw-bg-blue-700 tw-transition-colors">
+                Load More Rows
+              </button>
+            </div>
+        
+            <!-- Validation warnings -->
+            <div *ngIf="validationWarnings.length > 0" 
+                 class="tw-mt-4 tw-p-4 tw-bg-yellow-500/10 tw-rounded-lg">
+              <h4 class="tw-text-yellow-400 tw-font-medium tw-mb-2">Validation Warnings</h4>
+              <ul class="tw-space-y-1">
+                <li *ngFor="let warning of validationWarnings" 
+                    class="tw-text-sm tw-text-yellow-200">
+                  {{warning}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        </div>
+  
+        <!-- Step 3: Import Progress -->
+        <div *ngIf="currentStep === 3" class="tw-animate-fade-in">
+          <div class="tw-text-center tw-py-8">
+            <div class="tw-mx-auto tw-w-24 tw-h-24 tw-mb-6 tw-relative">
+              <!-- Circular Progress -->
+              <svg class="tw-w-full tw-h-full tw-transform tw-rotate-[-90deg]" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" 
+                        class="tw-stroke-blue-900/30 tw-fill-none" 
+                        style="stroke-width: 10;"></circle>
+                <circle cx="50" cy="50" r="45"
+                        class="tw-stroke-blue-500 tw-fill-none tw-transition-all tw-duration-300"
+                        [style.strokeDasharray]="'283'"
+                        [style.strokeDashoffset]="283 - (importProgress * 283 / 100)"
+                        style="stroke-width: 10;"></circle>
+              </svg>
+              <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center">
+                <span class="tw-text-2xl tw-font-bold">{{importProgress}}%</span>
+              </div>
+            </div>
+  
+            <h3 class="tw-text-xl tw-font-semibold tw-mb-2">Importing Data...</h3>
+            <p class="tw-text-blue-200">{{processedRows}} of {{totalRows}} rows processed</p>
+  
+            <!-- Status Messages -->
+            <div class="tw-mt-8 tw-max-h-48 tw-overflow-y-auto tw-bg-blue-900/30 tw-rounded-lg tw-p-4">
+              <div *ngFor="let message of statusMessages" 
+                   class="tw-text-sm tw-mb-2"
+                   [ngClass]="{'tw-text-green-400': message.type === 'success',
+                              'tw-text-yellow-400': message.type === 'warning',
+                              'tw-text-red-400': message.type === 'error'}">
+                {{message.text}}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Action Buttons -->
+        <div class="tw-mt-8 tw-flex tw-justify-between">
+          <button *ngIf="currentStep > 1 && currentStep < 3" 
+                  (click)="previousStep()"
+                  class="tw-px-6 tw-py-2 tw-rounded-lg tw-border tw-border-blue-400/50 
+                         tw-text-blue-200 hover:tw-bg-blue-500/10 tw-transition-all">
+            Back
+          </button>
+          <div></div> <!-- Spacer -->
+          <button *ngIf="currentStep < 3" 
+                  (click)="nextStep()"
+                  [disabled]="!canProceed"
+                  class="tw-px-6 tw-py-2 tw-rounded-lg tw-bg-blue-600 tw-text-white 
+                         tw-transition-all tw-duration-200
+                         enabled:hover:tw-bg-blue-700 enabled:hover:tw-shadow-lg
+                         disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+            {{currentStep === 2 ? 'Start Import' : 'Next'}}
+          </button>
+        </div>
+      </div>
+  
+      <!-- Help Section -->
+      <div class="tw-bg-white/5 tw-rounded-xl tw-p-6 tw-animate-slide-up">
+        <h3 class="tw-text-lg tw-font-semibold tw-mb-4">File Requirements:</h3>
+        <ul class="tw-space-y-2 tw-text-blue-200">
+          <li class="tw-flex tw-items-center ">
+            <i class="fas fa-check tw-text-green-400 tw-mr-2"></i>
+            Supported formats: Excel (.xlsx, .xls) or CSV
+          </li>
+          <li class="tw-flex tw-items-center">
+            <i class="fas fa-check tw-text-green-400 tw-mr-2"></i>
+            Maximum file size: 10MB
+          </li>
+          <li class="tw-flex tw-items-center">
+            <i class="fas fa-check tw-text-green-400 tw-mr-2"></i>
+            Required columns: Customer Name, Contract Number, etc.
+          </li>
+        </ul>
+        <button class="tw-mt-4 tw-text-blue-400 hover:tw-text-blue-300 tw-transition-colors">
+          Download template
+        </button>
+      </div>
+  </body>

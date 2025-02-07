@@ -87,4 +87,23 @@ export class RegisterComponent {
       });
     }
   }
+
+  // handleComingSoonClick(event: Event): void {
+  //   event.preventDefault(); // Prevent default navigation
+    
+  //   // Show a nice modal/toast instead
+  //   Swal.fire({
+  //     title: 'Coming Soon!',
+  //     text: 'This feature is currently under development. Stay tuned!',
+  //     icon: 'info',
+  //     confirmButtonText: 'Got it!',
+  //     confirmButtonColor: '#3B82F6', // tw-blue-500
+  //     showClass: {
+  //       popup: 'tw-animate-fade-in tw-duration-300'
+  //     },
+  //     hideClass: {
+  //       popup: 'tw-animate-fade-out tw-duration-200'
+  //     }
+  //   });
+  // }
 }

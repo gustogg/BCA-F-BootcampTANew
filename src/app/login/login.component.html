@@ -20,7 +20,8 @@
         </div> -->
 
         <!-- Login Form -->
-        <form (ngSubmit)="login()" class="tw-space-y-6">
+        <!-- <form (ngSubmit)="login()" class="tw-space-y-6"> -->
+          <form class="tw-space-y-6">
           <!-- Username Field -->
           <div class="tw-relative tw-group">
             <label for="login" class="tw-block tw-text-sm tw-font-medium tw-text-blue-900 tw-mb-2">
@@ -88,7 +89,8 @@
 
           <!-- Login Button -->
           <button
-            type="submit"
+            type="submit" 
+            [routerLink]="'/home'"
             class="tw-w-full tw-bg-blue-600 tw-text-white tw-py-3 tw-rounded-lg tw-font-medium 
                    tw-transition-all tw-duration-300 hover:tw-bg-blue-700
                    tw-transform hover:tw-scale-[1.02] hover:tw-shadow-lg
@@ -101,6 +103,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
           </button>
+
+          
+
         </form>
 
         <!-- Footer -->

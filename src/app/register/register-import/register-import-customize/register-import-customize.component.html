@@ -1,0 +1,380 @@
+<div class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-p-10">
+    <div class="tw-container tw-mx-auto">
+      <!-- Header -->
+      <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-rounded-lg tw-p-6 tw-mb-6 tw-animate-fade-in">
+        <h1 class="tw-text-2xl tw-font-bold tw-text-white tw-mb-2">
+          Customize Imported Data
+        </h1>
+        <p class="tw-text-blue-200">
+          Update box and map numbers for imported customer records
+        </p>
+      </div>
+  
+      <!-- Main Content -->
+    <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-rounded-lg tw-p-6">
+      <!-- Bulk Update Controls -->
+      <div class="tw-flex tw-gap-4 tw-mb-6 tw-animate-fade-in">
+        <mat-form-field color="primary" appearance="fill" class="fld tw-flex-grow">
+          <mat-label class="">Set Box Number for All Unset Records</mat-label>
+          <input matInput [formControl]="bulkNoBoxControl" 
+                 placeholder="Enter box number to set" 
+                 class="tw-text-white">
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" 
+                (click)="setBulkNoBox()" 
+                [disabled]="isUpdating || !bulkNoBoxControl.value"
+                class="tw-h-14 tw-bg-blue-600 tw-px-2 tw-text-white tw-rounded-md disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+          <mat-icon *ngIf="!isUpdating" class="tw-pt-1">save_alt</mat-icon>
+          <mat-spinner *ngIf="isUpdating" diameter="20" class="tw-inline"></mat-spinner>
+          <span class="tw-ml-2">{{ isUpdating ? 'Updating...' : 'Set Box Number' }}</span>
+        </button>
+      </div>
+
+      <!-- Search Filter -->
+      <mat-form-field appearance="fill" class="tw-w-full tw-mb-6 tw-animate-fade-in">
+        <mat-label class="tw-text-back">Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" 
+               placeholder="Search by contract number, customer ID, or name" 
+               class="tw-text-white">
+      </mat-form-field>
+    
+  
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="tw-flex tw-justify-center tw-items-center tw-py-8 tw-animate-fade-in">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+  
+        <!-- Table -->
+        <div class="tw-overflow-x-auto" *ngIf="!isLoading">
+          <table mat-table [dataSource]="dataSource" matSort class="tw-w-full tw-rounded-md tw-animate-fade-in">
+            
+            <!-- Contract Number Column -->
+            <ng-container matColumnDef="noKontrak">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Contract Number 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.noKontrak}} 
+              </td>
+            </ng-container>
+  
+            <!-- Customer ID Column -->
+            <ng-container matColumnDef="customerID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Customer ID 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.customerID}} 
+              </td>
+            </ng-container>
+  
+            <!-- Customer Name Column -->
+            <ng-container matColumnDef="namaKonsumen">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Customer Name 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.namaKonsumen}} 
+              </td>
+            </ng-container>
+  
+            <!-- Realization Date Column -->
+            <ng-container matColumnDef="tglRealisasi">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Realization Date 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.tglRealisasi | date}} 
+              </td>
+            </ng-container>
+  
+            <!-- Box Number Column -->
+            <ng-container matColumnDef="noBox">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Box Number 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.noBox || 'Not Set'}} 
+              </td>
+            </ng-container>
+  
+            <!-- Map Number Column -->
+            <ng-container matColumnDef="noMap">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900"> 
+                Map Number 
+              </th>
+              <td mat-cell *matCellDef="let row" class="tw-text-blue-900"> 
+                {{row.noMap || 'Not Set'}} 
+              </td>
+            </ng-container>
+  
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="tw-text-blue-900 tw-text-center"> 
+                Actions
+              </th>
+
+              <td mat-cell *matCellDef="let customer" class="tw-text-blue-900 tw-space-x-3"> 
+                <!-- <button mat-icon-button color="primary" (click)="updateCustomer(customer)"
+                        class="tw-text-blue-400 hover:tw-text-blue-300"
+                        matTooltip="Edit record">
+                  <mat-icon>edit</mat-icon>
+                </button> -->
+                <button mat-icon-button color="accent" (click)="showCustomerDetails(customer)"
+                        class="tw-text-blue-400 hover:tw-text-blue-300"
+                        matTooltip="View details">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteCustomer(customer)"
+                        class="tw-text-red-400 hover:tw-text-red-300"
+                        matTooltip="Delete record">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            
+  
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                class="hover:tw-bg-blue-500/10"></tr>
+  
+            <!-- Row shown when no matching data -->
+            <tr class="tw-mat-row" *matNoDataRow>
+              <td class="tw-text-center tw-py-4 tw-text-blue-200" [attr.colspan]="displayedColumns.length">
+                No data matching the filter
+              </td>
+            </tr>
+          </table>
+  
+          <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"
+                        aria-label="Select page of customers"></mat-paginator>
+        </div>
+  
+        <!-- Total Records -->
+        <div class="tw-mt-4 tw-text-blue-200" *ngIf="!isLoading">
+          Total records: {{totalRecords}}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Customer Details Modal -->
+<!-- Customer Details Modal -->
+<ng-template #customerDetailsModal>
+  <div class="tw-fixed tw-inset-0 tw-bg-black/50 tw-flex tw-items-center tw-justify-center tw-p-4" 
+       *ngIf="selectedCustomer">
+       <div 
+        [ngClass]="editMode ? 'tw-bg-white tw-animate-fade-in tw-duration-700' : 'tw-bg-gradient-to-br tw-from-blue-900 tw-to-blue-950 tw-animate-fade-in tw-duration-300'"
+        class="tw-rounded-lg tw-shadow-xl tw-w-full tw-max-w-3xl tw-max-h-[90vh] tw-overflow-auto">
+
+     
+      <!-- Modal Header -->
+      <div class="tw-p-6 tw-border-b tw-border-blue-800">
+        <div class="tw-flex tw-justify-between tw-items-center">
+          <h2 *ngIf="editMode" class="tw-text-2xl tw-font-bold tw-text-blue-900">
+            EDIT CUSTOMER
+          </h2>
+          <h2 *ngIf="!editMode" class="tw-text-2xl tw-font-bold tw-text-blue-300">
+            CUSTOMER DETAIL
+          </h2>
+          <div class="tw-flex tw-gap-2">
+            <button mat-icon-button (click)="toggleEditMode()"
+            [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'"
+                    class=" hover:tw-text-blue-100"
+                    [matTooltip]="editMode ? 'Cancel edit' : 'Edit details'">
+              <mat-icon>{{ editMode ? 'close' : 'edit' }}</mat-icon>
+            </button>
+            <button mat-icon-button (click)="dialog.closeAll()" *ngIf="!editMode"
+                    class="tw-text-blue-200 hover:tw-text-blue-100">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Content -->
+      <form [formGroup]="customerForm" class="tw-p-6">
+        <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-6">
+          <!-- Basic Information -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-2xl tw-font-bold">Basic Information</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm">Contract Number</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="noKontrak">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.noKontrak || 'Not Set'}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Customer ID</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input class="tw-text-white" matInput formControlName="customerID">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.customerID || 'Not Set'}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Customer Name</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="namaKonsumen">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.namaKonsumen || 'Not Set'}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">PIN Number</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="noPin">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.noPin || 'Not Set'}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Important Dates</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Realization Date</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput [matDatepicker]="realizationPicker" formControlName="tglRealisasi">
+                  <mat-datepicker-toggle matSuffix [for]="realizationPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #realizationPicker></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatDate(selectedCustomer.tglRealisasi)}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Due Date</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput [matDatepicker]="duePicker" formControlName="tglJatuhTempo">
+                  <mat-datepicker-toggle matSuffix [for]="duePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #duePicker></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatDate(selectedCustomer.tglJatuhTempo)}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Retention Date</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput [matDatepicker]="retentionPicker" formControlName="tglRetensi">
+                  <mat-datepicker-toggle matSuffix [for]="retentionPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #retentionPicker></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatDate(selectedCustomer.tglRetensi)}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Documents -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Documents</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">ID Card Copy</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="fcKTP">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatValue(selectedCustomer.fcKTP)}}</span>
+              </div>
+              
+              <!-- Add similar blocks for other document fields -->
+            </div>
+          </div>
+
+          <!-- Additional Information -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Additional Information</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Credit Committee Decision</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="k3">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatValue(selectedCustomer.k3)}}</span>
+              </div>
+              
+              <!-- Add similar blocks for other additional information fields -->
+            </div>
+          </div>
+
+          <!-- Business Documents -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Business Documents</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Financing Application Form</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="fap">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{formatValue(selectedCustomer.fap)}}</span>
+              </div>
+              
+              <!-- Add similar blocks for other business document fields -->
+            </div>
+          </div>
+
+          <!-- Filing Information -->
+          <div class="tw-space-y-4">
+            <h3 [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Filing Information</h3>
+            
+            <div class="tw-space-y-4">
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Box Number</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="noBox">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.noBox || 'Not Set'}}</span>
+              </div>
+              
+              <div class="tw-flex tw-flex-col">
+                <span [ngClass]="editMode ? 'tw-text-blue-900' : 'tw-text-blue-300'" class="tw-text-sm ">Map Number</span>
+                <mat-form-field *ngIf="editMode" appearance="outline" class="tw-w-full">
+                  <input matInput formControlName="noMap">
+                </mat-form-field>
+                <span *ngIf="!editMode" class="tw-text-white">{{selectedCustomer.noMap || 'Not Set'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Modal Footer -->
+      <div class="tw-p-6 tw-border-t tw-border-blue-800">
+        <div class="tw-flex tw-gap-4 tw-justify-end">
+          <button *ngIf="editMode" mat-button (click)="toggleEditMode()"
+                  class="tw-bg-gray-600 hover:tw-bg-gray-700 tw-text-white 
+                         tw-px-4 tw-py-2 tw-rounded-lg tw-transition-colors">
+            Cancel
+          </button>
+          <button *ngIf="editMode" mat-button (click)="saveCustomerDetails()"
+                  [disabled]="!customerForm.valid"
+                  class="tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white 
+                         tw-px-4 tw-py-2 tw-rounded-lg tw-transition-colors
+                         disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+            Save Changes
+          </button>
+          <button *ngIf="!editMode" mat-button (click)="dialog.closeAll()"
+                  class="tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white 
+                         tw-px-4 tw-py-2 tw-rounded-lg tw-transition-colors">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+  

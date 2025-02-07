@@ -14,6 +14,8 @@ import { RegisterCustomerComponent } from './register/register-customer/register
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { AuthGuard } from './auth.guard';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { RegisterImportComponent } from './register/register-import/register-import.component';
+import { RegisterImportCustomizeComponent } from './register/register-import/register-import-customize/register-import-customize.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },  // Redirect root path to login
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'register-box', component: RegisterBoxComponent },
   { path: 'register-customer', component: RegisterCustomerComponent },
+  { path: 'register-import', component: RegisterImportComponent },
+  { path: 'register-import-customize', component: RegisterImportCustomizeComponent },
   { path: 'sampling', component: SamplingComponent },
   { path: 'sampling-do', component: SamplingDoComponent },
   { path: 'sampling-do/:noBox', component: SamplingDoComponent },

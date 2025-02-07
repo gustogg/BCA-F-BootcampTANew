@@ -1,0 +1,129 @@
+/* Custom styles for Material components */
+::ng-deep .mat-form-field-outline {
+    color: rgba(147, 197, 253, 0.3) !important;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    color: rgb(147, 197, 253) !important;
+  }
+  
+  ::ng-deep .mat-form-field-flex {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  
+  ::ng-deep .mat-table {
+    background-color: transparent !important;
+  }
+  
+  ::ng-deep .mat-paginator {
+    background-color: transparent !important;
+  }
+  
+  ::ng-deep .mat-paginator-page-size-label,
+  ::ng-deep .mat-paginator-range-label {
+    color: rgb(147, 197, 253) !important;
+  }
+  
+  ::ng-deep .mat-select-value,
+  ::ng-deep .mat-select-arrow {
+    color: rgb(147, 197, 253) !important;
+  }
+  
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-outline {
+    color: rgb(147, 197, 253) !important;
+  }
+  
+  ::ng-deep .mat-input-element {
+    color: white !important;
+  }
+  
+  ::ng-deep .mat-sort-header-arrow {
+    color: rgb(147, 197, 253) !important;
+  }
+  
+  /* Add these custom animations */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.tw-animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tw-animate-fade-in-down {
+  animation: fadeInDown 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tw-animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom styles for Material inputs */
+::ng-deep .mat-form-field-outline {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+::ng-deep .mat-form-field-flex {
+  border-radius: 8px !important;
+}
+
+::ng-deep .mat-form-field-outline-start,
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 8px !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
+ }
+
+ .mat-form-field-underline {
+  /*change color of underline*/
+  background-color: white !important;
+} 
+
+.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: white !important;;
+}
+
+
+
+

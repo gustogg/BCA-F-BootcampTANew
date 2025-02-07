@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +19,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SearchDetailComponent } from './search/search-detail/search-detail.component';
@@ -29,10 +29,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
 import { SamplingPrintComponent } from './sampling/sampling-print/sampling-print.component';
 import { RegisterBoxComponent } from './register/register-box/register-box.component';
 import { RegisterCustomerComponent } from './register/register-customer/register-customer.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { RegisterImportComponent } from './register/register-import/register-import.component';
+import { CustomerService } from "./customer.service"
+import { Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
+import { RegisterImportCustomizeComponent } from './register/register-import/register-import-customize/register-import-customize.component';
+import { MatPaginatorModule } from "@angular/material/paginator"
+import { FormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltip } from '@angular/material/tooltip';
 
 
 
@@ -53,7 +64,9 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
     SamplingPrintComponent,
     RegisterBoxComponent,
     RegisterCustomerComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    RegisterImportComponent,
+    RegisterImportCustomizeComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +82,17 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
     MatRadioModule,
     MatListModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatTooltip
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    CustomerService,
   ],
   bootstrap: [AppComponent]
 })

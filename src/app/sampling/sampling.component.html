@@ -1,12 +1,12 @@
-<head>
+<head class=" tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-900">
   <script>
     document.addEventListener("DOMContentLoaded", function () {
     updateSampledZeroCount('ALL');
 });
   </script>
 </head>
-<body class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-900">
-  <div class="tw-container tw-mx-auto tw-p-6 tw-max-w-7xl">
+<body class=" tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-900 tw-min-h-fit">
+  <div class="tw-container tw-mx-auto tw-p-6 tw-max-w-7xl ">
     <!-- Filter Buttons -->
     <div class="tw-mb-8">
       <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-p-3 tw-rounded-xl tw-flex tw-flex-wrap tw-gap-3 tw-justify-center tw-shadow-lg">
@@ -20,7 +20,7 @@
 
         <button (click)="filterList('SAMPLING')"
           class="tw-relative tw-group tw-px-6 tw-py-2 tw-rounded-lg tw-transition-all tw-duration-300 tw-overflow-hidden"
-          [ngClass]="currentFilter === 'SAMPLING' ? 'tw-bg-red-500 tw-text-white' : 'tw-text-red-500 tw-border-2 tw-border-red-500 hover:tw-bg-red-500/10'">
+          [ngClass]="currentFilter === 'SAMPLING' ? 'tw-bg-red-500 tw-text-white' : 'tw-text-white tw-border-2 tw-border-white hover:tw-bg-red-500/10'">
           <span class="tw-relative tw-z-10 tw-font-medium">Sampling</span>
           <div *ngIf="currentFilter === 'SAMPLING'"
                class="tw-absolute tw-inset-0 tw-bg-red-600 tw-animate-ripple"></div>
@@ -28,7 +28,7 @@
 
         <button (click)="filterList('APPROVE')"
           class="tw-relative tw-group tw-px-6 tw-py-2 tw-rounded-lg tw-transition-all tw-duration-300 tw-overflow-hidden"
-          [ngClass]="currentFilter === 'APPROVE' ? 'tw-bg-yellow-500 tw-text-white' : 'tw-text-yellow-500 tw-border-2 tw-border-yellow-500 hover:tw-bg-yellow-500/10'">
+          [ngClass]="currentFilter === 'APPROVE' ? 'tw-bg-yellow-500 tw-text-white' : 'tw-text-white tw-border-2 tw-border-white hover:tw-bg-yellow-500/10'">
           <span class="tw-relative tw-z-10 tw-font-medium">Approve</span>
           <div *ngIf="currentFilter === 'APPROVE'"
                class="tw-absolute tw-inset-0 tw-bg-yellow-600 tw-animate-ripple"></div>
@@ -36,7 +36,7 @@
 
         <button (click)="filterList('COMPLETE')"
           class="tw-relative tw-group tw-px-6 tw-py-2 tw-rounded-lg tw-transition-all tw-duration-300 tw-overflow-hidden"
-          [ngClass]="currentFilter === 'COMPLETE' ? 'tw-bg-green-500 tw-text-white' : 'tw-text-green-500 tw-border-2 tw-border-green-500 hover:tw-bg-green-500/10'">
+          [ngClass]="currentFilter === 'COMPLETE' ? 'tw-bg-green-500 tw-text-white' : 'tw-text-white tw-border-2 tw-border-white hover:tw-bg-green-500/10'">
           <span class="tw-relative tw-z-10 tw-font-medium">Complete</span>
           <div *ngIf="currentFilter === 'COMPLETE'"
                class="tw-absolute tw-inset-0 tw-bg-green-600 tw-animate-ripple"></div>

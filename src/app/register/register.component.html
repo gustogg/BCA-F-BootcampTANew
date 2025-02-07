@@ -4,20 +4,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-Register</title>
 </head>
-<body class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-text-gray-100 tw-font-sans">
-
-  <!-- Main Container -->
-  <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-min-h-max tw-px-4 tw-py-20">
+<body class="tw-min-h-fit tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-text-gray-100 tw-font-sans">
+  <!-- Main Container with fade-in animation -->
+  <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-min-h-max tw-px-4 tw-py-20 tw-animate-fade-in">
     
-    <!-- Welcome Section -->
-    <div class="tw-text-center tw-mb-12 tw-space-y-4">
+    <!-- Welcome Section with slide-down animation -->
+    <div class="tw-text-center tw-mb-12 tw-space-y-4 tw-animate-slide-down">
       <h1 class="tw-text-4xl md:tw-text-5xl tw-font-bold tw-text-white tw-tracking-tight">
         Register Menu
       </h1>
-      <p class="tw-text-blue-200 tw-text-lg">Choose an option to get started</p>
+      <p class="tw-text-blue-200 tw-text-lg tw-animate-pulse-slow">Choose an option to get started</p>
     </div>
 
-    <!-- Features Section -->
+    <!-- Features Section with stagger animation for children -->
     <section class="tw-w-full tw-max-w-6xl tw-grid md:tw-grid-cols-3 tw-gap-8 tw-px-4">
       
       <!-- Register Box Card -->
@@ -25,18 +24,27 @@
         [routerLink]="'/register-box'"
         class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
                tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
-        <!-- Background Pattern -->
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden
+               tw-animate-slide-up tw-animate-delay-100">
+        <!-- Hover Effect Background -->
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
                     tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <!-- Ripple Effect on Hover -->
+        <div class="tw-absolute tw-inset-0 tw-bg-white/40 tw-scale-0 group-hover:tw-scale-100 
+                    tw-rounded-2xl tw-transition-transform tw-duration-500 tw-origin-center"></div>
         <!-- Content -->
         <div class="tw-relative tw-z-10">
           <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
-                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-            <img class="tw-w-full tw-h-full" src="./assets/box-open-svgrepo-com.png" alt="Register Box">
+                      tw-transform group-hover:tw-rotate-12 tw-transition-transform tw-duration-300
+                      group-hover:tw-scale-110">
+            <img class="tw-w-full tw-h-full tw-transition-transform tw-duration-300 group-hover:tw-scale-90" 
+                 src="./assets/box-open-svgrepo-com.png" alt="Register Box">
           </div>
-          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Register Box</h3>
-          <p class="tw-text-blue-600">Pendaftaran/Registrasi Box Dokumen</p>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3 
+                     group-hover:tw-text-blue-600 tw-transition-colors">Register Box</h3>
+          <p class="tw-text-blue-600 group-hover:tw-text-blue-800 tw-transition-colors">
+            Pendaftaran/Registrasi Box Dokumen
+          </p>
         </div>
       </button>
       
@@ -45,60 +53,76 @@
         [routerLink]="'/register-customer'"
         class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
                tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
-        <!-- Background Pattern -->
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden
+               tw-animate-slide-up tw-animate-delay-200">
+        <!-- Same hover effects as above -->
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
                     tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <div class="tw-absolute tw-inset-0 tw-bg-white/40 tw-scale-0 group-hover:tw-scale-100 
+                    tw-rounded-2xl tw-transition-transform tw-duration-500 tw-origin-center"></div>
         <!-- Content -->
         <div class="tw-relative tw-z-10">
           <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
-                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-            <img class="tw-w-full tw-h-full" src="./assets/customer-list-line-svgrepo-com.png" alt="Register Customer">
+                      tw-transform group-hover:tw-rotate-12 tw-transition-transform tw-duration-300
+                      group-hover:tw-scale-110">
+            <img class="tw-w-full tw-h-full tw-transition-transform tw-duration-300 group-hover:tw-scale-90" 
+                 src="./assets/customer-list-line-svgrepo-com.png" alt="Register Customer">
           </div>
-          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Register Customer</h3>
-          <p class="tw-text-blue-600">Pendaftaran/Registrasi Customer</p>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3 
+                     group-hover:tw-text-blue-600 tw-transition-colors">Register Customer</h3>
+          <p class="tw-text-blue-600 group-hover:tw-text-blue-800 tw-transition-colors">
+            Pendaftaran/Registrasi Customer
+          </p>
         </div>
       </button>
 
-      <!-- File Import Card (Coming Soon) -->
+      <!-- File Import Card -->
       <button 
-        [routerLink]="'/maintenance'"
+        [routerLink]="'/register-import'"
         class="tw-group tw-relative tw-bg-white/80 tw-rounded-2xl tw-p-8 tw-text-center 
                tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden">
-        <!-- Coming Soon Badge -->
-        <div class="tw-absolute tw-top-4 tw-right-4 tw-bg-blue-600 tw-text-white tw-text-xs 
-                    tw-px-3 tw-py-1 tw-rounded-full tw-font-medium">
+               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden
+               tw-animate-slide-up tw-animate-delay-300">
+        <!-- Coming Soon Badge with pulse animation -->
+        <!-- <div class="tw-absolute tw-top-4 tw-right-4 tw-bg-blue-600 tw-text-white tw-text-xs 
+                    tw-px-3 tw-py-1 tw-rounded-full tw-font-medium tw-animate-pulse">
           Coming Soon
-        </div>
-        <!-- Background Pattern -->
+        </div> -->
+        <!-- Same hover effects as above -->
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
                     tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+        <div class="tw-absolute tw-inset-0 tw-bg-white/40 tw-scale-0 group-hover:tw-scale-100 
+                    tw-rounded-2xl tw-transition-transform tw-duration-500 tw-origin-center"></div>
         <!-- Content -->
-        <div class="tw-relative tw-z-10 tw-opacity-50">
+        <div class="tw-relative tw-z-10">
           <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
-                      tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-            <img class="tw-w-full tw-h-full" src="./assets/import-content-svgrepo-com.png" alt="File Import">
+                      tw-transform group-hover:tw-rotate-12 tw-transition-transform tw-duration-300
+                      group-hover:tw-scale-110">
+            <img class="tw-w-full tw-h-full tw-transition-transform tw-duration-300 group-hover:tw-scale-90" 
+            src="./assets/import-content-svgrepo-com.png" alt="Register Customer">
           </div>
-          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">File Import</h3>
-          <p class="tw-text-blue-600">Import Data Customer *CSV/XLSX</p>
+          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3 
+                     group-hover:tw-text-blue-600 tw-transition-colors">File Import</h3>
+          <p class="tw-text-blue-600 group-hover:tw-text-blue-800 tw-transition-colors">
+            Import Data Customer *CSV/XLSX
+          </p>
         </div>
       </button>
 
     </section>
 
-    <!-- Decorative Elements -->
+    <!-- Animated Decorative Elements -->
     <div class="tw-fixed tw-top-0 tw-left-0 tw-w-96 tw-h-96 tw-bg-blue-400/10 tw-rounded-full 
-                tw--translate-x-1/2 tw--translate-y-1/2 tw-blur-3xl"></div>
+                tw--translate-x-1/2 tw--translate-y-1/2 tw-blur-3xl tw-animate-blob"></div>
     <div class="tw-fixed tw-bottom-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-blue-400/10 tw-rounded-full 
-                tw-translate-x-1/2 tw-translate-y-1/2 tw-blur-3xl"></div>
+                tw-translate-x-1/2 tw-translate-y-1/2 tw-blur-3xl tw-animate-blob-delay"></div>
 
-    <!-- Footer -->
+    <!-- Footer with fade-in animation -->
     <footer class="tw-w-full tw-fixed tw-bottom-0 tw-left-0 tw-bg-blue-900/90 tw-backdrop-blur-sm 
-                   tw-border-t tw-border-blue-700/50 tw-py-4 tw-px-4 tw-text-center">
+                   tw-border-t tw-border-blue-700/50 tw-py-4 tw-px-4 tw-text-center
+                   tw-animate-fade-in tw-animate-delay-500">
       <p class="tw-text-blue-200">&copy; 2024 BCA Finance. All rights reserved.</p>
     </footer>
 
   </div>
-
 </body>

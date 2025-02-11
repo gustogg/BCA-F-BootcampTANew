@@ -3,15 +3,15 @@ import {
   InjectionToken,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-34KPSYPO.js";
+} from "./chunk-ASQYCQSU.js";
 import {
   isObservable
-} from "./chunk-YPJBY2KE.js";
+} from "./chunk-RZFGSV6T.js";
 import {
   ConnectableObservable,
   Subject,
   of
-} from "./chunk-BJ3MD5BS.js";
+} from "./chunk-JFE6O76F.js";
 
 // node_modules/@angular/cdk/fesm2022/collections.mjs
 var DataSource = class {
@@ -411,6 +411,7 @@ export {
   _DisposeViewRepeaterStrategy,
   _RecycleViewRepeaterStrategy,
   SelectionModel,
+  getMultipleValuesInSingleSelectionError,
   UniqueSelectionDispatcher
 };
-//# sourceMappingURL=chunk-3X4IR2TE.js.map
+//# sourceMappingURL=chunk-MG7WVGGV.js.map

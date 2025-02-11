@@ -125,5 +125,14 @@
 }
 
 
+::ng-deep .mat-checkbox-frame {
+  border-color: white !important;
+}
 
+::ng-deep .mat-checkbox-background {
+  background-color: rgb(37, 99, 235) !important;
+}
 
+::ng-deep .mat-checkbox-label {
+  color: white !important;
+}

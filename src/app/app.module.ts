@@ -44,6 +44,7 @@ import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltip } from '@angular/material/tooltip';
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 
@@ -66,7 +67,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     RegisterCustomerComponent,
     MaintenanceComponent,
     RegisterImportComponent,
-    RegisterImportCustomizeComponent
+    RegisterImportCustomizeComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,8 @@ import { MatTooltip } from '@angular/material/tooltip';
     MatTableModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatTooltip
+    MatTooltip,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync(),

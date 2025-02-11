@@ -17,18 +17,30 @@
         <mat-form-field color="primary" appearance="fill" class="fld tw-flex-grow">
           <mat-label class="">Set Box Number for All Unset Records</mat-label>
           <input matInput [formControl]="bulkNoBoxControl" 
+                 [(ngModel)]="boxNumber"
+                 name="boxNumber"
                  placeholder="Enter box number to set" 
                  class="tw-text-white">
         </mat-form-field>
         
         <button mat-raised-button color="primary" 
                 (click)="setBulkNoBox()" 
-                [disabled]="isUpdating || !bulkNoBoxControl.value"
-                class="tw-h-14 tw-bg-blue-600 tw-px-2 tw-text-white tw-rounded-md disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
-          <mat-icon *ngIf="!isUpdating" class="tw-pt-1">save_alt</mat-icon>
+                matTooltip="Silahkan pilih customer" 
+                [disabled]="selection.selected.length === 0"
+                class="tw-h-14 tw-bg-blue-600 tw-px-2 tw-text-white tw-rounded-sm disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+          <mat-icon *ngIf="!isUpdating" class="tw-pt-2">save_alt</mat-icon>
           <mat-spinner *ngIf="isUpdating" diameter="20" class="tw-inline"></mat-spinner>
-          <span class="tw-ml-2">{{ isUpdating ? 'Updating...' : 'Set Box Number' }}</span>
+          <span class="tw-ml-2">{{ isUpdating ? 'Updating...' : 'Set Nomor Box ' }}</span>
         </button>
+
+        <button mat-raised-button color="accent"
+          matTooltip="Silahkan pilih customer yang dokumennya yang belum diterima"
+          (click)="generatePDF()"
+          [disabled]="selection.selected.length === 0"
+          class="tw-h-14 tw-bg-green-600 tw-px-2 tw-text-white tw-rounded-sm disabled:tw-opacity-50 disabled:tw-cursor-not-allowed">
+    <mat-icon class="tw-mr-2 tw-pt-2">print</mat-icon>
+    <span>Print Balancing Report</span>
+  </button>
       </div>
 
       <!-- Search Filter -->
@@ -46,8 +58,26 @@
         </div>
   
         <!-- Table -->
-        <div class="tw-overflow-x-auto" *ngIf="!isLoading">
+        <div class="tw-bg-blue-900/20 tw-rounded-lg tw-overflow-hidden" *ngIf="!isLoading">
           <table mat-table [dataSource]="dataSource" matSort class="tw-w-full tw-rounded-md tw-animate-fade-in">
+            
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef class="tw-text-blue-300">
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                             [checked]="selection.hasValue() && isAllSelected()"
+                             [indeterminate]="selection.hasValue() && !isAllSelected()"
+                             [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                             (change)="$event ? selection.toggle(row) : null"
+                             [checked]="selection.isSelected(row)"
+                             [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+         
             
             <!-- Contract Number Column -->
             <ng-container matColumnDef="noKontrak">

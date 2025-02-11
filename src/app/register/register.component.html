@@ -77,37 +77,39 @@
       </button>
 
       <!-- File Import Card -->
-      <button 
-        [routerLink]="'/register-import'"
-        class="tw-group tw-relative tw-bg-white/80 tw-rounded-2xl tw-p-8 tw-text-center 
-               tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-               hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden
-               tw-animate-slide-up tw-animate-delay-300">
-        <!-- Coming Soon Badge with pulse animation -->
-        <!-- <div class="tw-absolute tw-top-4 tw-right-4 tw-bg-blue-600 tw-text-white tw-text-xs 
-                    tw-px-3 tw-py-1 tw-rounded-full tw-font-medium tw-animate-pulse">
-          Coming Soon
-        </div> -->
-        <!-- Same hover effects as above -->
-        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
-                    tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
-        <div class="tw-absolute tw-inset-0 tw-bg-white/40 tw-scale-0 group-hover:tw-scale-100 
-                    tw-rounded-2xl tw-transition-transform tw-duration-500 tw-origin-center"></div>
-        <!-- Content -->
-        <div class="tw-relative tw-z-10">
-          <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
-                      tw-transform group-hover:tw-rotate-12 tw-transition-transform tw-duration-300
-                      group-hover:tw-scale-110">
-            <img class="tw-w-full tw-h-full tw-transition-transform tw-duration-300 group-hover:tw-scale-90" 
+    <button [routerLink]="'/register-import'"
+            class="tw-group tw-relative tw-bg-white tw-rounded-2xl tw-p-8 tw-text-center 
+                  tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
+                  hover:tw-shadow-2xl hover:tw-shadow-blue-500/20 tw-overflow-hidden
+                  tw-animate-slide-up tw-animate-delay-300">
+    <!-- New Feature Badge with pulse animation -->
+    <div class="tw-absolute tw-top-4 tw-right-4 tw-bg-blue-600 tw-text-white tw-text-xs 
+                tw-px-3 tw-py-1 tw-rounded-full tw-font-medium tw-animate-pulse
+                tw-flex tw-items-center tw-gap-1">
+      <span class="tw-w-2 tw-h-2 tw-bg-white tw-rounded-full"></span>
+      New Feature
+    </div>
+    <!-- Same hover effects as above -->
+    <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
+                tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity"></div>
+    <div class="tw-absolute tw-inset-0 tw-bg-white/40 tw-scale-0 group-hover:tw-scale-100 
+                tw-rounded-2xl tw-transition-transform tw-duration-500 tw-origin-center"></div>
+    <!-- Content -->
+    <div class="tw-relative tw-z-10">
+      <div class="tw-bg-blue-100 tw-rounded-full tw-p-4 tw-w-20 tw-h-20 tw-mx-auto tw-mb-6
+                  tw-transform group-hover:tw-rotate-12 tw-transition-transform tw-duration-300
+                  group-hover:tw-scale-110">
+        <img class="tw-w-full tw-h-full tw-transition-transform tw-duration-300 group-hover:tw-scale-90" 
             src="./assets/import-content-svgrepo-com.png" alt="Register Customer">
-          </div>
-          <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3 
-                     group-hover:tw-text-blue-600 tw-transition-colors">File Import</h3>
-          <p class="tw-text-blue-600 group-hover:tw-text-blue-800 tw-transition-colors">
-            Import Data Customer *CSV/XLSX
-          </p>
-        </div>
-      </button>
+      </div>
+      <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3 
+                group-hover:tw-text-blue-600 tw-transition-colors">File Import</h3>
+      <p class="tw-text-blue-600 group-hover:tw-text-blue-800 tw-transition-colors">
+        Import Data Customer *CSV/XLSX
+      </p>
+    </div>
+    </button>
+      
 
     </section>
 

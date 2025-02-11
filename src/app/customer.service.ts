@@ -183,6 +183,9 @@ export class CustomerService {
     );
   }
 
+  getListBox(no_box: string): Observable<ListBox | null> {
+    return this.http.get<ListBox>(`${this.listBoxApiUrl}`)
+  }
   
   
   // updateCustomer(id: number, customerData: Customer): Observable<Customer> {

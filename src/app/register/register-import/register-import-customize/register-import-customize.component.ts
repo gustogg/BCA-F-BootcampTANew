@@ -489,7 +489,7 @@ toggleEditMode(): void {
   
       // Title
       doc.setFontSize(16)
-      const title = `Report Balancing`
+      const title = `Report Balancing - Archive Management`
       const pageWidth = doc.internal.pageSize.width
       const titleWidth = doc.getStringUnitWidth(title) * doc.internal.scaleFactor
       const titleX = pageWidth / 2
@@ -550,7 +550,7 @@ toggleEditMode(): void {
       doc.text(`Archive Management Unit`, 280, dateY + 30, { align: "right" })
   
       // Save the PDF
-      const fileName = `sampling-list-${new Date().toISOString().slice(0, 10)}.pdf`
+      const fileName = `AM-BalancingReport-${new Date().toISOString().slice(0, 10)}.pdf`
       doc.save(fileName)
     }
     async refreshList(): Promise<void> {

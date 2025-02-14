@@ -20,27 +20,26 @@ import { RegisterImportCustomizeComponent } from './register/register-import/reg
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },  // Redirect root path to login
   { path: 'login', component: LoginComponent },  // Set LoginComponent for '/login'
-  
   // Protect the 'home' route with authGuard
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },  
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
 
   // Other routes
-  { path: 'register', component: RegisterComponent },
-  { path: 'register-box', component: RegisterBoxComponent },
-  { path: 'register-customer', component: RegisterCustomerComponent },
-  { path: 'register-import', component: RegisterImportComponent },
-  { path: 'register-import-customize', component: RegisterImportCustomizeComponent },
-  { path: 'sampling', component: SamplingComponent },
-  { path: 'sampling-do', component: SamplingDoComponent },
-  { path: 'sampling-do/:noBox', component: SamplingDoComponent },
-  { path: 'sampling-view', component: SamplingViewComponent },
-  { path: 'sampling-view/:noBox', component: SearchDetailComponent },
-  { path: 'sampling-print', component: SamplingPrintComponent },
-  { path: 'sampling-print/:noBox', component: SamplingPrintComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'search-detail/:noBox', component: SearchDetailComponent },
-  { path: 'customer-list', component: CustomerListComponent },
-  { path: 'maintenance', component: MaintenanceComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]  },
+  { path: 'register-box', component: RegisterBoxComponent, canActivate: [AuthGuard]  },
+  { path: 'register-customer', component: RegisterCustomerComponent, canActivate: [AuthGuard]  },
+  { path: 'register-import', component: RegisterImportComponent, canActivate: [AuthGuard]  },
+  { path: 'register-import-customize', component: RegisterImportCustomizeComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling', component: SamplingComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-do', component: SamplingDoComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-do/:noBox', component: SamplingDoComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-view', component: SamplingViewComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-view/:noBox', component: SearchDetailComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-print', component: SamplingPrintComponent, canActivate: [AuthGuard]  },
+  { path: 'sampling-print/:noBox', component: SamplingPrintComponent, canActivate: [AuthGuard]  },
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard]  },
+  { path: 'search-detail/:noBox', component: SearchDetailComponent, canActivate: [AuthGuard]  },
+  { path: 'customer-list', component: CustomerListComponent, canActivate: [AuthGuard]  },
+  { path: 'maintenance', component: MaintenanceComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

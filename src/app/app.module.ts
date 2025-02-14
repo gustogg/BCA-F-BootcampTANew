@@ -45,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { DashboardComponent } from './login/dashboard/dashboard.component';
 
 
 
@@ -68,6 +69,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MaintenanceComponent,
     RegisterImportComponent,
     RegisterImportCustomizeComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

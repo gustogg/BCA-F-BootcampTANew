@@ -1,7 +1,4 @@
 import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-YDGQJHXM.js";
-import {
   SelectionModel
 } from "./chunk-MG7WVGGV.js";
 import {
@@ -14,14 +11,19 @@ import {
   MatPseudoCheckboxModule,
   MatRippleModule,
   ObserversModule,
-  Platform,
   RippleRenderer,
   SPACE,
+  hasModifierKey
+} from "./chunk-5G4D2YUD.js";
+import {
+  Platform,
   _getFocusedElementPierceShadowDom,
   coerceBooleanProperty,
-  coerceNumberProperty,
-  hasModifierKey
-} from "./chunk-XVU3SFMY.js";
+  coerceNumberProperty
+} from "./chunk-QQCDBOAH.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-YDGQJHXM.js";
 import {
   CommonModule,
   NgTemplateOutlet
@@ -82,10 +84,10 @@ import {
   ɵɵtemplateRefExtractor,
   ɵɵviewQuery
 } from "./chunk-ASQYCQSU.js";
+import "./chunk-PGF5GHY3.js";
 import {
   merge
 } from "./chunk-RZFGSV6T.js";
-import "./chunk-PGF5GHY3.js";
 import {
   Subject,
   Subscription,

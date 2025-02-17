@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -46,6 +46,12 @@ export interface ListBox {
   createdDate: Date;
 }
 
+export interface user{
+  id: number;
+  username: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -63,8 +69,16 @@ export class CustomerService {
   private listBoxApiUrl = environment.listBoxApiUrl;
   private apiLogin = environment.apiLogin;
   private apiRegister = environment.apiRegister;
+  private apiGetUser = environment.apiGetUser;
   
+  username: string | null = '';
+
   constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    // Get the username from localStorage
+    this.username = localStorage.getItem('username');
+  }
 
   createCustomer(customer: Omit<Customer, 'id'>): Observable<Customer> {
     return this.http.post<Customer>(`${this.apiUrl}`, customer).pipe(
@@ -136,16 +150,24 @@ export class CustomerService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.apiLogin, { username, password }).pipe(
+    return this.http.post<any>(this.apiLogin, { username, password }).pipe(
+      tap((response) => {
+        console.log('Login response:', response);
+        // Assuming the response contains a JWT token
+        const token = response.token;  // Adjust based on your response structure
+        localStorage.setItem('token', token);  // Store the token in localStorage
+      }),
       catchError(error => {
         console.error('Error logging in', error);
         return throwError(error);
       })
     );
   }
+  
+  
 
-  register(username: string, password: string): Observable<any> {
-    return this.http.post(this.apiRegister, { username, password }).pipe(
+  register(username: string, password: string, role: string): Observable<any> {
+    return this.http.post(this.apiRegister, { username, password, role }).pipe(
       catchError(error => {
         console.error('Error registering user', error);
         return throwError(error);
@@ -185,6 +207,15 @@ export class CustomerService {
 
   getListBox(no_box: string): Observable<ListBox | null> {
     return this.http.get<ListBox>(`${this.listBoxApiUrl}`)
+  }
+
+  getUser(username: string): Observable<user> {
+    const token = localStorage.getItem('token');  // Get the token from localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`  // Pass the token in the Authorization header
+    });
+
+    return this.http.get<user>(`${this.apiGetUser}/${username}`, { headers });
   }
   
   

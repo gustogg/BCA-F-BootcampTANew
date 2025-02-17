@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CustomerService } from '../../customer.service'; // Ensure correct path
@@ -6,7 +6,8 @@ import { CustomerService } from '../../customer.service'; // Ensure correct path
 @Component({
   selector: 'app-sampling-do',
   templateUrl: './sampling-do.component.html',
-  styleUrls: ['./sampling-do.component.css']
+  styleUrls: ['./sampling-do.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SamplingDoComponent implements OnInit {
   customerDetails: any = null; // Initialize as null for better state management
@@ -103,6 +104,9 @@ export class SamplingDoComponent implements OnInit {
     }
   }
   
+  trackById(index: number, customer: any): number {
+    return customer.id;
+  }
   
   
   

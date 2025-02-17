@@ -6,7 +6,6 @@
   <title>E-Register</title>
 </head>
 <body class="tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-text-gray-100 tw-font-sans tw-min-h-screen">
-
   <!-- Main Container -->
   <div class="tw-flex tw-flex-col tw-min-h-screen">
 
@@ -22,7 +21,7 @@
         
         <!-- User Section -->
         <div class="tw-flex tw-items-center tw-space-x-6">
-          <p class="tw-text-blue-900 tw-font-medium tw-text-base tw-pt-3 tw-hidden sm:tw-block">Hi, Gusto Ginting</p>
+          <p *ngIf="userData" class="tw-text-blue-900 tw-font-medium tw-text-base tw-pt-3 tw-hidden sm:tw-block tw-uppercase">Hi, {{username}} ({{ userData.role }})</p>
           <button [routerLink]="'/login'" 
                   class="tw-px-4 tw-py-2 tw-border-2 tw-border-blue-600 tw-rounded-lg 
                          tw-text-blue-600 tw-font-semibold hover:tw-bg-blue-600 

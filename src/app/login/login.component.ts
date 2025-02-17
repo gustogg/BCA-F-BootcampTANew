@@ -37,6 +37,7 @@ export class LoginComponent {
 
   username = ""
   password = ""
+  role = ""
   errorMessage = ""
   isLoading = false
 
@@ -55,12 +56,13 @@ export class LoginComponent {
       this.isLoading = true
       this.errorMessage = ""
 
-      console.log("Logging in with:", this.username)
-      const response = await this.authService.login(this.username, this.password).toPromise()
+      console.log("Logging in with:", this.username, this.role)
+      const response = await this.authService.login(this.username, this.password, this.role).toPromise()
 
       if (response?.token) {
         console.log("Login successful, token received:", response.token)
         localStorage.setItem("token", response.token)
+        localStorage.setItem("username", this.username);
         this.router.navigate(["/home"]).then(() => {
           window.location.reload();  // Forces a page reload
         });

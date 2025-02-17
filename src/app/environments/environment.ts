@@ -4,6 +4,7 @@ export const environment = {
     listBoxesApiUrl: 'http://localhost:8080/api/listbox/unapproved',
     apiLogin: 'http://localhost:8080/api/auth/login',
     apiRegister: 'http://localhost:8080/api/auth/register',
-    listBoxApiUrl: 'http://localhost:8080/api/listbox'
+    listBoxApiUrl: 'http://localhost:8080/api/listbox',
+    apiGetUser: 'http://localhost:8080/api/auth/user'
   };
   

@@ -46,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { DashboardComponent } from './login/dashboard/dashboard.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -92,7 +93,8 @@ import { DashboardComponent } from './login/dashboard/dashboard.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatTooltip,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ScrollingModule
   ],
   providers: [
     provideAnimationsAsync(),

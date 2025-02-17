@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },  // Set LoginComponent for '/login'
   // Protect the 'home' route with authGuard
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-
   // Other routes
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]  },
   { path: 'register-box', component: RegisterBoxComponent, canActivate: [AuthGuard]  },

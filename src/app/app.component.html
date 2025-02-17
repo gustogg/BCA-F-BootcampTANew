@@ -20,7 +20,8 @@
             </span> -->
           </div>
           <!-- User Name -->
-          <p class="tw-text-blue-900 tw-font-medium tw-text-base tw-pt-3 tw-hidden sm:tw-block">Hi, Gusto Ginting</p>
+          <p *ngIf="userData" class="tw-text-blue-900 tw-font-medium tw-text-base tw-pt-3 tw-hidden sm:tw-block tw-uppercase">Hi, {{ username }} ({{ userData.role }})</p>
+
         </div>
         
         <!-- Logout Button -->

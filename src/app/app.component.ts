@@ -3,7 +3,17 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { CustomerService, user } from './customer.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import Swal from 'sweetalert2';
+import { MatTooltip } from '@angular/material/tooltip';
+
 // import { Router } from '@angular/router';
+interface NavItem {
+  path: string;
+  label: string;
+  disabled?: boolean;
+  disabledMessage?: string;
+  roles?: string[]; // Add roles array to specify which roles can access this item
+}
 
 @Component({
   selector: 'app-root',
@@ -48,11 +58,29 @@ if (this.username) {
 // this.fetchUserData(); // Fetch user data when the component initializes
 }
 
-navItems = [
-{ path: '/home', label: 'Home' },
-{ path: '/register', label: 'Register' },
-{ path: '/sampling', label: 'Sampling' },
-{ path: '/search', label: 'Search' }
+navItems: NavItem[] = [
+  { 
+    path: '/home', 
+    label: 'Home',
+    roles: ['admin', 'register', 'sampling'] // All roles can access home
+  },
+  { 
+    path: '/register', 
+    label: 'Register',
+    disabledMessage: 'Not available for sampling users',
+    roles: ['admin', 'register']
+  },
+  { 
+    path: '/sampling', 
+    label: 'Sampling',
+    disabledMessage: 'Not available for register users',
+    roles: ['admin', 'sampling']
+  },
+  { 
+    path: '/search', 
+    label: 'Search',
+    roles: ['admin', 'register', 'sampling']
+  }
 ];
 
 toggleMobileMenu(): void {
@@ -77,6 +105,76 @@ getUserData(username: string): void {
     console.error('Token not found');
   }
 }
+
+logout() {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You will be logged out of the system!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, logout!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Perform logout
+      console.log('User logging out');
+      localStorage.removeItem('token');
+      
+      // Show success message
+      Swal.fire({
+        title: 'Logged Out!',
+        text: 'You have been successfully logged out.',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+      }).then(() => {
+        // Navigate to login page after the success message
+        this.router.navigate(['/login']);
+      });
+    }
+  });
+}
+
+canSeeSamplingButton(): boolean {
+  return this.userData?.role !== 'register';
+}
+
+canSeeRegisterButton(): boolean {
+  return this.userData?.role !== 'sampling';
+}
+
+canApproveButton(): boolean {
+  return this.userData?.role !== 'admin';
+}
+
+
+updateNavItemsAccess(): void {
+  this.navItems = this.navItems.map(item => ({
+    ...item,
+    disabled: this.isNavItemDisabled(item)
+  }));
+}
+
+isNavItemDisabled(item: NavItem): boolean {
+  if (!this.userData || !item.roles) return true;
+  return !item.roles.includes(this.userData.role);
+}
+
+getFilteredNavItems(): NavItem[] {
+  if (!this.userData) return this.navItems;
+
+  return this.navItems.filter(item => {
+    if (this.userData?.role === 'sampling' && item.path === '/register') {
+      return false; // Hide Register for Sampling users
+    }
+    if (this.userData?.role === 'register' && item.path === '/sampling') {
+      return false; // Hide Sampling for Register users
+    }
+    return true; // Show all other items
+  });
+}
+
 
 // fetchUserData(): void {
 //   const apiUrl = this.authService.getApiUrlUser(); // Get API URL from AuthService

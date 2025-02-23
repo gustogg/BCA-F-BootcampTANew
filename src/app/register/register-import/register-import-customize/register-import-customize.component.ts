@@ -476,6 +476,7 @@ toggleEditMode(): void {
         "CUSTOMER ID",
         "NAMA KONSUMEN",
         "TGL REALISASI",
+        "TGL DATA MASUK"
       ]
   
       const rows = this.selection.selected.map((customer: Customer, index: number) => [
@@ -485,6 +486,7 @@ toggleEditMode(): void {
         customer.customerID || "-",
         customer.namaKonsumen || "-",
         customer.tglRealisasi ? new Date(customer.tglRealisasi).toLocaleDateString() : "-",
+        customer.createdDate ? new Date(customer.createdDate).toLocaleDateString() : "-",
       ])
   
       // Title
@@ -503,7 +505,7 @@ toggleEditMode(): void {
         .filter((value, index, self) => value && self.indexOf(value) === index) // Get unique box numbers
         .join(", ")
       const date = new Date().toLocaleDateString();
-      const keterangan = `Dengan ini diberitahukan per tanggal ${date}, bahwa berikut adalah daftar nasabah yang dokumennya belum diterima secara resmi oleh Unit Archive\n\nManagement.`;
+      const keterangan = `Dengan ini diberitahukan per tanggal ${date}, bahwa berikut adalah daftar konsumen yang dokumennya belum diterima secara resmi oleh Unit Archive\n\nManagement.`;
       doc.text(keterangan, 10, 35, { align: "left" })
   
       // Generate table

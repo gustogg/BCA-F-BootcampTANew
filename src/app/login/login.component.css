@@ -7,3 +7,48 @@
   .tw-animate-shake {
     animation: shake 0.5s ease-in-out;
   }
+
+  .custom-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #0066ff;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-weight: 500;
+    border: 1px solid #0066ff;
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: #0066ff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 0 0 20px;
+    margin: 0;
+  }
+  
+  .close-button:hover {
+    opacity: 0.8;
+  }
+  
+  @keyframes slideDown {
+    from {
+      top: -100px;
+      opacity: 0;
+    }
+    to {
+      top: 20px;
+      opacity: 1;
+    }
+  }

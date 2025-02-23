@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { user } from '../customer.service';  // Assuming user interface is exported
 
 
 @Component({
@@ -31,7 +32,9 @@ export class SamplingComponent implements OnInit {
   countSampledZero: number = 0;
   countApprovedZero: number = 0;
   displayedDataCount: number = 0;
-
+  username: string | null = '';
+  userData: user | null = null; // To store the user data fetched from API
+  errorMessage: string = '';
 
 
   constructor(
@@ -46,6 +49,12 @@ export class SamplingComponent implements OnInit {
   ngOnInit() {
     this.loadListBoxes();
     this.updateDisplayedDataCount();
+    this.username = localStorage.getItem('username');
+
+    // Fetch the user data if the username exists
+    if (this.username) {
+      this.getUserData(this.username);
+    }
   }
 
   // Fetch all ListBox items
@@ -321,6 +330,27 @@ export class SamplingComponent implements OnInit {
     });
   }
 
-  
+  getUserData(username: string): void {
+      const token = localStorage.getItem('token'); // Get the token from localStorage
+      if (token) {
+        this.customerService.getUser(username).subscribe(
+          (data: user) => {
+            this.userData = data; // Store user data
+            console.log('User data fetched:', this.userData);
+          },
+          (error) => {
+            this.errorMessage = 'Error fetching user data.';
+            console.error('Error fetching user data:', error);
+          }
+        );
+      } else {
+        console.error('Token not found');
+      }
+    }
+
+    
+  canApproveButton(): boolean {
+    return this.userData?.role !== 'sampling';
+  }
 
 }

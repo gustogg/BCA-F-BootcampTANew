@@ -5,11 +5,12 @@
 });
   </script>
 </head>
+
 <body class=" tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-900 tw-min-h-fit">
   <div class="tw-container tw-mx-auto tw-p-6 tw-max-w-7xl ">
     <!-- Filter Buttons -->
     <div class="tw-mb-8">
-      <div class="tw-bg-white/10 tw-backdrop-blur-sm tw-p-3 tw-rounded-xl tw-flex tw-flex-wrap tw-gap-3 tw-justify-center tw-shadow-lg">
+      <div *ngIf="canApproveButton()" class="tw-bg-white/10 tw-backdrop-blur-sm tw-p-3 tw-rounded-xl tw-flex tw-flex-wrap tw-gap-3 tw-justify-center tw-shadow-lg">
         <button (click)="filterList('ALL')"
           class="tw-relative tw-group tw-px-6 tw-py-2 tw-rounded-lg tw-transition-all tw-duration-300 tw-overflow-hidden"
           [ngClass]="currentFilter === 'ALL' ? 'tw-bg-white tw-text-blue-800' : 'tw-text-white hover:tw-bg-white/10'">
@@ -45,7 +46,7 @@
     </div>
 
     <!-- Header with Count -->
-    <div class="tw-mb-8 tw-text-center tw-animate-fade-in">
+    <div *ngIf="canApproveButton()" class="tw-mb-8 tw-text-center tw-animate-fade-in">
       <h2 class="tw-text-3xl tw-font-bold tw-text-white">
         {{ getHeadingText(currentFilter) }}
         <span class="tw-inline-block tw-ml-2 tw-px-3 tw-py-1 tw-bg-white/10 tw-rounded-full tw-text-xl">
@@ -103,7 +104,7 @@
                     <span>View</span>
               </button>
 
-              <button (click)="approveListBox(listBox)"
+              <button *ngIf="canApproveButton()" (click)="approveListBox(listBox)"
                     [disabled]="getProgressBox(listBox) === 'Sampling' || getProgressBox(listBox) === 'Complete'"
                     [matTooltip]="getProgressBox(listBox) === 'Complete' ? 'Your progress is complete, can’t do sampling or approve' : 
                                   getProgressBox(listBox) === 'Sampling' ? 'You must do sampling first before using the approve button' : 'Approve This Box'"

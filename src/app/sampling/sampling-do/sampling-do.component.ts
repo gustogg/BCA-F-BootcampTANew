@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { CustomerService } from '../../customer.service'; // Ensure correct path
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CustomerService } from '../../customer.service';
 
 @Component({
   selector: 'app-sampling-do',
   templateUrl: './sampling-do.component.html',
-  styleUrls: ['./sampling-do.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./sampling-do.component.css']
 })
 export class SamplingDoComponent implements OnInit {
+  // customerDetails: any = {}; 
   customerDetails: any = null; // Initialize as null for better state management
   errorMessage: string = '';
 
@@ -20,10 +20,12 @@ export class SamplingDoComponent implements OnInit {
 
   ngOnInit(): void {
     const noBox = this.route.snapshot.paramMap.get('noBox'); // Get 'noBox' from the URL
-  
+
     if (noBox) {
       this.customerService.getCustomerDetails(noBox).subscribe({
         next: (data) => {
+          console.log('Customer details received:', data);
+          this.customerDetails = data; // Assign data to customerDetails q
           this.customerDetails = data; // Assign data to customerDetails
         },
         error: (err) => {
@@ -35,7 +37,6 @@ export class SamplingDoComponent implements OnInit {
       console.error('No noBox parameter provided');
     }
   }
-
   // Method to update the 'sampled' column to 'yes'
   startSampling(customerId: number): void {
     const customerToUpdate = this.customerDetails.find(
@@ -104,16 +105,11 @@ export class SamplingDoComponent implements OnInit {
     }
   }
   
-  trackById(index: number, customer: any): number {
-    return customer.id;
-  }
+  
+  
+  
   
   
   
 
-  
-  
-  
-
-  
 }

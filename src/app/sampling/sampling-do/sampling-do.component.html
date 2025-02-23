@@ -1,6 +1,5 @@
 <body class="tw-w-full tw-bg-blue-900">
-<div  class="tw-bg-blue-800 tw-p-3 tw-w-full table-container">
-  
+<div  class="tw-bg-blue-800 tw-w-full tw-p-3 tw-w-full table-container">
   <table class="tw-shadow-md tw-h-max tw-bg-gray-200 tw-border-collapse tw-rounded-md tw-w-full sticky-table">
     <thead class="tw-bg-blue-900 tw-text-white tw-sticky tw-top-0 tw-z-10" style="top: -15px">
       <tr>
@@ -32,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customerDetails; trackBy: trackById" class="tw-border-t tw-border-gray-700">
+      <tr *ngFor="let customer of customerDetails" class="tw-border-t tw-border-gray-700">
         <td class="tw-py-2 tw-px-4">{{ customer.id }}</td>
         <td class="tw-py-2 tw-px-4">{{ customer.noMap }}</td>
         <td class="tw-py-2 tw-px-4">{{ customer.noKontrak }}</td>
@@ -69,4 +68,6 @@
   <div *ngIf="!customerDetails">
     <p>Loading customer details...</p>
   </div>
+  
 </body>
+

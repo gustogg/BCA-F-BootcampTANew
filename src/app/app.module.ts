@@ -50,6 +50,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +95,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatDialogModule,
     MatTooltip,
     MatCheckboxModule,
-    ScrollingModule
+    ScrollingModule,
+
   ],
   providers: [
     provideAnimationsAsync(),

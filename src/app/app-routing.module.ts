@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'register-import', component: RegisterImportComponent, canActivate: [AuthGuard]  },
   { path: 'register-import-customize', component: RegisterImportCustomizeComponent, canActivate: [AuthGuard]  },
   { path: 'sampling', component: SamplingComponent, canActivate: [AuthGuard]  },
-  { path: 'sampling-do', component: SamplingDoComponent, canActivate: [AuthGuard]  },
+  // { path: 'sampling-do', component: SamplingDoComponent},
   { path: 'sampling-do/:noBox', component: SamplingDoComponent, canActivate: [AuthGuard]  },
   { path: 'sampling-view', component: SamplingViewComponent, canActivate: [AuthGuard]  },
   { path: 'sampling-view/:noBox', component: SearchDetailComponent, canActivate: [AuthGuard]  },

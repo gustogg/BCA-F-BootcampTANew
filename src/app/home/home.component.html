@@ -10,106 +10,269 @@
   <div class="tw-flex tw-flex-col tw-min-h-screen">
 
     <!-- Header -->
-    <header class="tw-w-full tw-py-4 tw-bg-white/95 tw-backdrop-blur-sm tw-shadow-lg tw-sticky tw-top-0 tw-z-50">
-      <div class="tw-container tw-mx-auto tw-px-4 tw-flex tw-justify-between tw-items-center">
-        <!-- Logo Section -->
-        <div class="tw-flex tw-items-center tw-space-x-4">
-          <img src="../assets/ARSA-LOGO.png" class="tw-w-28 tw-object-contain hover:tw-transform hover:tw-scale-105 tw-transition-transform">
-          <div class="tw-h-8 tw-w-px tw-bg-blue-200"></div>
-          <img class="tw-w-44 tw-object-contain hover:tw-transform hover:tw-scale-105 tw-transition-transform" src="./assets/BCA_Finance.png" alt="BCA Finance Logo">
-        </div>
-        
-        <!-- User Section -->
-        <div class="tw-flex tw-items-center tw-space-x-6">
-          <p *ngIf="userData" class="tw-text-blue-900 tw-font-medium tw-text-base tw-pt-3 tw-hidden sm:tw-block tw-uppercase">Hi, {{username}} ({{ userData.role }})</p>
-          <button [routerLink]="'/login'" 
-                  class="tw-px-4 tw-py-2 tw-border-2 tw-border-blue-600 tw-rounded-lg 
-                         tw-text-blue-600 tw-font-semibold hover:tw-bg-blue-600 
-                         hover:tw-text-white tw-transition-all tw-duration-300
-                         tw-transform hover:tw-scale-105 active:tw-scale-95">
-            LOG OUT
-          </button>
-        </div>
+    <div class="tw-flex tw-flex-col tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950">
+      <!-- Animated Background -->
+      <div class="tw-fixed tw-inset-0 tw-z-0">
+        <div class="tw-absolute tw-inset-0 tw-bg-grid-white/[0.02] tw-bg-[size:50px_50px]"></div>
+        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-800/50 tw-to-blue-950/50 tw-backdrop-blur-3xl"></div>
+        <div class="tw-absolute tw-top-0 tw-left-0 tw-w-96 tw-h-96 tw-bg-blue-400/20 
+                    tw-rounded-full tw--translate-x-1/2 tw--translate-y-1/2 tw-blur-3xl 
+                    tw-animate-pulse"></div>
+        <div class="tw-absolute tw-bottom-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-blue-400/20 
+                    tw-rounded-full tw-translate-x-1/2 tw-translate-y-1/2 tw-blur-3xl 
+                    tw-animate-pulse [animation-delay:2s]"></div>
       </div>
-    </header>
+    
+      <!-- Main Content -->
+      <div class="tw-relative tw-z-10 tw-flex tw-flex-col tw-min-h-screen">
+        <!-- Header -->
+        <header class="tw-w-full tw-py-4 tw-bg-white tw-shadow-lg tw-sticky tw-top-0 tw-z-50">
+          <div class="tw-container tw-mx-auto tw-px-4 tw-flex tw-justify-between tw-items-center">
+            <!-- Logo Section -->
+            <div class="tw-flex tw-items-center tw-space-x-4 tw-group">
+              <img src="../assets/ARSA-LOGO.png" 
+                   class="tw-w-28 tw-object-contain tw-transform tw-transition-all 
+                          group-hover:tw-scale-105 tw-duration-500">
+              <div class="tw-h-8 tw-w-px tw-bg-blue-200 tw-transform tw-transition-all 
+                          group-hover:tw-rotate-12 tw-duration-500"></div>
+              <img class="tw-w-44 tw-object-contain tw-transform tw-transition-all 
+                          group-hover:tw-scale-105 tw-duration-500" 
+                   src="./assets/BCA_Finance.png" alt="BCA Finance Logo">
+            </div>
+            
+            <!-- User Section -->
+            <div class="tw-flex tw-items-center tw-space-x-6">
+              <div *ngIf="userData" 
+                   class="tw-bg-blue-50 tw-px-4 tw-rounded-full 
+                          tw-border tw-border-blue-100 tw-hidden sm:tw-flex tw-items-center 
+                          tw-space-x-2 tw-transform hover:tw-scale-105 tw-transition-all">
+                <span class="tw-w-2 tw-h-2 tw-bg-green-400 tw-rounded-full tw-animate-pulse"></span>
+                <p class="tw-text-blue-900 tw-font-medium tw-pt-2">{{username}} 
+                  <span class="tw-text-blue-600 tw-text-sm">({{ userData.role }})</span>
+                </p>
+              </div>
+              <button (click)="logout()" 
+                      class="tw-px-6 tw-py-2 tw-bg-blue-600 tw-rounded-full 
+                             tw-font-semibold tw-text-white
+                             hover:tw-bg-blue-700 tw-transition-all tw-duration-300
+                             tw-transform hover:tw-scale-105 active:tw-scale-95
+                             tw-flex tw-items-center tw-space-x-2">
+                <span>LOGOUT</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-4 tw-w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+    
+        <!-- Hero Section -->
+        <section class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center 
+                        tw-text-center tw-px-4 tw-py-14 tw-overflow-hidden">
+          <div class="tw-absolute tw-inset-0 tw-bg-blue-500/5 tw-backdrop-blur-3xl"></div>
+          
+          <div class="tw-relative tw-z-10 tw-animate-fade-in">
+            <h2 style="font-size: 40px;" class="tw-font-black tw-text-transparent tw-bg-clip-text 
+            tw-bg-gradient-to-r tw-from-blue-100 tw-to-white 
+            tw-mb-4 tw-tracking-tight tw-pb-8">
+              ARSA | HOME
+            </h2>
+            <p class="tw-text-xl tw-text-blue-100/80 tw-max-w-2xl tw-mx-auto 
+                      tw-font-light tw-tracking-wide">
+              APLIKASI REGISTER-SAMPLING ARCHIVE MANAGEMENT
+            </p>
+          </div>
+        </section>
+    
+        <!-- Features Section -->
+        <!-- Replace the Features Section with this updated version -->
 
-    <!-- Hero Section -->
-    <section class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-text-center tw-px-4 tw-py-20 tw-overflow-hidden">
-      <!-- Decorative Elements -->
-      <div class="tw-absolute tw-inset-0 tw-bg-blue-500/10 tw-backdrop-blur-3xl tw-rounded-full tw-scale-150 tw-animate-pulse"></div>
+<!-- Features Section -->
+<section class="tw-container tw-mx-auto tw-px-4 tw-py-16">
+  <!-- Section Header -->
+  <div class="tw-text-center tw-mb-16">
+    <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-4">
+      Quick Access Menu
+    </h2>
+    <div class="tw-w-24 tw-h-1 tw-bg-gradient-to-r tw-from-blue-400 tw-to-blue-600 
+                tw-mx-auto tw-rounded-full"></div>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="tw-grid md:tw-grid-cols-3 tw-gap-8 tw-max-w-6xl tw-mx-auto">
+    
+    <!-- New Register Card -->
+    <button *ngIf="canSeeRegisterButton()" [routerLink]="'/register'"
+            class="tw-group tw-relative tw-bg-white tw-rounded-3xl tw-p-8 
+                   tw-transition-all tw-duration-500 tw-overflow-hidden
+                   hover:tw-shadow-[0_0_40px_rgba(59,130,246,0.3)]
+                   tw-transform hover:tw-translate-y-[-8px]">
+      <!-- Background Gradient Effect -->
+      <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 
+                  tw-via-white tw-to-blue-50 tw-opacity-80"></div>
       
+      <!-- Content Container -->
       <div class="tw-relative tw-z-10">
-        <h2 class="tw-text-5xl tw-font-extrabold tw-text-white tw-mb-4 tw-tracking-tight">
-          ARSA
-        </h2>
-        <p class="tw-text-xl tw-text-blue-200 tw-max-w-2xl tw-mx-auto">
-          APLIKASI REGISTER-SAMPLING ARCHIVE MANAGEMENT
+        <!-- Icon Container -->
+        <div class="tw-relative">
+          <!-- Background Circle -->
+          <div class="tw-absolute tw-inset-0 tw-bg-blue-500/10 tw-rounded-full 
+                      tw-transform tw-scale-[1.2] group-hover:tw-scale-[2.2] 
+                      tw-transition-transform tw-duration-500"></div>
+          <div class="tw-bg-white tw-rounded-full tw-p-6 tw-w-24 tw-h-24 
+                      tw-mx-auto tw-mb-6 tw-shadow-lg
+                      tw-transform group-hover:tw-rotate-12 tw-transition-all 
+                      tw-duration-500 tw-relative">
+            <img class="tw-w-full tw-h-full tw-object-contain tw-transition-transform 
+                        tw-duration-500 group-hover:tw-scale-110" 
+                 src="./assets/add-file-svgrepo-com.png" alt="New Register">
+          </div>
+        </div>
+
+        <!-- Text Content -->
+        <h3 class="tw-text-2xl tw-font-extrabold tw-text-blue-900 tw-mb-3 
+                   group-hover:tw-text-blue-600 tw-transition-colors">
+          New Register
+        </h3>
+        <p class="tw-text-blue-600/80 group-hover:tw-text-blue-500 
+                  tw-transition-colors">
+          Input Registrasi Baru
         </p>
+
+        <!-- Action Indicator -->
+        <div class="tw-mt-6 tw-flex tw-items-center tw-justify-center tw-space-x-2 
+                    tw-text-blue-500 tw-opacity-0 group-hover:tw-opacity-100 
+                    tw-transition-all tw-duration-300 tw-translate-y-2 
+                    group-hover:tw-translate-y-0">
+          <span class="tw-text-sm tw-font-medium">Mulai Registrasi</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-4 tw-w-4 tw-transition-transform 
+                    group-hover:tw-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
       </div>
-    </section>
+    </button>
 
-    <!-- Features Section -->
-    <section class="tw-container tw-mx-auto tw-px-4 tw-py-12">
-      <div class="tw-grid md:tw-grid-cols-3 tw-gap-8 tw-max-w-6xl tw-mx-auto">
-        
-        <!-- New Register Card -->
-        <button [routerLink]="'/register'"
-                class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
-                       tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-                       hover:tw-shadow-2xl hover:tw-shadow-blue-500/20">
-          <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
-                      tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-rounded-2xl"></div>
-          <div class="tw-relative tw-z-10">
-            <div class="tw-bg-blue-100 tw-rounded-full tw-p-6 tw-w-24 tw-h-24 tw-mx-auto tw-mb-6
-                        tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-              <img class="tw-w-full tw-h-full" src="./assets/add-file-svgrepo-com.png" alt="New Register">
-            </div>
-            <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">New Register</h3>
-            <p class="tw-text-blue-600">Input Registrasi Baru</p>
+    <!-- Sampling Card -->
+    <button *ngIf="canSeeSamplingButton()" [routerLink]="'/sampling'"
+            class="tw-group tw-relative tw-bg-white tw-rounded-3xl tw-p-8 
+                   tw-transition-all tw-duration-500 tw-overflow-hidden
+                   hover:tw-shadow-[0_0_40px_rgba(59,130,246,0.3)]
+                   tw-transform hover:tw-translate-y-[-8px]">
+      <!-- Background Gradient Effect -->
+      <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 
+                  tw-via-white tw-to-blue-50 tw-opacity-80"></div>
+      
+      <!-- Content Container -->
+      <div class="tw-relative tw-z-10">
+        <!-- Icon Container -->
+        <div class="tw-relative">
+          <!-- Background Circle -->
+          <div class="tw-absolute tw-inset-0 tw-bg-blue-500/10 tw-rounded-full 
+                      tw-transform tw-scale-[1.2] group-hover:tw-scale-[2.2] 
+                      tw-transition-transform tw-duration-500"></div>
+          <div class="tw-bg-white tw-rounded-full tw-p-6 tw-w-24 tw-h-24 
+                      tw-mx-auto tw-mb-6 tw-shadow-lg
+                      tw-transform group-hover:tw-rotate-12 tw-transition-all 
+                      tw-duration-500 tw-relative">
+            <img class="tw-w-full tw-h-full tw-object-contain tw-transition-transform 
+                        tw-duration-500 group-hover:tw-scale-110" 
+                 src="./assets/check-file-svgrepo-com.png" alt="Sampling">
           </div>
-        </button>
+        </div>
 
-        <!-- Sampling Card -->
-        <button [routerLink]="'/sampling'"
-                class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
-                       tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-                       hover:tw-shadow-2xl hover:tw-shadow-blue-500/20">
-          <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
-                      tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-rounded-2xl"></div>
-          <div class="tw-relative tw-z-10">
-            <div class="tw-bg-blue-100 tw-rounded-full tw-p-6 tw-w-24 tw-h-24 tw-mx-auto tw-mb-6
-                        tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-              <img class="tw-w-full tw-h-full" src="./assets/check-file-svgrepo-com.png" alt="Sampling">
-            </div>
-            <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Sampling</h3>
-            <p class="tw-text-blue-600">Sampling Dokumen</p>
-          </div>
-        </button>
+        <!-- Text Content -->
+        <h3 class="tw-text-2xl tw-text-blue-900 tw-mb-3 
+                   group-hover:tw-text-blue-600 tw-transition-colors tw-font-extrabold">
+          Sampling
+        </h3>
+        <p class="tw-text-blue-600/80 group-hover:tw-text-blue-500 
+                  tw-transition-colors">
+          Sampling Dokumen
+        </p>
 
-        <!-- Search Card -->
-        <button [routerLink]="'/search'"
-                class="tw-group tw-relative tw-bg-white/95 tw-rounded-2xl tw-p-8 tw-text-center 
-                       tw-transform hover:tw-scale-105 tw-transition-all tw-duration-300
-                       hover:tw-shadow-2xl hover:tw-shadow-blue-500/20">
-          <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 tw-to-transparent 
-                      tw-opacity-0 group-hover:tw-opacity-100 tw-transition-opacity tw-rounded-2xl"></div>
-          <div class="tw-relative tw-z-10">
-            <div class="tw-bg-blue-100 tw-rounded-full tw-p-6 tw-w-24 tw-h-24 tw-mx-auto tw-mb-6
-                        tw-transform group-hover:tw-rotate-6 tw-transition-transform tw-duration-300">
-              <img class="tw-w-full tw-h-full" src="./assets/search-file-svgrepo-com.png" alt="Search">
-            </div>
-            <h3 class="tw-text-2xl tw-font-bold tw-text-blue-900 tw-mb-3">Search</h3>
-            <p class="tw-text-blue-600">Pencarian/Track Dokumen</p>
-          </div>
-        </button>
+        <!-- Action Indicator -->
+        <div class="tw-mt-6 tw-flex tw-items-center tw-justify-center tw-space-x-2 
+                    tw-text-blue-500 tw-opacity-0 group-hover:tw-opacity-100 
+                    tw-transition-all tw-duration-300 tw-translate-y-2 
+                    group-hover:tw-translate-y-0">
+          <span class="tw-text-sm tw-font-medium">Mulai Sampling</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-4 tw-w-4 tw-transition-transform 
+                    group-hover:tw-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
       </div>
-    </section>
+    </button>
 
-    <!-- Footer -->
-    <footer class="tw-mt-auto tw-w-full tw-bg-blue-900/90 tw-backdrop-blur-sm 
-                   tw-border-t tw-border-blue-700/50 tw-py-4 tw-px-4 tw-text-center">
-      <p class="tw-text-blue-200">&copy; 2024 BCA Finance. All rights reserved.</p>
-    </footer>
+    <!-- Search Card -->
+    <button [routerLink]="'/search'"
+            class="tw-group tw-relative tw-bg-white tw-rounded-3xl tw-p-8 
+                   tw-transition-all tw-duration-500 tw-overflow-hidden
+                   hover:tw-shadow-[0_0_40px_rgba(59,130,246,0.3)]
+                   tw-transform hover:tw-translate-y-[-8px]">
+      <!-- Background Gradient Effect -->
+      <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-50 
+                  tw-via-white tw-to-blue-50 tw-opacity-80"></div>
+      
+      <!-- Content Container -->
+      <div class="tw-relative tw-z-10">
+        <!-- Icon Container -->
+        <div class="tw-relative">
+          <!-- Background Circle -->
+          <div class="tw-absolute tw-inset-0 tw-bg-blue-500/10 tw-rounded-full 
+                      tw-transform tw-scale-[1.2] group-hover:tw-scale-[2.2] 
+                      tw-transition-transform tw-duration-500"></div>
+          <div class="tw-bg-white tw-rounded-full tw-p-6 tw-w-24 tw-h-24 
+                      tw-mx-auto tw-mb-6 tw-shadow-lg
+                      tw-transform group-hover:tw-rotate-12 tw-transition-all 
+                      tw-duration-500 tw-relative">
+            <img class="tw-w-full tw-h-full tw-object-contain tw-transition-transform 
+                        tw-duration-500 group-hover:tw-scale-110" 
+                 src="./assets/search-file-svgrepo-com.png" alt="Search">
+          </div>
+        </div>
+
+        <!-- Text Content -->
+        <h3 class="tw-text-2xl tw-font-extrabold tw-text-blue-900 tw-mb-3 
+                   group-hover:tw-text-blue-600 tw-transition-colors">
+          Search
+        </h3>
+        <p class="tw-text-blue-600/80 group-hover:tw-text-blue-500 
+                  tw-transition-colors">
+          Pencarian/Track Dokumen
+        </p>
+
+        <!-- Action Indicator -->
+        <div class="tw-mt-6 tw-flex tw-items-center tw-justify-center tw-space-x-2 
+                    tw-text-blue-500 tw-opacity-0 group-hover:tw-opacity-100 
+                    tw-transition-all tw-duration-300 tw-translate-y-2 
+                    group-hover:tw-translate-y-0">
+          <span class="tw-text-sm tw-font-medium">Cari Dokumen</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-4 tw-w-4 tw-transition-transform 
+                    group-hover:tw-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+      </div>
+    </button>
+
+  </div>
+</section>
+    
+        <!-- Footer -->
+        <footer class="tw-mt-auto tw-w-full tw-bg-gradient-to-t tw-from-blue-950 
+                       tw-to-transparent tw-backdrop-blur-sm tw-py-8 tw-px-4 tw-text-center">
+          <div class="tw-container tw-mx-auto">
+            <div class="tw-flex tw-flex-col tw-items-center tw-space-y-4">
+              <p class="tw-text-blue-200/80 tw-text-sm">
+                &copy; 2024 BCA Finance. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
 
   </div>
 

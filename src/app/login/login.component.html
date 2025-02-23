@@ -1,10 +1,13 @@
 <div class="tw-min-h-screen tw-bg-gradient-to-br tw-from-blue-800 tw-to-blue-950 tw-text-blue-900 tw-flex tw-items-center tw-justify-center tw-p-4">
   <div class="tw-w-full tw-max-w-md">
     <!-- Login Card -->
+    <div *ngIf="showSuccessAlert" class="custom-alert">
+      <span>Login successful! Welcome {{username}}!</span>
+      <button class="close-button" (click)="hideAlert()">×</button>
+    </div>
     <div class="tw-bg-white tw-rounded-2xl tw-shadow-2xl tw-overflow-hidden tw-transform hover:tw-scale-[1.02] tw-transition-all tw-duration-300">
       <!-- Top Decorative Bar -->
       <div class="tw-h-2 tw-bg-gradient-to-r tw-from-blue-400 tw-to-blue-600"></div>
-
       <div class="tw-p-8">
         <!-- Logo Section -->
         <div class="tw-flex tw-items-center tw-justify-center tw-space-x-4 tw-mb-20 tw-relative">

@@ -1,0 +1,30 @@
+/* Add to your existing CSS */
+@keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .tw-animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Optional: Add a subtle pulse animation for the background circles */
+  @keyframes subtle-pulse {
+    0%, 100% {
+      transform: scale(1.8);
+    }
+    50% {
+      transform: scale(1.9);
+    }
+  }
+  
+  .tw-animate-subtle-pulse {
+    animation: subtle-pulse 3s ease-in-out infinite;
+  }

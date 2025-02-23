@@ -86,12 +86,12 @@ customerDetails: any = {}; // Initialize as an object since it will be a single 
     // Generate the table in the PDF
     doc.autoTable(columns, rows, {
       startY: 30,  // Position from the top
-      margin: { horizontal: 10 },
+      margin: { horizontal: 4 },
       styles: { fontSize: 8, cellPadding: 3, overflow: 'linebreak' },  // Table style
       headStyles: {
         fillColor: [255, 255, 255], // Set background color of header
         textColor: [0, 0, 0], // Set text color of header
-        fontSize: 8, // Set font size of header
+        fontSize: 6, // Set font size of header
         halign: 'left', // Center align text in header
         valign: 'middle', // Center align text vertically in header
         lineWidth: 0.1, // Set line width for the border
@@ -100,6 +100,7 @@ customerDetails: any = {}; // Initialize as an object since it will be a single 
       bodyStyles: { 
         fillColor: [255, 255, 255],
         lineWidth: 0.1, // Set line width for the border
+        fontSize: 6,
         lineColor: [0, 0, 0], // Set border color (black) 
         textColor: 0 },  // Body styles (white)
         lineWidth: 0.5,
@@ -117,9 +118,34 @@ customerDetails: any = {}; // Initialize as an object since it will be a single 
     doc.text(`Jakarta, ${today}`, 280, dateY, { align: 'right' }); // Align to the right edge
     const img = '/assets/BCA_Finance.png';
     doc.addImage(img, 'PNG', 230, dateY+12, 50, 7); // Adjust X, Y, width, and height as needed
-    doc.text(`PT. BCA Finance`, 280, dateY+30, { align: 'right' }); // Align to the right edge
+    doc.text(`Archive Management Unit Head`, 280, dateY+30, { align: 'right' }); // Align to the right edge
 
 
+    const today2 = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Add the date below the table
+    // Add the date below the table
+    const dateY2 = doc.lastAutoTable.finalY + 10; // Position the date below the table
+    doc.setFontSize(11); // Set the font size
+    // doc.text(`Jakarta, ${today2}`, 180, dateY2, { align: 'left' }); // Align to the right edge
+    const img2 = '/assets/SAMPLED.png';
+    doc.addImage(img2, 'PNG', 135, dateY2-5, 35, 35); // Adjust X, Y, width, and height as needed
+    doc.text(`PIC Sampling`, 140, dateY2+30, { align: 'left' }); // Align to the right edge
+
+
+
+    const today3 = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Add the date below the table
+    // Add the date below the table
+    const dateY3 = doc.lastAutoTable.finalY + 10; // Position the date below the table
+    doc.setFontSize(11); // Set the font size
+    // doc.text(`Jakarta, ${today2}`, 180, dateY2, { align: 'left' }); // Align to the right edge
+    const img3 = '/assets/REGISTERED.png';
+    doc.addImage(img3, 'PNG', 58, dateY3-5, 35, 35); // Adjust X, Y, width, and height as needed
+    doc.text(`PIC Register`, 65, dateY3+30, { align: 'left' }); // Align to the right edge
+
+    
     // Save the PDF
     doc.save(`sampling-${noBox}.pdf`);
   }
